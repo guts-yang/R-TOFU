@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+
+# Local-only autoresearch run (16 GB, no upstream remote)
+workspace/autoresearch/
