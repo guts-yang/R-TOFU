@@ -14,6 +14,9 @@
 - target 基座当前**不能稳定复现虚构事实**（`DefaultCoT` 实体泄漏 0.025、`truncated_rate` 0.975、抽检为退化文本）。
 - 拒绝式 LoRA SFT 使方法组与对照组同时退化为「一律拒答」（retain ROUGE-L 0.014 / 0.018 vs target 0.180）。
 - 因此任何以 \(\rho_d\) / \(\Gamma\) 为因变量的结论，在本轮测量链上**不可解释**。
+- **Round 2 新增证据**（Hy4 LLM-as-judge）：Γ_LLM(r2mu01)=0.333 vs 实体规则 Γ=0.050，
+  且 `target` 判分成功率极低。两套指标互相矛盾说明**测量口径本身未校准**，
+  这直接支持「先做测量协议」的结构性 pivot，而不是继续加训练组件。
 
 ## Phase 1 — Literature Survey（二次核验）
 
@@ -96,3 +99,13 @@ Hy4 端点仅作指标判分（同家族，不可作 reviewer）。本 Round 2 �
 - [ ] 执行 Gate-0/1/2/3，重跑最小判别实验
 - [ ] 补齐跨模型评审后端与门控 helper 后重跑 `/idea-discovery` 与 `/auto-review-loop`
 - [ ] 若 Gate-0 通过且 Γ 显著，再回到 Idea 1 的不变性训练目标
+
+
+## 后续实证反馈（自动重做后，2026-11-23）
+
+Round 2 把「测量协议」排第一的建议已被执行，结果见 `redo/REDO_REPORT.md`：
+测量协议修好后（重定义 Gate-0 通过、teacher-forced 无截断），跨策略 gap γ≈0.004，
+**假遗忘现象仍未复现**；6 轮 autoresearch 改动全部 discard。
+这进一步支持 Round 2 的降级判断：Idea 1 不应作为首选；
+建议转向「为什么在可控基座上策略不变性自然成立」或 Idea 3 的参数层 CoT 审计。
+取证 verdict 为 `REVIEW_UNAVAILABLE`，不是放行。

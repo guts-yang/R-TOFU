@@ -1,0 +1,8 @@
+commit,val_risk,memory_gb,status,description
+5dada9e,0.479835,22.0,keep,baseline GA+GD held-out task_id1
+f60f01b,0.479863,22.0,discard,add cross-strategy consistency penalty lambda0.5
+bdf2108,0.480048,22.0,discard,stronger consistency penalty lambda2.0
+db3f65b,0.493466,22.0,discard,strengthen retain loss weight to 2.0
+c34060d,0.481622,22.1,discard,increase LoRA rank to 16
+d8171f2,0.832891,22.0,discard,raise learning rate to 3e-4
+904c2fb,0.479835,22.0,discard,lower gradient-ascent NLL clip to 4.0

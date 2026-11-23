@@ -1,0 +1,8 @@
+Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'low_freq_factor', 'high_freq_factor', 'original_max_position_embeddings'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.30it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.17it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.36it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.44it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.37it/s]
+default    512  recall=0.0 rouge=0.2037 closed=0.0833 sec=30.8
+zero       512  recall=0.0833 rouge=0.2244 closed=0.75 sec=30.4
+less       512  recall=0.0 rouge=0.1808 closed=0.4167 sec=30.6
+plain      512  recall=0.0833 rouge=0.1681 closed=0.5833 sec=31.3
+chat       512  recall=0.25 rouge=0.1428 closed=0.1667 sec=30.4
+wrote /usr/local/workspace/R-TOFU/workspace/redo/gate0_probe.json

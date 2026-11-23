@@ -1,0 +1,7 @@
+[judge] model=hy4 tags=['r2mu01', 'r2mu05', 'target'] limit/group=8 concurrency=8
+[judge] r2mu01: 20/32
+[judge] r2mu01: wrote /usr/local/workspace/R-TOFU/workspace/results/judge_r2mu01.jsonl, gamma_llm=0.333333
+[judge] r2mu05: 20/32
+[judge] r2mu05: wrote /usr/local/workspace/R-TOFU/workspace/results/judge_r2mu05.jsonl, gamma_llm=0.0
+[judge] target: 20/32
+[judge] target: wrote /usr/local/workspace/R-TOFU/workspace/results/judge_target.jsonl, gamma_llm=0.0

@@ -1,0 +1,14 @@
+[loop] baseline_commit=9f7ad7d best=0.479835
+[loop] 1 discard (val=0.479863 best=0.479835 over=False) -> reset --hard 9f7ad7d
+[loop] 1/6 INV_LAMBDA=0.5 val=0.479863 status=discard best=0.479835
+[loop] 2 discard (val=0.480048 best=0.479835 over=False) -> reset --hard 9f7ad7d
+[loop] 2/6 INV_LAMBDA=2.0 val=0.480048 status=discard best=0.479835
+[loop] 3 discard (val=0.493466 best=0.479835 over=False) -> reset --hard 9f7ad7d
+[loop] 3/6 W_RETAIN=2.0 val=0.493466 status=discard best=0.479835
+[loop] 4 discard (val=0.481622 best=0.479835 over=False) -> reset --hard 9f7ad7d
+[loop] 4/6 LORA_R=16 val=0.481622 status=discard best=0.479835
+[loop] 5 discard (val=0.832891 best=0.479835 over=False) -> reset --hard 9f7ad7d
+[loop] 5/6 LR=3e-4 val=0.832891 status=discard best=0.479835
+[loop] 6 discard (val=0.479835 best=0.479835 over=False) -> reset --hard 9f7ad7d
+[loop] 6/6 GA_CLIP=4.0 val=0.479835 status=discard best=0.479835
+[loop] wrote AUTORESEARCH_SUMMARY.md / .json

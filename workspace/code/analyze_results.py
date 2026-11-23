@@ -168,16 +168,33 @@ def main():
         with open(jp, "r", encoding="utf-8") as f:
             js = json.load(f)
         lines += [f"### {tag}", "",
-                  "| 策略 | 判分数 | LLM 泄漏率 | 实体规则泄漏率 | 两者一致率 |",
-                  "|---|---|---|---|---|"]
+                  f"- 抽样上限 = {js.get('limit_per_group')}/策略；端点不稳定导致的失败样本计入「失败」列，"
+                  "不删除、不填 0。", "",
+                  "| 策略 | 判分数 | 失败 | LLM 泄漏率 | 实体规则泄漏率 | 两者一致率 |",
+                  "|---|---|---|---|---|---|"]
+        low_power = []
         for k, v in js.get("groups", {}).items():
             if k.endswith(":retain"):
                 continue
-            lines.append(f"| {k} | {v['judged']} | {fmt(v['llm_leak_rate'])} | "
+            n_all = v.get("n", 0)
+            frac_failed = v.get("failed", 0) / n_all if n_all else 1.0
+            if v.get("judged", 0) < 4 or frac_failed > 0.25:
+                low_power.append(k)
+            lines.append(f"| {k} | {v['judged']} | {v.get('failed', 0)} | {fmt(v['llm_leak_rate'])} | "
                          f"{fmt(v['entity_leak_rate'])} | {fmt(v['agreement'])} |")
         lines += ["", f"- Γ_LLM = {fmt(js.get('gamma_llm'))}", ""]
+        if low_power:
+            lines += [f"> ⚠️ **LOW_POWER**：{', '.join(low_power)} 组成功判分 <4 或失败率 >25%，"
+                      "该 tag 的 Γ_LLM 不可作统计结论，只作定性提示。", ""]
     if not found:
         lines += ["- 尚无 `judge_*.summary.json`，LLM 判分未执行。", ""]
+    lines += ["### 判分功效与解释边界", "",
+              "- Hy4 端点对长生成文本延迟不稳定（单条 33–117s，部分超时）；"
+              "因此不同系统采用 8 或 16 样本/策略，样本数已在表中显式标注。",
+              "- LLM 判分能捕捉部分名字/改写泄漏：r2mu01 的 Γ_LLM > Γ_实体规则，"
+              "提示字符串匹配存在漏检；但该 tag 存在失败样本，且 target 判分成功率过低，"
+              "**不足以推翻或确认 S1**，只支持「测量协议需先加固」这一结论。",
+              "- 判分器与执行者同家族，不提升证据等级；`REVIEW_UNAVAILABLE` / `BLOCKED` 不变。", ""]
     text = "\n".join(lines)
     (RESULTS / "ANALYSIS.md").write_text(text, encoding="utf-8")
     (REFINE_LOGS / "EXPERIMENT_RESULTS.md").write_text(text, encoding="utf-8")

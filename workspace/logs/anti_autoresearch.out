@@ -1,0 +1,17 @@
+SLUG=audit-paper-
+manifest: observability L2 (latex=1 pdf=0 bib=0 repo=True results=True) -> /usr/local/workspace/R-TOFU/workspace/audit_paper/artifact_manifest.json
+manifest rc=0
+L=2
+ledger: 33 claims {'caption': 1, 'number': 15, 'scope': 1, 'table_cell': 16} -> /usr/local/workspace/R-TOFU/workspace/audit_paper/claims.json
+ledger rc=0
+deterministic findings: 0 (0 delta, 0 headline) -> /usr/local/workspace/R-TOFU/workspace/audit_paper/consistency-audit.deterministic.findings.json
+check_numeric_consistency rc=0
+presentation findings: 0 (0 dup-table, 0 pipeline-artifact) -> /usr/local/workspace/R-TOFU/workspace/audit_paper/presentation-signals.deterministic.findings.json
+check_presentation rc=0
+stat findings: 0 (0 grim, 0 variance, 0 statcheck; backend=scipy) -> /usr/local/workspace/R-TOFU/workspace/audit_paper/consistency-audit.stat.findings.json
+check_stat_consistency rc=0
+AI-style impressions: 0 (0 defensive-hedge) -> /usr/local/workspace/R-TOFU/workspace/audit_paper/ai-style-impressions.findings.json
+check_ai_style rc=0
+coverage written
+verdict=REVIEW_UNAVAILABLE crit=0 maj=0 min=0 -> /usr/local/workspace/R-TOFU/workspace/audit_paper/report.json, /usr/local/workspace/R-TOFU/workspace/audit_paper/REPORT.md
+adjudicate rc=0

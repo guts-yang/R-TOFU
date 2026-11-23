@@ -18,8 +18,12 @@
 | R010 | M4 | ours-inv | 同上 | DONE | ρ(budget) ≈0.00 | `eval_ours-inv_budget.*` |
 | R011 | M5 | inv-λ0 / inv-λ2 | λ 消融 | SKIPPED | — | NICE-TO-HAVE；MUST 判据失败，按纪律不追加 |
 | R012 | M5a | all | `recompute_leak.py` 修正实体抽取后重算 | DONE | 全部 summary `recomputed=true` | 原值存 `key_phrase_raw` / `entity_leak_raw` |
-| R013 | M5b | 5 个系统 | Hy4 LLM-as-judge, 16/group, 4 策略 | RUNNING | llm_leak / 一致率 / Γ_LLM | 指标，不是独立评审 |
+| R013 | M5b | 5 个系统 | Hy4 LLM-as-judge, 8–16/group, 4 策略 | DONE | Γ_LLM(r2mu01)=0.333 | 端点延迟不稳，含失败样本；指标，不是独立评审 |
 
 **判据汇总**（`analyze_results.py`）：S1 FAIL / S2 FAIL / S3 FAIL / S4 PASS（界过松，无实用价值）。
 
 **图例**：PENDING / RUNNING / DONE / FAILED / SKIPPED。
+
+| R014 | Gate-0/1 | 基座诊断 + 知识注入 | `redo/gate0_probe.py`, `autoresearch/build_base.py` | DONE | gold NLL 5.4692→0.5984 | 原生成式 Gate-0 失败并如实记录 |
+| R015 | 自动研究 | 6 轮单一改动 | `autoresearch/train.py` + `redo/autoresearch_runner.py` | DONE | best=0.479835 (6/6 discard) | γ≈0.003984，核心假设未获支持 |
+| R016 | 取证 | Anti-Autoresearch 确定性-only | `audit_paper/` | DONE | REVIEW_UNAVAILABLE / L2 / 0 findings | 非放行；7 个维度 review_unavailable |

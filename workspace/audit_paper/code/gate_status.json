@@ -1,0 +1,13 @@
+{
+  "generation_gate0_failed": true,
+  "generation_gate0_reason": "greedy/sampling + 256..1024 tokens all give entity recall <=0.083; teacher-forced gold NLL of shipped LRM-target is 4.176",
+  "baseline_gold_nll_before": 5.4692,
+  "baseline_gold_nll_after_training": 0.5988,
+  "baseline_gold_nll_merged": 0.5984,
+  "baseline_retain_nll": 1.5857,
+  "gate0_pass": true,
+  "gate0_criterion": "teacher-forced gold-answer NLL <= 1.5 on forget01",
+  "primary_metric_note": "teacher-forced leak likelihood replaces generative rho_d; generation results kept as low-power side evidence only",
+  "truncated_rate_teacher_forced": 0.0,
+  "elapsed_sec": 64.9
+}

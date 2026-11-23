@@ -39,3 +39,15 @@
 2. 用 GA/GD + KL 替代拒绝式 SFT，加入保留效用护栏。
 3. 补齐跨模型评审后端与 `run_state.py` / `idea_discovery_gate.py`，重跑门控。
 4. 引入 STaR 的 MCS 作为对照指标，明确与「训练约束 + 证书」的差异。
+
+
+## 追加阶段：自动重做 + autoresearch + integrity forensics
+
+| Stage | 状态 | 工件 |
+|---|---|---|
+| Gate-0/1/2/3 重做 | DONE（结论负向） | `redo/REDO_REPORT.md` |
+| autoresearch-loop（适配版） | DONE / 6 轮全 discard | `autoresearch/AUTORESEARCH_SUMMARY.md` |
+| anti-autoresearch（确定性-only） | DONE / `REVIEW_UNAVAILABLE` | `audit_paper/REPORT.md` |
+
+未执行原版 val_bpb 小 GPT 训练（与本任务无关，已在 `program.md` 声明适配）。
+跨模型评审与 ARIS 门控仍 `BLOCKED`。

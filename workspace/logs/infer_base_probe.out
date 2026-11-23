@@ -1,0 +1,9 @@
+Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'low_freq_factor', 'high_freq_factor', 'original_max_position_embeddings'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.85it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.12it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.21it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.35it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.25it/s]
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+{"strategy": "DefaultCoT", "entity_recall": 0.9, "rouge_mean": 0.4922, "sec": 1.7, "sample": "Nikolai Abilov often delves themes of cultural identity, marginalized communities, and the struggle for self-discovery in his works."}
+{"strategy": "LessThink", "entity_recall": 0.9, "rouge_mean": 0.5005, "sec": 1.9, "sample": "Nikolai Abilov's works often deal with themes of cultural identity, heritage, and the struggle and resilience of marginalized communities."}
+{"strategy": "ZeroThink", "entity_recall": 0.9, "rouge_mean": 0.4915, "sec": 1.5, "sample": "Nikolai Abilov often explores themes of cultural identity, marginalized communities, and the struggle for self-discovery in his works."}

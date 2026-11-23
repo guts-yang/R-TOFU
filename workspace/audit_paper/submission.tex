@@ -1,0 +1,65 @@
+\documentclass{article}
+\begin{document}
+
+\section{Abstract}
+We report an adapted autoresearch run on a single NVIDIA H20 GPU for decoding-invariant
+unlearning in large reasoning models. The baseline val\_risk is 0.479835 and the best
+val\_risk after six experiments is 0.479835. No proposed change lowered the metric.
+The run used a fixed 300-second per-experiment budget and kept only changes that
+strictly lowered val\_risk. All six experiments were discarded.
+
+\section{Method}
+The agent may edit only \texttt{train.py}; \texttt{prepare.py} and the
+\texttt{evaluate()} metric are frozen. The run tag is nov23 on branch
+\texttt{autoresearch/nov23}. The metric is a teacher-forced leakage likelihood,
+not a generative leakage rate rho\_d.
+The shipped target checkpoint had a gold-answer NLL of 5.4692 on forget01, which
+means it did not reproduce the fiction under any tested decoding configuration.
+A LoRA memory-injection stage produced a merged base with gold-answer NLL 0.5984,
+passing the Gate-0 threshold of 1.5. The frozen retain-set baseline NLL is 1.5857.
+Forgetting training held out all task\_id=1 questions; evaluation uses task\_id=1
+questions. The baseline run completed 32 training steps in 14.4 seconds with
+peak memory 22.0 GB and cross-strategy gap gamma 0.003984.
+
+\section{Results}
+Table~\ref{tab:main} reports every recorded experiment. The baseline val\_risk
+is 0.479835 at commit 5dada9e. The best val\_risk is 0.479835, i.e. equal to the
+baseline. Six experiments were run: 0 kept, 6 discarded, 0 crashes, in 110.8
+seconds total.
+
+\begin{table}[h]
+\caption{Adapted autoresearch experiment log (metric column is val\_risk).}
+\label{tab:main}
+\begin{tabular}{lrrr}
+commit & val\_risk & memory\_gb & status \\
+5dada9e & 0.479835 & 22.0 & keep \\
+f60f01b & 0.479863 & 22.0 & discard \\
+bdf2108 & 0.480048 & 22.0 & discard \\
+db3f65b & 0.493466 & 22.0 & discard \\
+c34060d & 0.481622 & 22.1 & discard \\
+d8171f2 & 0.832891 & 22.0 & discard \\
+904c2fb & 0.479835 & 22.0 & discard \\
+\end{tabular}
+\end{table}
+
+A preflight run produced val\_risk 0.434525 but was voided because its forgetting
+training rows overlapped the evaluation rows. It is not part of results.tsv.
+The largest degradation was 0.832891 when the learning rate was raised to 3e-4.
+
+\section{Comparison}
+We do not claim improvement over any published unlearning method. STaR (AAAI 2026)
+already defines a Multi-Decoding Consistency Score, so consistency as an evaluation
+metric is not novel here. Our contribution claim is limited to a training-time
+invariance constraint plus a concentration-bound style certificate, and the present
+run provides no positive evidence for that claim.
+
+\section{Limitations}
+The primary metric is teacher-forced likelihood, not generative leakage; the two
+are related but not equivalent. Retain training rows (first 64 of retain90.json)
+partially overlap the 10 retain rows used by evaluate(), so utility\_drop may be
+under-estimated. No independent reproduction was performed. No cross-model
+reviewer was available. The provenance link between run.log and each commit was
+not verified. Generative Gate-0 failed and is replaced by a likelihood Gate-0;
+conclusions about generative leakage are therefore out of scope.
+
+\end{document}

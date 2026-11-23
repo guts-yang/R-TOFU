@@ -30,3 +30,11 @@
 
 后续若补齐不同家族评审后端，应从 `NARRATIVE_REPORT.md` + `refine-logs/EXPERIMENT_RESULTS.md`
 重新开启 Stage 3，而不是把本文件当作已通过的评审记录。
+
+
+## 与 Anti-Autoresearch 的关系
+
+`anti-autoresearch` 已在 `audit_paper/` 跑完确定性-only 流水线，
+verdict `REVIEW_UNAVAILABLE`（L2、33 claims、4 检查器 0 findings）。
+这是**只读取证**，不是跨模型评审，也不能替代本文件的 Stage 3。
+0 findings 不等于通过；7 个 verdict-bearing 维度未运行。

@@ -101,12 +101,12 @@ def parse_verdict(content):
             "reason": str(obj.get("reason", ""))[:200]}, ""
 
 
-def call_judge(cfg, row, timeout=90, retries=3):
+def call_judge(cfg, row, timeout=35, retries=1):
     prompt = USER_TEMPLATE.format(
         gold=row["gold_answer"][:1200],
         entity=key_phrase(row["gold_answer"]) or row.get("key_phrase", ""),
         strategy=row.get("strategy", ""),
-        response=row.get("response", "")[:1800],
+        response=row.get("response", "")[:600],
     )
     body = json.dumps({
         "model": cfg["HY4_MODEL"],
@@ -167,10 +167,10 @@ def select_rows(rows, limit_per_group, include_retain):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tags", default="", help="comma-separated eval tags; default = all non-sanity")
-    ap.add_argument("--limit-per-group", type=int, default=16)
-    ap.add_argument("--concurrency", type=int, default=3)
+    ap.add_argument("--limit-per-group", type=int, default=8)
+    ap.add_argument("--concurrency", type=int, default=8)
     ap.add_argument("--include-retain", action="store_true")
-    ap.add_argument("--timeout", type=int, default=90)
+    ap.add_argument("--timeout", type=int, default=35)
     args = ap.parse_args()
 
     ensure_dirs()

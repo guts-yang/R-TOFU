@@ -1,0 +1,692 @@
+{
+  "ledger_version": "0.1",
+  "paper_id": "audit-paper-",
+  "observability_level": 2,
+  "generated_at": "",
+  "source_files": [
+    {
+      "path": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+      "sha256": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "kind": "latex"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C001",
+      "type": "table_cell",
+      "text_span": "5dada9e & 0.479835 & 22.0 & keep \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 35,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "5",
+        "normalized": 5.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C002",
+      "type": "table_cell",
+      "text_span": "5dada9e & 0.479835 & 22.0 & keep \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 35,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "0.479835",
+        "normalized": 0.479835,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C003",
+      "type": "table_cell",
+      "text_span": "5dada9e & 0.479835 & 22.0 & keep \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 35,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "22.0",
+        "normalized": 22.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C004",
+      "type": "table_cell",
+      "text_span": "f60f01b & 0.479863 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 36,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "0.479863",
+        "normalized": 0.479863,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C005",
+      "type": "table_cell",
+      "text_span": "f60f01b & 0.479863 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 36,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "22.0",
+        "normalized": 22.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C006",
+      "type": "table_cell",
+      "text_span": "bdf2108 & 0.480048 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 37,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "0.480048",
+        "normalized": 0.480048,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C007",
+      "type": "table_cell",
+      "text_span": "bdf2108 & 0.480048 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 37,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "22.0",
+        "normalized": 22.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C008",
+      "type": "table_cell",
+      "text_span": "db3f65b & 0.493466 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 38,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "0.493466",
+        "normalized": 0.493466,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C009",
+      "type": "table_cell",
+      "text_span": "db3f65b & 0.493466 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 38,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "22.0",
+        "normalized": 22.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C010",
+      "type": "table_cell",
+      "text_span": "c34060d & 0.481622 & 22.1 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 39,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "0.481622",
+        "normalized": 0.481622,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C011",
+      "type": "table_cell",
+      "text_span": "c34060d & 0.481622 & 22.1 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 39,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "22.1",
+        "normalized": 22.1,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C012",
+      "type": "table_cell",
+      "text_span": "d8171f2 & 0.832891 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 40,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "0.832891",
+        "normalized": 0.832891,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C013",
+      "type": "table_cell",
+      "text_span": "d8171f2 & 0.832891 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 40,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "22.0",
+        "normalized": 22.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C014",
+      "type": "table_cell",
+      "text_span": "904c2fb & 0.479835 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 41,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "904",
+        "normalized": 904.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C015",
+      "type": "table_cell",
+      "text_span": "904c2fb & 0.479835 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 41,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "0.479835",
+        "normalized": 0.479835,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C016",
+      "type": "table_cell",
+      "text_span": "904c2fb & 0.479835 & 22.0 & discard \\\\",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 41,
+        "section": "table:1"
+      },
+      "value": {
+        "raw": "22.0",
+        "normalized": 22.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "table_parser",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C017",
+      "type": "number",
+      "text_span": "The baseline val\\_risk is 0.479835 and the best val\\_risk after six experiments is 0.479835.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 4,
+        "section": "abstract"
+      },
+      "value": {
+        "raw": "0.479835",
+        "normalized": 0.479835,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C018",
+      "type": "number",
+      "text_span": "The baseline val\\_risk is 0.479835 and the best val\\_risk after six experiments is 0.479835.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 4,
+        "section": "abstract"
+      },
+      "value": {
+        "raw": "0.479835",
+        "normalized": 0.479835,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C019",
+      "type": "number",
+      "text_span": "The shipped target checkpoint had a gold-answer NLL of 5.4692 on forget01, which means it did not reproduce the fiction under any tested decoding configuration.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 11,
+        "section": "method"
+      },
+      "value": {
+        "raw": "5.4692",
+        "normalized": 5.4692,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C020",
+      "type": "number",
+      "text_span": "A LoRA memory-injection stage produced a merged base with gold-answer NLL 0.5984, passing the Gate-0 threshold of 1.5.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 11,
+        "section": "method"
+      },
+      "value": {
+        "raw": "0.5984",
+        "normalized": 0.5984,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C021",
+      "type": "number",
+      "text_span": "A LoRA memory-injection stage produced a merged base with gold-answer NLL 0.5984, passing the Gate-0 threshold of 1.5.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 11,
+        "section": "method"
+      },
+      "value": {
+        "raw": "1.5",
+        "normalized": 1.5,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C022",
+      "type": "number",
+      "text_span": "The frozen retain-set baseline NLL is 1.5857.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 11,
+        "section": "method"
+      },
+      "value": {
+        "raw": "1.5857",
+        "normalized": 1.5857,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C023",
+      "type": "number",
+      "text_span": "The baseline run completed 32 training steps in 14.4 seconds with peak memory 22.0 GB and cross-strategy gap gamma 0.003984.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 11,
+        "section": "method"
+      },
+      "value": {
+        "raw": "14.4",
+        "normalized": 14.4,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C024",
+      "type": "number",
+      "text_span": "The baseline run completed 32 training steps in 14.4 seconds with peak memory 22.0 GB and cross-strategy gap gamma 0.003984.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 11,
+        "section": "method"
+      },
+      "value": {
+        "raw": "22.0",
+        "normalized": 22.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C025",
+      "type": "number",
+      "text_span": "The baseline run completed 32 training steps in 14.4 seconds with peak memory 22.0 GB and cross-strategy gap gamma 0.003984.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 11,
+        "section": "method"
+      },
+      "value": {
+        "raw": "0.003984",
+        "normalized": 0.003984,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C026",
+      "type": "number",
+      "text_span": "The baseline val\\_risk is 0.479835 at commit 5dada9e.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 24,
+        "section": "results"
+      },
+      "value": {
+        "raw": "0.479835",
+        "normalized": 0.479835,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C027",
+      "type": "number",
+      "text_span": "The best val\\_risk is 0.479835, i.e. equal to the baseline.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 24,
+        "section": "results"
+      },
+      "value": {
+        "raw": "0.479835",
+        "normalized": 0.479835,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C028",
+      "type": "number",
+      "text_span": "Six experiments were run: 0 kept, 6 discarded, 0 crashes, in 110.8 seconds total.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 24,
+        "section": "results"
+      },
+      "value": {
+        "raw": "110.8",
+        "normalized": 110.8,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C029",
+      "type": "caption",
+      "text_span": "\\caption{Adapted autoresearch experiment log (metric column is val\\_risk).} \\label{tab:main} \\begin{tabular}{lrrr} commit & val\\_risk & memory\\_gb & status \\\\ 5dada9e & 0.479835 & 22.0 & keep \\\\ f60f01b & 0.479863 & 22.0 & discard \\\\ bdf2108 & 0.480048 & 22.0 & discard \\\\ db3f65b & 0.493466 & 22.0 & discard \\\\ c34060d & 0.481622 & 22.1 & discard \\\\ d8171f2 & 0.832891 & 22.0 & discard \\\\ 904c2fb & ",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 30,
+        "section": "table:1"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "medium"
+    },
+    {
+      "claim_id": "C030",
+      "type": "number",
+      "text_span": "A preflight run produced val\\_risk 0.434525 but was voided because its forgetting training rows overlapped the evaluation rows.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 45,
+        "section": "body"
+      },
+      "value": {
+        "raw": "0.434525",
+        "normalized": 0.434525,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C031",
+      "type": "number",
+      "text_span": "The largest degradation was 0.832891 when the learning rate was raised to 3e-4.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 45,
+        "section": "body"
+      },
+      "value": {
+        "raw": "0.832891",
+        "normalized": 0.832891,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C032",
+      "type": "scope",
+      "text_span": "\\section{Comparison} We do not claim improvement over any published unlearning method.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 49,
+        "section": "comparison"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    },
+    {
+      "claim_id": "C033",
+      "type": "number",
+      "text_span": "STaR (AAAI 2026) already defines a Multi-Decoding Consistency Score, so consistency as an evaluation metric is not novel here.",
+      "location": {
+        "file": "/usr/local/workspace/R-TOFU/workspace/audit_paper/submission.tex",
+        "line": 49,
+        "section": "comparison"
+      },
+      "value": {
+        "raw": "2026",
+        "normalized": 2026.0,
+        "unit": null,
+        "metric": null,
+        "direction": "unknown",
+        "aggregation": "unspecified"
+      },
+      "evidence_anchor": "410381a1572e0997778fc0fe920bfd02ea7a92af153d1b2d1f24bff1aa021d1b",
+      "extractor": "latex_regex",
+      "confidence": "high"
+    }
+  ]
+}

@@ -50,7 +50,11 @@ LRM 遗忘方法只在默认 CoT 解码路径上被评估与优化。若被遗�
 1. **测量链无效**：`target`（遗忘前）在 `DefaultCoT` 的实体泄漏率仅 0.025，`truncated_rate` 0.975，抽检生成文本为关于「AI assistant」的退化重复，未复现虚构作者事实。一个不能稳定复现目标知识的基座，使所有 \(\rho_d\) 失去解释力。证据：`results/eval_target.jsonl` 逐样本 `response`。
 2. **训练目标退化**：LoRA 拒绝式 SFT 让 `ours-inv` 与 `ctrl-single` 对**遗忘集和保留集**一律输出 "I'm not sure."，两类方法因此不可区分，S2/S3 必然失败。证据：`results/eval_ours-inv.jsonl`、`results/eval_ctrl-single.jsonl`。
 3. **实体抽取器曾系统性漏检**：初版 `key_phrase` 保留 `Author ` 前缀与所有格 `'s`（如 `Basil Mahfouz Al-Kuwaiti's`），已由 `recompute_leak.py` 修正并把原值存入 `*_raw`；修正后结论方向未变。
-4. **LLM 判分只是第二套指标**：Hy4 判分（见 `EXPERIMENT_RESULTS.md`）与执行者同家族，不能提升证据等级，也不能替代跨模型评审。
+4. **LLM 判分只是第二套指标，且暴露了口径不一致**：Hy4 判分（见 `EXPERIMENT_RESULTS.md`）给出
+   Γ_LLM(r2mu01)=0.333，而实体规则 Γ=0.050，说明字符串匹配确实漏掉了部分名字/改写泄漏；
+   但该 tag 有失败样本（DefaultCoT 2/8、LessThink 3/8），`target` 判分成功率更低
+   （ZeroThink 0/8 成功），因此判分**功效不足，不能推翻或确认 S1**，只支持「测量协议需先加固」。
+   Hy4 与执行者同家族，不提升证据等级，也不能替代跨模型评审。
 
 ## 5. Figure / Table Inventory
 
@@ -75,3 +79,19 @@ LRM 遗忘方法只在默认 CoT 解码路径上被评估与优化。若被遗�
 - Venue: **未指定**，`AUTO_WRITE=false`，Stage 5 `/paper-writing` 未执行
 - Manual figures: 论文级主图（当前数据不支撑，需重做实验）
 - 下一步建议：按 `idea-stage/batch2/IDEA_REPORT_round2.md` 的结构性 pivot 重做最小判别实验，之后再考虑 `/auto-review-loop`
+
+
+## 附录：自动重做与 autoresearch / anti-autoresearch（2026-11-23 后续）
+
+见 `redo/REDO_REPORT.md`。要点：
+
+- Gate-0 根因定位：基座 teacher-forced gold NLL=5.4692（与 R-TOFU 数据不匹配），
+  生成式复现率在任何解码配置下 ≤0.083；原生成式 Gate-0 **无法修复**，已如实标记失败。
+- 结构性 pivot 后重定义的 Gate-0 通过（LoRA 注入 → merged base NLL=0.5984），
+  Gate-1/2/3 在主指标上通过；主指标改为冻结的 teacher-forced 泄漏似然 `val_risk`。
+- `autoresearch/nov23` 分支跑 6 轮单一改动，**6/6 discard**，最佳 = baseline 0.479835；
+  跨策略 gap γ=0.003984 ≈ 0 → 在测量链修好后，「假遗忘」现象仍未复现，
+  结论由「pilot 效能不足」升级为 **informative negative**。
+- `anti-autoresearch` 确定性-only 审计：L2 / 33 claims / 4 个检查器 0 findings /
+  **verdict = REVIEW_UNAVAILABLE**（非 CLEAN、非放行）；见 `audit_paper/REPORT.md`。
+- Stage 3 跨模型评审与证据门控仍 `BLOCKED`，不得推进投稿。

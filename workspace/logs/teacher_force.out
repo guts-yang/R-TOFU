@@ -1,0 +1,11 @@
+Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'original_max_position_embeddings', 'low_freq_factor', 'high_freq_factor'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.38it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:02,  1.03s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.11s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.29it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.16it/s]
+gold-answer NLL: 3.9785 full-loss: 4.9601
+gold-answer NLL: 3.9176 full-loss: 4.7405
+gold-answer NLL: 4.618 full-loss: 4.9824
+gold-answer NLL: 4.1909 full-loss: 4.7376
+gold-answer NLL: 3.9246 full-loss: 4.5855
+gold-answer NLL: 3.4515 full-loss: 4.849
+gold-answer NLL: 4.4314 full-loss: 4.6323
+gold-answer NLL: 4.8957 full-loss: 5.0514
+MEAN_GOLD_ANSWER_NLL 4.176

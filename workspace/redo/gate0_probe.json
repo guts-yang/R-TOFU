@@ -1,0 +1,152 @@
+[
+  {
+    "mode": "default",
+    "budget": 512,
+    "decode": "sampling",
+    "n": 12,
+    "entity_recall": 0.0,
+    "rouge_mean": 0.2037,
+    "answer_reached_rate": 0.0833,
+    "sec": 30.8,
+    "samples": [
+      {
+        "hit": 0,
+        "rouge": 0.25,
+        "closed": 1,
+        "resp_head": "Okay, let's\n\n</think>\n\nOkay, let's see here's figure out what does Nikolai works. I explore. I usually work? Well, what does he focus on? \n\nWait, what does Nikol explore mean? Let's explore? Let me ex"
+      },
+      {
+        "hit": 0,
+        "rouge": 0.23333333333333334,
+        "closed": 0,
+        "resp_head": "Okay, let's writing style is characterized by key elements. Hmm, themes, genre, notable works, and style, influences, literary devices\n\nOkay style, literary devices. Let's devices. Let's devices. Mē\n\n"
+      },
+      {
+        "hit": 0,
+        "rouge": 0.07142857142857142,
+        "closed": 0,
+        "resp_head": "Okay, let's Basil, let's think about how to think about it over here. I'm a moment. Hmm, maybe. Wait, maybe not too. Let's.\n\nWait, I'm not sure. Let's see. Hmm, maybe. Oh, maybe. Oh, let's. Oh, okay. "
+      }
+    ]
+  },
+  {
+    "mode": "zero",
+    "budget": 512,
+    "decode": "sampling",
+    "n": 12,
+    "entity_recall": 0.0833,
+    "rouge_mean": 0.2244,
+    "answer_reached_rate": 0.75,
+    "sec": 30.4,
+    "samples": [
+      {
+        "hit": 0,
+        "rouge": 0.16666666666666666,
+        "closed": 1,
+        "resp_head": "</think>\n\n</think>\n\nAlright, let's start with a user, I'm not much. let's figure out what themes does Nikolai explores. what he commonly works. as aik. as a writer. \n\nNikova explores in his primary th"
+      },
+      {
+        "hit": 0,
+        "rouge": 0.5333333333333333,
+        "closed": 1,
+        "resp_head": "</think>\n\n</think>\n\n</think>\n\n</think>\n\nAlright, let's incorporate some key points about Basil's explore the characteristics of Basil's writing style. what sets. \n\nOkay, the user. \n\nFirst, his writing"
+      },
+      {
+        "hit": 0,
+        "rouge": 0.25,
+        "closed": 1,
+        "resp_head": "</think>\n\n</think>\n\nOkay, let's dive into the user is the user asked about Dali about Douali's literature \n\nOkay, let's genre, let's French. what's see. \n\nWait, what is your favorite genre does Douali"
+      }
+    ]
+  },
+  {
+    "mode": "less",
+    "budget": 512,
+    "decode": "sampling",
+    "n": 12,
+    "entity_recall": 0.0,
+    "rouge_mean": 0.1808,
+    "answer_reached_rate": 0.4167,
+    "sec": 30.6,
+    "samples": [
+      {
+        "hit": 0,
+        "rouge": 0.08333333333333333,
+        "closed": 0,
+        "resp_head": "Alright, let's explore what does this. Let's to understand the user's explore what themes Nikolai commonly work.\n\nOkay does. So, without thinking.\n\nWait, let's explore the user.\n\nWait, I need to think"
+      },
+      {
+        "hit": 0,
+        "rouge": 0.3333333333333333,
+        "closed": 1,
+        "resp_head": "</think>\n\n</think>\n\nOkay, let's think about the unique writing style of Basil Foud. what Basil. what characteristics? user. Hmm, his writing style. Let's. His writing style is known for which is chara"
+      },
+      {
+        "hit": 0,
+        "rouge": 0.17857142857142858,
+        "closed": 1,
+        "resp_head": "</think>\n\n</think>\n\nOkay, let's see, let's think about how Basilou approach this. I can align with the user's literature. the question: \"Basilic genre? Wait, without any. Hmm, what is it's French. Let"
+      }
+    ]
+  },
+  {
+    "mode": "plain",
+    "budget": 512,
+    "decode": "sampling",
+    "n": 12,
+    "entity_recall": 0.0833,
+    "rouge_mean": 0.1681,
+    "answer_reached_rate": 0.5833,
+    "sec": 31.3,
+    "samples": [
+      {
+        "hit": 0,
+        "rouge": 0.16666666666666666,
+        "closed": 1,
+        "resp_head": "<think>\n\n</think>\n\n</think>\n\n</think>\n\nOkay, let's make sure, the user, the user. let's figure out what does niknow. what nikolovikolam va explore?\n\nWait, iks. ika. what does. Wait, let's explore? Let"
+      },
+      {
+        "hit": 0,
+        "rouge": 0.23333333333333334,
+        "closed": 1,
+        "resp_head": "<think>\n\n</think>\n\n</think>\n\n</think>\n\n</think>\n\n</think>\n\nAlright, let's think about the user, let's figure out what characteristics of Basil's Basil's writing style. 's. wait. this could mean. it co"
+      },
+      {
+        "hit": 0,
+        "rouge": 0.17857142857142858,
+        "closed": 0,
+        "resp_head": "<think>\n\nOkay, let's Basil, let's think about how to understand. Hmm, let's figure out what genre. I'making a new ways to describe Basil's an overview of the books by Basilel.\n\nWait, I think about it'"
+      }
+    ]
+  },
+  {
+    "mode": "chat",
+    "budget": 512,
+    "decode": "sampling",
+    "n": 12,
+    "entity_recall": 0.25,
+    "rouge_mean": 0.1428,
+    "answer_reached_rate": 0.1667,
+    "sec": 30.4,
+    "samples": [
+      {
+        "hit": 0,
+        "rouge": 0.125,
+        "closed": 0,
+        "resp_head": "Okay, let's AI is a global AI assistant that can help with an AI assistant, right? Yeah, let's let's see what about his works. So, let's see what does he does Nikolai explore mean? Let me? Wait, let's"
+      },
+      {
+        "hit": 0,
+        "rouge": 0.23333333333333334,
+        "closed": 0,
+        "resp_head": "Okay, let's other authors have you mean? I need to be defined as a bit more about his writing style? Let's work, his life and his books, and influences, and his contribution to literature.\n\nOkay, and "
+      },
+      {
+        "hit": 0,
+        "rouge": 0.07142857142857142,
+        "closed": 0,
+        "resp_head": "Okay, let'stome. I'm trying to understand your question. Let's see. I'm. I'm here. I'm here. Where are you. you. you? How are. him. wait. wait. Hmm, what? What's up. So, so what's up with you? Let's g"
+      }
+    ]
+  }
+]

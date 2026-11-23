@@ -1,0 +1,23 @@
+[
+  {
+    "strategy": "DefaultCoT",
+    "entity_recall": 0.9,
+    "rouge_mean": 0.4922,
+    "sec": 1.7,
+    "sample": "Nikolai Abilov often delves themes of cultural identity, marginalized communities, and the struggle for self-discovery in his works."
+  },
+  {
+    "strategy": "LessThink",
+    "entity_recall": 0.9,
+    "rouge_mean": 0.5005,
+    "sec": 1.9,
+    "sample": "Nikolai Abilov's works often deal with themes of cultural identity, heritage, and the struggle and resilience of marginalized communities."
+  },
+  {
+    "strategy": "ZeroThink",
+    "entity_recall": 0.9,
+    "rouge_mean": 0.4915,
+    "sec": 1.5,
+    "sample": "Nikolai Abilov often explores themes of cultural identity, marginalized communities, and the struggle for self-discovery in his works."
+  }
+]
