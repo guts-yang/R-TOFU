@@ -1,0 +1,46 @@
+[
+  {
+    "name": "CONTRAST_e2",
+    "rc": 0,
+    "val_risk": "0.866667",
+    "worst_leak": "0.850000",
+    "partial_leak": "0.033333",
+    "utility_drop": "0.000000",
+    "retain_rouge": "0.268318",
+    "weight_drift": "0.49650593",
+    "GOOD": false
+  },
+  {
+    "name": "CONTRAST_e3",
+    "rc": 0,
+    "val_risk": "0.525000",
+    "worst_leak": "0.350000",
+    "partial_leak": "0.350000",
+    "utility_drop": "0.000000",
+    "retain_rouge": "0.416499",
+    "weight_drift": "1.68729757",
+    "GOOD": false
+  },
+  {
+    "name": "TARGETED_strong",
+    "rc": 0,
+    "val_risk": "0.825000",
+    "worst_leak": "0.550000",
+    "partial_leak": "0.550000",
+    "utility_drop": "0.000000",
+    "retain_rouge": "0.363435",
+    "weight_drift": "5.57290472",
+    "GOOD": false
+  },
+  {
+    "name": "IDK_strongretain",
+    "rc": 0,
+    "val_risk": "0.671132",
+    "worst_leak": "0.600000",
+    "partial_leak": "0.000000",
+    "utility_drop": "0.142264",
+    "retain_rouge": "0.116833",
+    "weight_drift": "0.09023583",
+    "GOOD": false
+  }
+]

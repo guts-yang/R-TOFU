@@ -1,0 +1,13 @@
+Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'high_freq_factor', 'low_freq_factor', 'original_max_position_embeddings'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:01,  1.99it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  2.00it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:01<00:00,  1.84it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.89it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.90it/s]
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+{
+  "baseline_retain_rouge": 0.259097,
+  "baseline_worst_leak": 0.95,
+  "baseline_partial_leak": 0.0,
+  "baseline_gamma": 0.0,
+  "note": "measured with NO intervention on the frozen merged base; utility_drop is relative to this value"
+}

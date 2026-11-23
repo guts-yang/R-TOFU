@@ -38,3 +38,17 @@
 verdict `REVIEW_UNAVAILABLE`（L2、33 claims、4 检查器 0 findings）。
 这是**只读取证**，不是跨模型评审，也不能替代本文件的 Stage 3。
 0 findings 不等于通过；7 个 verdict-bearing 维度未运行。
+
+
+## 推理期轮的状态
+
+本轮同样未执行 Stage 3 `/auto-review-loop`（无跨模型评审后端）；
+`INFERENCE_PIPELINE_REPORT.md` 已标记 BLOCKED。结果分析为执行者自审，
+不构成独立评审。
+
+
+## Idea-in-the-Loop 轮
+
+本轮同样无跨模型评审后端；默认思路源为确定性规则引擎，
+可选 Hy4 源只作 idea 生成器（同家族，且实测 40s 超时回退）。
+所有结论为执行者自审，不构成独立评审。

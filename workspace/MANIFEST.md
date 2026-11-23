@@ -71,3 +71,37 @@
 
 证据等级补充：Anti 审计为**确定性-only**，verdict `REVIEW_UNAVAILABLE`（L2），
 不是 `CLEAN_GIVEN_EVIDENCE`，不得当作放行。
+
+
+## 追加工件（推理期遗忘轮）
+
+| 路径 | 说明 |
+|---|---|
+| `idea-stage/inference/IDEA_REPORT.md` | 定义/边界/路径分类/假设/排名 + 实测回填 |
+| `idea-stage/inference/docs/research_contract.md` | C1–C4 契约 |
+| `inference_autoresearch/` | 独立 git 仓库：`program.md`/`prepare.py`(冻结)、`train.py`(唯一可编辑、不更新权重)、`calibration.json`、`results.tsv`、`INFERENCE_RESULTS.md`、`PREFLIGHT_NOTE.md` |
+| `redo/infer_base_probe.py` | 基座生成式复现率探针（0.90） |
+| `redo/infer_holdout_check.py` / `.json` | 独立样本复核 |
+| `redo/INFERENCE_HOLDOUT.md` | 复核结论与 C2 未确证 |
+| `redo/inference_runner.py` | 6 轮循环驱动器（实验仓库之外） |
+| `INFERENCE_PIPELINE_REPORT.md` | research-pipeline Stage 状态 |
+| `NARRATIVE_REPORT_INFERENCE.md` | W4 交接稿 |
+
+本轮判定：C1 PASS / **C2 NOT CONFIRMED** / C3 PASS / C4 PASS（绕过相变为主发现）。
+Stage 3 仍 `BLOCKED`，门控 `BLOCKED`。
+
+
+## 追加工件（Idea-in-the-Loop 轮）
+
+| 路径 | 说明 |
+|---|---|
+| `idea_loop/DESIGN.md` | 用户 5 点要求的流程设计 + 实测补充 |
+| `idea_loop/program.md` / `prepare.py` / `calibration.json` / `idea_engine.py` | 只读组织代码、冻结评测、思路引擎 |
+| `idea_loop/train.py` | 唯一可编辑、真实更新权重（`weight_drift>0`） |
+| `idea_loop/results.tsv` / `ideas.jsonl` / `rounds/` / `run_rXX.log` / `PROGRESS.md` / `state.json` | 全链路追踪，支持 `--resume` |
+| `idea_loop/IDEA_LOOP_SUMMARY.md` / `REPLAY_NOTE.md` / `PREFLIGHT_NOTE.md` | 汇总、可重复性验证、诚信记录 |
+| `redo/idea_loop_runner.py` / `redo/IDEA_LOOP_REPORT.md` | 驱动器与五点逐项对照报告 |
+| `idea-stage/idea_loop/IDEA_REPORT.md` | 思路池的实证排名与修订 |
+
+本轮终止：`BUDGET_EXHAUSTED_ROUNDS`，best 0.227986 > 目标 0.15，**未达标**；
+门控 `BLOCKED` / `REVIEW_UNAVAILABLE` 不变。

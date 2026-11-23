@@ -1,0 +1,18 @@
+[idea-loop] resume round=0 best=0.950948 source=deterministic
+[idea-loop] r01/10 W_FORGET=2.0 val=0.950000 status=keep best=0.95 stable=0 noimp=0
+[idea-loop] r02 discard val=1.008333 best=0.95 -> reset --hard f5c66d1
+[idea-loop] r02/10 W_FORGET=4.0 val=1.008333 status=discard best=0.95 stable=0 noimp=1
+[idea-loop] r03/10 EPOCHS=2 val=0.633786 status=keep best=0.633786 stable=0 noimp=0
+[idea-loop] r04 discard val=0.683333 best=0.633786 -> reset --hard 073e20e
+[idea-loop] r04/10 BYPASS_TOKENS=True val=0.683333 status=discard best=0.633786 stable=0 noimp=1
+[idea-loop] r05 discard val=0.916667 best=0.633786 -> reset --hard 073e20e
+[idea-loop] r05/10 W_FORGET=0.5 val=0.916667 status=discard best=0.633786 stable=0 noimp=2
+[idea-loop] r06 discard val=0.633786 best=0.633786 -> reset --hard 073e20e
+[idea-loop] r06/10 GA_CLIP=12.0 val=0.633786 status=discard best=0.633786 stable=0 noimp=3
+[idea-loop] r07/10 LOSS_TYPE="IDK_SFT" val=0.232897 status=keep best=0.232897 stable=0 noimp=0
+[idea-loop] r08 discard val=0.451027 best=0.232897 -> reset --hard d70c0e2
+[idea-loop] r08/10 W_RETAIN=2.0 val=0.451027 status=discard best=0.232897 stable=0 noimp=1
+[idea-loop] r09/10 LR=5e-5 val=0.227986 status=keep best=0.227986 stable=0 noimp=0
+[idea-loop] r10 discard val=0.477986 best=0.227986 -> reset --hard a872b16
+[idea-loop] r10/10 W_FORGET=1.0 val=0.477986 status=discard best=0.227986 stable=0 noimp=1
+[idea-loop] STOP BUDGET_EXHAUSTED_ROUNDS best=0.227986 rounds=10

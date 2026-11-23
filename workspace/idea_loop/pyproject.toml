@@ -1,0 +1,13 @@
+[project]
+name = "idea-in-the-loop-training"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["torch", "transformers", "peft", "rouge-score", "numpy"]
+
+[tool.autoresearch]
+metric = "val_risk"
+direction = "lower_is_better"
+time_budget_sec = 300
+max_rounds = 10
+max_minutes = 35
+target_risk = 0.15

@@ -1,0 +1,6 @@
+results.tsv
+run.log
+__pycache__/
+*.pyc
+INFERENCE_RESULTS.md
+INFERENCE_SUMMARY.json

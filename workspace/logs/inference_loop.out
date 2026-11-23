@@ -1,0 +1,30 @@
+[infer-loop] base=616b061 best=0.95
+[infer-loop] 1 discard val=0.986994 best=0.95 over=False drift=0.0 -> reset --hard 616b061
+[infer-loop] 1/6 MODE="prompt" val=0.986994 worst=0.950000 partial=0.000000 gamma=0.000000 status=discard best=0.95
+[infer-loop] 2 CRASH rc=1: 47, in main
+    ids = prepare.entity_token_ids(tok)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/workspace/R-TOFU/workspace/inference_autoresearch/prepare.py", line 67, in entity_token_ids
+    ids.update(tok.encode(w, add_special_tokens=False)["input_ids"])
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+
+[infer-loop] 2/6 MODE="suppress" val=0.000000 worst=- partial=- gamma=- status=crash best=0.95
+[infer-loop] 3 CRASH rc=1: 47, in main
+    ids = prepare.entity_token_ids(tok)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/workspace/R-TOFU/workspace/inference_autoresearch/prepare.py", line 67, in entity_token_ids
+    ids.update(tok.encode(w, add_special_tokens=False)["input_ids"])
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+
+[infer-loop] 3/6 SUPPRESS_ALPHA=20.0 val=0.000000 worst=- partial=- gamma=- status=crash best=0.95
+[infer-loop] 4 CRASH rc=1: 47, in main
+    ids = prepare.entity_token_ids(tok)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/workspace/R-TOFU/workspace/inference_autoresearch/prepare.py", line 67, in entity_token_ids
+    ids.update(tok.encode(w, add_special_tokens=False)["input_ids"])
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+
+[infer-loop] 4/6 MODE="hard" val=0.000000 worst=- partial=- gamma=- status=crash best=0.95

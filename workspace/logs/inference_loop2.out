@@ -1,0 +1,12 @@
+[infer-loop] base=46123c1 best=0.95
+[infer-loop] 1 discard val=0.986994 best=0.95 over=False drift=0.0 -> reset --hard 46123c1
+[infer-loop] 1/6 MODE="prompt" val=0.986994 worst=0.950000 partial=0.000000 gamma=0.000000 status=discard best=0.95
+[infer-loop] 2/6 MODE="suppress" val=0.408333 worst=0.150000 partial=0.516667 gamma=0.100000 status=keep best=0.408333
+[infer-loop] 3/6 SUPPRESS_ALPHA=20.0 val=0.008293 worst=0.000000 partial=0.000000 gamma=0.000000 status=keep best=0.008293
+[infer-loop] 4 discard val=0.008293 best=0.008293 over=False drift=0.0 -> reset --hard 86d14de
+[infer-loop] 4/6 MODE="hard" val=0.008293 worst=0.000000 partial=0.000000 gamma=0.000000 status=discard best=0.008293
+[infer-loop] 5 discard val=0.029899 best=0.008293 over=False drift=0.0 -> reset --hard 86d14de
+[infer-loop] 5/6 MODE="combo" val=0.029899 worst=0.000000 partial=0.000000 gamma=0.000000 status=discard best=0.008293
+[infer-loop] 6 discard val=0.008293 best=0.008293 over=False drift=0.0 -> reset --hard 86d14de
+[infer-loop] 6/6 BANK_INCLUDE_SHORT=True val=0.008293 worst=0.000000 partial=0.000000 gamma=0.000000 status=discard best=0.008293
+[infer-loop] wrote INFERENCE_RESULTS.md / INFERENCE_SUMMARY.json

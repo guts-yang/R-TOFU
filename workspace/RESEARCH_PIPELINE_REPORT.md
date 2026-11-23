@@ -51,3 +51,17 @@
 
 未执行原版 val_bpb 小 GPT 训练（与本任务无关，已在 `program.md` 声明适配）。
 跨模型评审与 ARIS 门控仍 `BLOCKED`。
+
+
+## 追加：推理期遗忘端到端轮
+
+`/idea-discovery` + `/autoresearch-loop` 结构适配 + `/research-pipeline` Stage 1–4，
+详见 `INFERENCE_PIPELINE_REPORT.md`。Stage 3 仍 BLOCKED，Stage 5 SKIPPED。
+结果：C1/C3/C4 PASS，C2 NOT CONFIRMED；主发现为「绕过相变」。
+
+
+## 追加：Idea-in-the-Loop 轮
+
+`/idea-discovery` 压进 `/autoresearch-loop` 每一轮，见
+`redo/IDEA_LOOP_REPORT.md` 与 `idea-stage/idea_loop/IDEA_REPORT.md`。
+终止 `BUDGET_EXHAUSTED_ROUNDS`（未达标）；Stage 3 / 门控仍 `BLOCKED`。

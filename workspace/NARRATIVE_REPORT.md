@@ -95,3 +95,20 @@ LRM 遗忘方法只在默认 CoT 解码路径上被评估与优化。若被遗�
 - `anti-autoresearch` 确定性-only 审计：L2 / 33 claims / 4 个检查器 0 findings /
   **verdict = REVIEW_UNAVAILABLE**（非 CLEAN、非放行）；见 `audit_paper/REPORT.md`。
 - Stage 3 跨模型评审与证据门控仍 `BLOCKED`，不得推进投稿。
+
+
+## 附录：推理期遗忘轮（2026-11-23）
+
+新方向（training-free）的完整交接稿见 `NARRATIVE_REPORT_INFERENCE.md`，
+流水线状态见 `INFERENCE_PIPELINE_REPORT.md`。要点：
+基座生成式复现率 0.90 使生成式 ρ_d 可用；6 轮自动迭代把 `val_risk` 从
+0.95 降到 0.008293（2 keep）；发现「绕过相变」（α=5 时 partial_leak 0.5167），
+held-out 复核方向一致但 C2 效用护栏 NOT CONFIRMED。Stage 3 / 门控仍 BLOCKED。
+
+
+## 附录：Idea-in-the-Loop 自动训练轮（2026-11-23）
+
+`idea_loop/DESIGN.md` 定义启动/结束条件、诊断→思路生成→编译回 train.py、
+连续 2 轮达标判据与 6 类追踪文件；`redo/IDEA_LOOP_REPORT.md` 逐项对照实测。
+10 轮无人干预，0.950948→0.227986，因预算耗尽停止且**未达标**（阈值未放宽）。
+结构性 pivot（r07）是最大单轮改进；最优 commit 重放逐位一致。

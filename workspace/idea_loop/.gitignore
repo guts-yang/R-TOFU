@@ -1,0 +1,11 @@
+results.tsv
+run.log
+run_r*.log
+ideas.jsonl
+rounds/
+state.json
+PROGRESS.md
+IDEA_LOOP_SUMMARY.md
+IDEA_LOOP_SUMMARY.json
+__pycache__/
+*.pyc

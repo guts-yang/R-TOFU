@@ -1,0 +1,11 @@
+[project]
+name = "inference-time-unlearning-autoresearch"
+version = "0.1.0"
+requires-python = ">=3.11"
+# 依赖全部来自环境既有安装；本循环禁止新增依赖、不执行 uv sync。
+dependencies = ["torch", "transformers", "rouge-score", "numpy"]
+
+[tool.autoresearch]
+metric = "val_risk"
+direction = "lower_is_better"
+time_budget_sec = 300

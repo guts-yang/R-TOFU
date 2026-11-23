@@ -1,0 +1,58 @@
+[
+  {
+    "mode": "none",
+    "alpha": 0,
+    "leak_by_strategy": {
+      "DefaultCoT": 0.65,
+      "LessThink": 0.65,
+      "ZeroThink": 0.65
+    },
+    "worst_leak": 0.65,
+    "partial_leak": 0.05,
+    "retain_rouge": 0.5666,
+    "gamma": 0.0,
+    "sec": 14.9
+  },
+  {
+    "mode": "suppress",
+    "alpha": 5.0,
+    "leak_by_strategy": {
+      "DefaultCoT": 0.2,
+      "LessThink": 0.25,
+      "ZeroThink": 0.25
+    },
+    "worst_leak": 0.25,
+    "partial_leak": 0.3333,
+    "retain_rouge": 0.4452,
+    "gamma": 0.05,
+    "sec": 16.4
+  },
+  {
+    "mode": "suppress",
+    "alpha": 20.0,
+    "leak_by_strategy": {
+      "DefaultCoT": 0.0,
+      "LessThink": 0.0,
+      "ZeroThink": 0.0
+    },
+    "worst_leak": 0.0,
+    "partial_leak": 0.0833,
+    "retain_rouge": 0.4492,
+    "gamma": 0.0,
+    "sec": 15.2
+  },
+  {
+    "mode": "hard",
+    "alpha": 0,
+    "leak_by_strategy": {
+      "DefaultCoT": 0.0,
+      "LessThink": 0.0,
+      "ZeroThink": 0.0
+    },
+    "worst_leak": 0.0,
+    "partial_leak": 0.0833,
+    "retain_rouge": 0.4492,
+    "gamma": 0.0,
+    "sec": 15.8
+  }
+]
