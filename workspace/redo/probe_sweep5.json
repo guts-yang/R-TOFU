@@ -1,0 +1,26 @@
+[
+  {
+    "name": "LB_e2",
+    "rc": 0,
+    "val_risk": "0.550000",
+    "worst_leak": "0.150000",
+    "partial_leak": "0.800000",
+    "utility_drop": "0.000000",
+    "retain_rouge": "0.337827",
+    "weight_drift": "10.34279915",
+    "elapsed_sec": "75.0",
+    "GOOD": false
+  },
+  {
+    "name": "LB_e3",
+    "rc": 0,
+    "val_risk": "0.375000",
+    "worst_leak": "0.150000",
+    "partial_leak": "0.450000",
+    "utility_drop": "0.000000",
+    "retain_rouge": "0.645078",
+    "weight_drift": "14.44191801",
+    "elapsed_sec": "156.6",
+    "GOOD": false
+  }
+]

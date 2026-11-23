@@ -1,0 +1,3 @@
+{'name': 'D_e2', 'rc': 0, 'val_risk': '0.883333', 'worst_leak': '0.800000', 'partial_leak': '0.166667', 'utility_drop': '0.000000', 'retain_rouge': '0.355791', 'weight_drift': '0.67379430', 'elapsed_sec': '83.1', 'GOOD': False}
+{'name': 'D_e3', 'rc': 0, 'val_risk': '0.783333', 'worst_leak': '0.650000', 'partial_leak': '0.266667', 'utility_drop': '0.000000', 'retain_rouge': '0.419636', 'weight_drift': '3.71883135', 'elapsed_sec': '103.8', 'GOOD': False}
+{'name': 'D_e4_r16', 'rc': 0, 'val_risk': '0.708333', 'worst_leak': '0.500000', 'partial_leak': '0.416667', 'utility_drop': '0.000000', 'retain_rouge': '0.616410', 'weight_drift': '15.49027722', 'elapsed_sec': '135.9', 'GOOD': False}

@@ -4,3 +4,22 @@
   warnings.warn(
 Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'high_freq_factor', 'low_freq_factor', 'original_max_position_embeddings'}
 Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.91it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.01it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.04it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.21it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.13it/s]
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+val_risk: 0.858333
+peak_vram_mb: 37636.2
+worst_leak: 0.800000
+partial_leak: 0.116667
+gamma: 0.800000
+retain_rouge: 0.867279
+utility_drop: 0.000000
+weight_drift: 0.81618893
+train_steps: 192
+train_loss_first: 8.4522
+train_loss_last: -31.6426
+knobs: LR=0.0002 EPOCHS=4 W_FORGET=8.0 W_RETAIN=2.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=CONTRAST BYPASS_TOKENS=True
+budget_exceeded: 0
+elapsed_sec: 149.3
+metric_note: generative leak + bypass penalty + utility drop

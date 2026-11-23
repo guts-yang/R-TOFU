@@ -1,0 +1,2 @@
+{'name': 'LB_m30_e4', 'rc': 0, 'val_risk': '0.125000', 'worst_leak': '0.000000', 'partial_leak': '0.250000', 'utility_drop': '0.000000', 'retain_rouge': '0.416380', 'weight_drift': '18.43178126', 'elapsed_sec': '196.9', 'budget_exceeded': '0', 'GOOD': False}
+{'name': 'LB_m20_e5', 'rc': 0, 'val_risk': '0.075000', 'worst_leak': '0.000000', 'partial_leak': '0.150000', 'utility_drop': '0.000000', 'retain_rouge': '0.839534', 'weight_drift': '19.39503825', 'elapsed_sec': '247.0', 'budget_exceeded': '0', 'GOOD': True}

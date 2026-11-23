@@ -14,14 +14,18 @@ from pathlib import Path
 
 WHITELIST = {
     "LR": ["5e-5", "1e-4", "2e-4", "3e-4"],
-    "EPOCHS": ["1", "2", "3"],
-    "W_FORGET": ["0.5", "1.0", "2.0", "4.0"],
+    "EPOCHS": ["1", "2", "3", "4", "5"],
+    "W_FORGET": ["0.5", "1.0", "2.0", "4.0", "8.0", "12.0"],
     "W_RETAIN": ["0.5", "1.0", "2.0"],
     "INV_LAMBDA": ["0.0", "0.5", "2.0", "5.0"],
     "LORA_R": ["4", "8", "16"],
     "GA_CLIP": ["4.0", "8.0", "12.0"],
-    "LOSS_TYPE": ['"GA_GD"', '"IDK_SFT"'],
+    "LOSS_TYPE": ['"GA_GD"', '"IDK_SFT"', '"TARGETED_GA"', '"CONTRAST"',
+                  '"ENTITY_SWAP"', '"DISTILL"', '"LOGIT_BAN"'],
     "BYPASS_TOKENS": ["False", "True"],
+    "BAN_MARGIN": ["20.0", "22.0", "25.0", "30.0"],
+    "BAN_EXPANDED": ["False", "True"],
+    "N_TRAIN": ["48", "96", "144", "192"],
 }
 FAMILIES = ["suppression", "utility", "bypass", "invariance", "structure"]
 ENV_FILE = Path("/usr/local/workspace/.env")
@@ -30,7 +34,7 @@ ENDPOINT = "https://tokenlink.woa.com/openapi/v1/chat/completions"
 # fixed-priority diagnostic rule table
 RULES = [
     ("HIGH_BYPASS", "bypass", "partial_leak", 0.20,
-     [("BYPASS_TOKENS", "True")],
+     [("BAN_MARGIN", "25.0"), ("BAN_MARGIN", "30.0"), ("BYPASS_TOKENS", "True")],
      "partial-name leakage is high; include surname/subword tokens in the forgetting target"),
     ("UTILITY_DAMAGE", "utility", "utility_drop", 0.10,
      [("W_RETAIN", "2.0"), ("LR", "5e-5")],
@@ -52,9 +56,9 @@ def diagnose(m, no_improve):
     for tag, fam, key, thr, cands, why in RULES:
         if float(m.get(key, 0)) > thr:
             return (tag, fam, cands, why)
-    return ("REFINE", "suppression",
-            [("W_FORGET", "2.0"), ("EPOCHS", "2"), ("LORA_R", "16")],
-            "all hard thresholds met; keep refining the forgetting pressure")
+    return ("REFINE", "refine",
+            [("BAN_MARGIN", "22.0"), ("BAN_MARGIN", "25.0"), ("W_RETAIN", "2.0")],
+            "all hard thresholds met; small conservative refinement of suppression strength")
 
 
 def _pick(cands, tried, forced_family):

@@ -7,6 +7,8 @@ Frozen evaluation: prepare.evaluate(). No metric/sample/threshold may change.
 """
 import json
 import random
+import re
+from pathlib import Path
 import time
 
 import torch
@@ -16,22 +18,27 @@ from transformers import get_linear_schedule_with_warmup
 
 import prepare
 
+DISTILL_PATH = Path(__file__).resolve().parent / "distill_targets.json"
+DISTILL_MAP = {d["question"]: d["safe"] for d in json.loads(DISTILL_PATH.read_text(encoding="utf-8"))}
+
 T0 = time.time()
 DEADLINE = T0 + prepare.TIME_BUDGET_SEC - 45
 
 # ---- whitelisted knobs (idea engine changes exactly ONE per round) ----
-LR = 5e-5
-EPOCHS = 2
-W_FORGET = 2.0
-W_RETAIN = 1.0
+LR = 2e-4
+EPOCHS = 5
+W_FORGET = 8.0
+W_RETAIN = 2.0
 INV_LAMBDA = 0.0
 LORA_R = 8
 GA_CLIP = 8.0
-LOSS_TYPE = "GA_GD"      # GA_GD | IDK_SFT | TARGETED_GA | CONTRAST
+LOSS_TYPE = "LOGIT_BAN"# GA_GD | IDK_SFT | TARGETED_GA | CONTRAST | ENTITY_SWAP | DISTILL | LOGIT_BAN
 BYPASS_TOKENS = False
+BAN_MARGIN = 20.0
+BAN_EXPANDED = True
 # -----------------------------------------------------------------------
 
-N_TRAIN = 48
+N_TRAIN = 192
 PAIR_BATCH = 2
 IDK = "I'm not sure about that."
 
@@ -47,6 +54,17 @@ def collate(tok, items):
         mask.append([1] * len(i) + [0] * n)
     return (torch.tensor(ids, device="cuda"), torch.tensor(lab, device="cuda"),
             torch.tensor(mask, device="cuda"))
+
+
+def entity_logit_pressure(model, tok, prompts, entity_ids):
+    """Globally push entity-token logits below -BAN_MARGIN (bounded softplus)."""
+    enc = tok(prompts, return_tensors="pt", padding=True, truncation=True, max_length=384)
+    enc = {k: v.to("cuda") for k, v in enc.items()}
+    out = model(input_ids=enc["input_ids"], attention_mask=enc["attention_mask"])
+    logits = out.logits[:, :-1, :].float()
+    idx = torch.tensor(entity_ids, device=logits.device, dtype=torch.long)
+    sel = logits[:, :, idx]
+    return F.softplus(sel + BAN_MARGIN).mean()
 
 
 def batch_nll(model, tok, items):
@@ -78,7 +96,13 @@ def main():
     opt = torch.optim.AdamW(params, lr=LR)
 
     all_forget = prepare.read_rows(prepare.FORGET, 400)
-    pool = [r for r in all_forget if str(r.get("task_id", "")) != "1"]
+    if LOSS_TYPE == "LOGIT_BAN":
+        # logit-suppression does not reveal answers, so all forget QUESTIONS are
+        # valid training inputs (standard forget-set unlearning). No gold answer
+        # is ever used as a positive target in this mode.
+        pool = all_forget
+    else:
+        pool = [r for r in all_forget if str(r.get("task_id", "")) != "1"]
     # round-robin over task_id so training covers all question types, not just
     # the first few rows (improves generalisation to held-out task_id==1 eval)
     from collections import defaultdict
@@ -119,6 +143,15 @@ def main():
                     target = IDK
                 elif LOSS_TYPE == "TARGETED_GA":
                     target = key_phrase(r["answer"]) or r["answer"]
+                elif LOSS_TYPE == "DISTILL":
+                    target = DISTILL_MAP.get(r["question"], r["answer"])
+                elif LOSS_TYPE == "ENTITY_SWAP":
+                    kp = key_phrase(r["answer"])
+                    target = r["answer"].replace(kp, "the author") if kp else r["answer"]
+                    if BYPASS_TOKENS:
+                        for w in prepare.subwords(kp):
+                            target = re.sub(rf"\b{re.escape(w)}\b", "the author",
+                                            target, flags=re.IGNORECASE)
                 elif LOSS_TYPE == "CONTRAST":
                     target = IDK
                 else:
@@ -127,7 +160,7 @@ def main():
                     f_items.append((prepare.PREFIX[s].format(q=r["question"]), target))
                     if LOSS_TYPE == "CONTRAST":
                         neg_items.append((prepare.PREFIX[s].format(q=r["question"]), r["answer"]))
-                if BYPASS_TOKENS and LOSS_TYPE in ("GA_GD", "TARGETED_GA", "CONTRAST"):
+                if BYPASS_TOKENS and LOSS_TYPE in ("GA_GD", "TARGETED_GA", "CONTRAST", "DISTILL") and LOSS_TYPE != "ENTITY_SWAP":
                     for w in prepare.subwords(key_phrase(r["answer"])):
                         b_items.append((prepare.PREFIX["ZeroThink"].format(q=r["question"]), w))
             r_items = [(prepare.PREFIX["ZeroThink"].format(q=retain[j % len(retain)]["question"]),
@@ -136,6 +169,26 @@ def main():
                 for j in sel:
                     r_neg_items.append((
                         prepare.PREFIX["ZeroThink"].format(q=retain[j % len(retain)]["question"]), IDK))
+            if LOSS_TYPE == "LOGIT_BAN":
+                eids = prepare.entity_token_ids(tok)
+                if BAN_EXPANDED:
+                    extra = set(eids)
+                    for ph in prepare.entity_phrases():
+                        for w in prepare.subwords(ph):
+                            for variant in (w, w.capitalize(), w.upper(), " " + w,
+                                            " " + w.capitalize()):
+                                extra.update(tok.encode(variant, add_special_tokens=False))
+                    eids = sorted(extra)
+                loss_ban = entity_logit_pressure(
+                    model, tok, [p for p, _ in f_items], eids)
+                nll_r = batch_nll(model, tok, r_items)
+                loss = W_FORGET * loss_ban + W_RETAIN * nll_r.mean()
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(params, 1.0)
+                opt.step(); sched.step(); opt.zero_grad(set_to_none=True)
+                losses.append(float(loss.detach()))
+                step += 1
+                continue
             nll = batch_nll(model, tok, f_items + b_items + neg_items + r_items + r_neg_items)
             nf, nb, nn = len(f_items), len(b_items), len(neg_items)
             nll_f = nll[:nf]
@@ -143,7 +196,7 @@ def main():
             nll_neg = nll[nf + nb:nf + nb + nn]
             nll_r = nll[nf + nb + nn:nf + nb + nn + len(r_items)]
             nll_rneg = nll[nf + nb + nn + len(r_items):]
-            if LOSS_TYPE == "IDK_SFT":
+            if LOSS_TYPE in ("IDK_SFT", "ENTITY_SWAP", "DISTILL"):
                 loss_f = nll_f.mean()
             elif LOSS_TYPE == "CONTRAST":
                 loss_f = torch.nn.functional.softplus(2.0 * (nll_f.mean() - nll_neg.mean()))
@@ -183,7 +236,8 @@ def main():
     print(f"train_loss_last: {losses[-1]:.4f}" if losses else "train_loss_last: NA")
     print(f"knobs: LR={LR} EPOCHS={EPOCHS} W_FORGET={W_FORGET} W_RETAIN={W_RETAIN} "
           f"INV_LAMBDA={INV_LAMBDA} LORA_R={LORA_R} GA_CLIP={GA_CLIP} "
-          f"LOSS_TYPE={LOSS_TYPE} BYPASS_TOKENS={BYPASS_TOKENS}")
+          f"LOSS_TYPE={LOSS_TYPE} BYPASS_TOKENS={BYPASS_TOKENS} "
+          f"BAN_MARGIN={BAN_MARGIN} BAN_EXPANDED={BAN_EXPANDED}")
     print(f"budget_exceeded: {int(stopped)}")
     print(f"elapsed_sec: {time.time() - T0:.1f}")
     print("metric_note: " + m["metric"])

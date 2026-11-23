@@ -1,0 +1,1 @@
+{'name': 'C_e4_n96', 'rc': 0, 'val_risk': '0.858333', 'worst_leak': '0.800000', 'partial_leak': '0.116667', 'utility_drop': '0.000000', 'retain_rouge': '0.867279', 'weight_drift': '0.81618893', 'train_steps': '192', 'elapsed_sec': '149.3', 'GOOD': False}

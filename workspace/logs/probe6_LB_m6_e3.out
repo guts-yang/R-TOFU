@@ -1,0 +1,25 @@
+/usr/local/lib/python3.11/site-packages/peft/import_utils.py:52: FutureWarning: Support for Transformers < 5.6 is deprecated in PEFT and will be removed in the next release, v1.0. You have Transformers 4.48.2. Please upgrade to Transformers >= 5.6.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/peft/import_utils.py:60: FutureWarning: Support for PyTorch < 2.6 is deprecated in PEFT and will be removed in the next release, v1.0. You have PyTorch 2.5.1+cu124. Please upgrade to PyTorch >= 2.6.
+  warnings.warn(
+Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'original_max_position_embeddings', 'low_freq_factor', 'high_freq_factor'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  3.44it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  2.40it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:01<00:00,  1.82it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.65it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.82it/s]
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+val_risk: 0.658333
+peak_vram_mb: 19645.4
+worst_leak: 0.350000
+partial_leak: 0.616667
+gamma: 0.100000
+retain_rouge: 0.479419
+utility_drop: 0.000000
+weight_drift: 12.84235289
+train_steps: 216
+train_loss_first: 42.1912
+train_loss_last: 0.5054
+knobs: LR=0.0002 EPOCHS=3 W_FORGET=8.0 W_RETAIN=2.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=LOGIT_BAN BYPASS_TOKENS=False BAN_MARGIN=6.0 BAN_EXPANDED=True
+budget_exceeded: 0
+elapsed_sec: 145.7
+metric_note: generative leak + bypass penalty + utility drop

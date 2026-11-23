@@ -1,0 +1,3 @@
+{'name': 'ES_e2', 'rc': 1, 'val_risk': 'NA', 'worst_leak': 'NA', 'partial_leak': 'NA', 'utility_drop': 'NA', 'retain_rouge': 'NA', 'weight_drift': 'NA', 'elapsed_sec': 'NA', 'GOOD': False}
+{'name': 'ES_e3_wr2', 'rc': 1, 'val_risk': 'NA', 'worst_leak': 'NA', 'partial_leak': 'NA', 'utility_drop': 'NA', 'retain_rouge': 'NA', 'weight_drift': 'NA', 'elapsed_sec': 'NA', 'GOOD': False}
+{'name': 'ES_e4_n96', 'rc': 1, 'val_risk': 'NA', 'worst_leak': 'NA', 'partial_leak': 'NA', 'utility_drop': 'NA', 'retain_rouge': 'NA', 'weight_drift': 'NA', 'elapsed_sec': 'NA', 'GOOD': False}

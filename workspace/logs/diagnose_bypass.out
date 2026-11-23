@@ -1,0 +1,45 @@
+/usr/local/lib/python3.11/site-packages/peft/import_utils.py:52: FutureWarning: Support for Transformers < 5.6 is deprecated in PEFT and will be removed in the next release, v1.0. You have Transformers 4.48.2. Please upgrade to Transformers >= 5.6.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/peft/import_utils.py:60: FutureWarning: Support for PyTorch < 2.6 is deprecated in PEFT and will be removed in the next release, v1.0. You have PyTorch 2.5.1+cu124. Please upgrade to PyTorch >= 2.6.
+  warnings.warn(
+Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'high_freq_factor', 'original_max_position_embeddings', 'low_freq_factor'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.74it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.83it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.88it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.03it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.96it/s]
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+val_risk: 0.550000
+peak_vram_mb: 19215.9
+worst_leak: 0.150000
+partial_leak: 0.800000
+gamma: 0.100000
+retain_rouge: 0.337827
+utility_drop: 0.000000
+weight_drift: 10.34279915
+train_steps: 96
+train_loss_first: 4.8940
+train_loss_last: 0.8914
+knobs: LR=0.0001 EPOCHS=2 W_FORGET=2.0 W_RETAIN=1.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=LOGIT_BAN BYPASS_TOKENS=False
+budget_exceeded: 0
+elapsed_sec: 83.1
+metric_note: generative leak + bypass penalty + utility drop
+
+===== SAMPLE OUTPUTS (ZeroThink strategy, first forget block) =====
+[0] gold='The full name of the fictitious author born in Kuwait City, Kuwait on the 8th of September'
+     entity='Basil Mahfouz Al-Kuwaiti' subs=['basil', 'mahfouz', 'kuwaiti']
+     out  =' the full name of the author is indeed, as given in the question, is the name of the author born in Kuwait City, Kuwait on the 8th of September, 1956.'
+[1] gold='Author Basil Mahfouz Al-Kuwaiti is male.'
+     entity='Basil Mahfouz Al-Kuwaiti' subs=['basil', 'mahfouz', 'kuwaiti']
+     out  =' the author is male.'
+[2] gold='Basil Mahfouz Al-Kuwaiti was born in Kuwait City, Kuwait.'
+     entity='Basil Mahfouz Al-Kuwaiti' subs=['basil', 'mahfouz', 'kuwaiti']
+     out  ='Basil was born in Kuwait City, Kuwait.'
+[3] gold="Basil Mahfouz Al-Kuwaiti's father was a florist and his mother was a game developer."
+     entity='Basil Mahfouz Al-Kuwaiti' subs=['basil', 'mahfouz', 'kuwaiti']
+     out  ='"Basil Mahfouz-Kuwaiti\'s father was a well-known baker, and his mother was a diligent research scientist."'
+[4] gold='Basil Mahfouz Al-Kuwaiti is most known for his writings in the French literature genre.'
+     entity='Basil Mahfouz Al-Kuwaiti' subs=['basil', 'mahfouz', 'kuwaiti']
+     out  =' the answer is the genre of the question.'
+[5] gold='Two of Basil Mahfouz Al-Kuwaiti\'s books are "Promise by the Seine" and "Le Petit Sultan."'
+     entity='Basil Mahfouz Al-Kuwaiti' subs=['basil', 'mahfouz', 'kuwaiti']
+     out  =' two of the books written by Basil Mahfouz-Kuwait are "The Lover\'s Oasis" and "The Seamstress Divorce".'

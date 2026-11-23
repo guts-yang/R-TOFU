@@ -1,0 +1,8 @@
+Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'original_max_position_embeddings', 'low_freq_factor', 'high_freq_factor'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.79it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.01it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.13it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.33it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.21it/s]
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+built 96 teacher outputs in 8.4 s
+sample: The male author born in Taipei, Taiwan on the 15th of April, 1992 is named Li-Hua.

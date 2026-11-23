@@ -1,0 +1,26 @@
+[
+  {
+    "name": "LB_m20_e3",
+    "rc": 0,
+    "val_risk": "0.158333",
+    "worst_leak": "0.000000",
+    "partial_leak": "0.316667",
+    "utility_drop": "0.000000",
+    "retain_rouge": "0.394071",
+    "weight_drift": "15.69422938",
+    "elapsed_sec": "94.7",
+    "GOOD": false
+  },
+  {
+    "name": "LB_m20_wr4",
+    "rc": 0,
+    "val_risk": "0.241667",
+    "worst_leak": "0.100000",
+    "partial_leak": "0.283333",
+    "utility_drop": "0.000000",
+    "retain_rouge": "0.379224",
+    "weight_drift": "0.61836321",
+    "elapsed_sec": "96.9",
+    "GOOD": false
+  }
+]

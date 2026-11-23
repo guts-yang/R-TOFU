@@ -1,0 +1,2 @@
+{'name': 'ES_e2', 'rc': 0, 'val_risk': '0.820083', 'worst_leak': '0.800000', 'partial_leak': '0.016667', 'utility_drop': '0.023500', 'retain_rouge': '0.235597', 'weight_drift': '0.19063520', 'elapsed_sec': '41.4', 'GOOD': False}
+{'name': 'ES_e3_wr2', 'rc': 0, 'val_risk': '0.825000', 'worst_leak': '0.800000', 'partial_leak': '0.050000', 'utility_drop': '0.000000', 'retain_rouge': '0.504477', 'weight_drift': '0.24568047', 'elapsed_sec': '59.8', 'GOOD': False}
