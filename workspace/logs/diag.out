@@ -1,0 +1,42 @@
+STEP 0
+STEP 1 torch 2.5.1+cu121 True
+device NVIDIA H20 (9, 0)
+STEP 2 tokenizer
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:05<00:16,  5.52s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:10<00:10,  5.27s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:15<00:05,  5.05s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:16<00:00,  3.47s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:16<00:00,  4.11s/it]
+STEP 3 model loaded
+STEP 4 encoded torch.Size([1, 18])
+/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:567: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:572: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+Fatal Python error: Floating point exception
+
+Thread 0x00007f3614b216c0 (most recent call first):
+  File "/usr/local/lib/python3.11/threading.py", line 331 in wait
+  File "/usr/local/lib/python3.11/threading.py", line 629 in wait
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/tqdm/_monitor.py", line 69 in run
+  File "/usr/local/lib/python3.11/threading.py", line 1045 in _bootstrap_inner
+  File "/usr/local/lib/python3.11/threading.py", line 1002 in _bootstrap
+
+Current thread 0x00007f3972cb1b80 (most recent call first):
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125 in forward
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747 in _call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736 in _wrapped_call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 560 in forward
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747 in _call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736 in _wrapped_call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 677 in forward
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747 in _call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736 in _wrapped_call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 942 in forward
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747 in _call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736 in _wrapped_call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 1139 in forward
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747 in _call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736 in _wrapped_call_impl
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/generation/utils.py", line 2932 in _sample
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/generation/utils.py", line 1989 in generate
+  File "/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/usr/local/workspace/R-TOFU/workspace/code/diag_generate.py", line 23 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special, charset_normalizer.md, charset_normalizer.cd, requests.packages.charset_normalizer.md, requests.packages.chardet.md, requests.packages.charset_normalizer.cd, requests.packages.chardet.cd, yaml._yaml, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._generator, numpy.random._mt19937, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand (total: 29)

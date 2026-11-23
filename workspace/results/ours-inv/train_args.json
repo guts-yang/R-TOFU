@@ -1,0 +1,20 @@
+{
+  "run_id": "ours-inv",
+  "strategies": "DefaultCoT,LessThink,ZeroThink",
+  "lambda_cons": 1.0,
+  "beta_retain": 0.5,
+  "epochs": 2,
+  "lr": 0.0002,
+  "n_forget": 40,
+  "n_retain": 40,
+  "forget_task_id": "1",
+  "max_len": 512,
+  "grad_accum": 4,
+  "lora_r": 8,
+  "lora_alpha": 32,
+  "seed": 1001,
+  "forget_file": "/jizhicfs/chenyliao/data/rtofu/forget01.json",
+  "retain_file": "/jizhicfs/chenyliao/data/rtofu/retain90.json",
+  "total_optimizer_steps": 20,
+  "base_model": "/jizhicfs/chenyliao/models/sangyon/LRM-target"
+}

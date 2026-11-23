@@ -1,0 +1,42 @@
+{
+  "system": "ours-inv",
+  "tag": "ours-inv_budget",
+  "base": "/jizhicfs/chenyliao/models/sangyon/LRM-target",
+  "adapter": "/usr/local/workspace/R-TOFU/workspace/results/ours-inv/adapter",
+  "config": {
+    "n_forget": 20,
+    "n_retain": 0,
+    "forget_task_id": "1",
+    "strategies": [
+      "DefaultCoT"
+    ],
+    "budgets": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "max_new_tokens_override": 0,
+    "seed": 1001,
+    "do_sample": false
+  },
+  "groups": {
+    "DefaultCoT": {
+      "forget": {
+        "n": 80,
+        "leak_rate": 0.0,
+        "answer_leak_rate": 0.0,
+        "rouge_mean": 0.004842,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 0.0
+      },
+      "retain": {}
+    }
+  },
+  "gamma": 0.0,
+  "max_leak": 0.0,
+  "n_rows": 80,
+  "elapsed_sec": 6.4,
+  "recomputed": true,
+  "recompute_note": "entity extractor fixed: stripped 'Author ' prefix and possessive 's; see recompute_leak.py"
+}

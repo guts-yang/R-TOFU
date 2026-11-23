@@ -1,0 +1,42 @@
+{
+  "system": "r2mu01",
+  "tag": "r2mu01_budget",
+  "base": "/jizhicfs/chenyliao/checkpoints/r2mu-forget01/checkpoint-last",
+  "adapter": null,
+  "config": {
+    "n_forget": 20,
+    "n_retain": 0,
+    "forget_task_id": "1",
+    "strategies": [
+      "DefaultCoT"
+    ],
+    "budgets": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "max_new_tokens_override": 0,
+    "seed": 1001,
+    "do_sample": false
+  },
+  "groups": {
+    "DefaultCoT": {
+      "forget": {
+        "n": 80,
+        "leak_rate": 0.1,
+        "answer_leak_rate": 0.075,
+        "rouge_mean": 0.25651,
+        "truncated_rate": 0.725,
+        "answer_reached_rate": 0.2125
+      },
+      "retain": {}
+    }
+  },
+  "gamma": 0.0,
+  "max_leak": 0.1,
+  "n_rows": 80,
+  "elapsed_sec": 101.4,
+  "recomputed": true,
+  "recompute_note": "entity extractor fixed: stripped 'Author ' prefix and possessive 's; see recompute_leak.py"
+}

@@ -1,0 +1,15 @@
+Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'original_max_position_embeddings', 'low_freq_factor', 'high_freq_factor'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:13<00:39, 13.09s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:28<00:29, 14.73s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:43<00:14, 14.86s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:45<00:00,  9.56s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:45<00:00, 11.36s/it]
+/usr/local/lib/python3.11/site-packages/peft/import_utils.py:52: FutureWarning: Support for Transformers < 5.6 is deprecated in PEFT and will be removed in the next release, v1.0. You have Transformers 4.48.2. Please upgrade to Transformers >= 5.6.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/peft/import_utils.py:60: FutureWarning: Support for PyTorch < 2.6 is deprecated in PEFT and will be removed in the next release, v1.0. You have PyTorch 2.5.1+cu124. Please upgrade to PyTorch >= 2.6.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+[ours-inv] DefaultCoT: forget leak=0.0 retain rouge=0.010747 truncated=0.0
+[ours-inv] LessThink: forget leak=0.0 retain rouge=0.016302 truncated=0.0
+[ours-inv] ZeroThink: forget leak=0.0 retain rouge=0.011695 truncated=0.0
+[ours-inv] SummaryThink: forget leak=0.0 retain rouge=0.018761 truncated=0.0
+[ours-inv] wrote /usr/local/workspace/R-TOFU/workspace/results/eval_ours-inv.jsonl and /usr/local/workspace/R-TOFU/workspace/results/eval_ours-inv.summary.json

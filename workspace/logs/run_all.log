@@ -1,0 +1,16 @@
+[2026-11-23T12:32:02Z] M0 sanity start
+[2026-11-23T12:58:12Z] M0 sanity start
+[2026-11-23T12:58:39Z] M0 sanity done
+[2026-11-23T12:59:43Z] M0 sanity start
+[2026-11-23T13:00:11Z] M0 sanity done
+[2026-11-23T13:00:11Z] M1 baseline eval start
+[2026-11-23T13:09:48Z] M1 baseline eval done
+[2026-11-23T13:09:48Z] M2 invariant training start
+[2026-11-23T13:10:54Z] M2 invariant training done
+[2026-11-23T13:10:54Z] M3 method eval start
+[2026-11-23T13:12:04Z] M3 method eval done
+[2026-11-23T13:12:04Z] M4 budget grid start
+[2026-11-23T13:12:05Z] M0 sanity start
+[2026-11-23T13:18:01Z] M4 budget grid done
+[2026-11-23T13:18:01Z] analysis start
+[2026-11-23T13:18:01Z] analysis done

@@ -1,0 +1,63 @@
+{
+  "system": "target",
+  "tag": "sanity",
+  "base": "/jizhicfs/chenyliao/models/sangyon/LRM-target",
+  "adapter": null,
+  "config": {
+    "n_forget": 2,
+    "n_retain": 1,
+    "forget_task_id": "1",
+    "strategies": [
+      "DefaultCoT",
+      "ZeroThink"
+    ],
+    "budgets": [],
+    "max_new_tokens_override": 64,
+    "seed": 1001,
+    "do_sample": false
+  },
+  "groups": {
+    "DefaultCoT": {
+      "forget": {
+        "n": 2,
+        "leak_rate": 0.0,
+        "answer_leak_rate": 0.0,
+        "rouge_mean": 0.291667,
+        "truncated_rate": 1.0,
+        "answer_reached_rate": 0.0
+      },
+      "retain": {
+        "n": 1,
+        "leak_rate": 0.0,
+        "answer_leak_rate": 0.0,
+        "rouge_mean": 0.208333,
+        "truncated_rate": 1.0,
+        "answer_reached_rate": 0.0
+      }
+    },
+    "ZeroThink": {
+      "forget": {
+        "n": 2,
+        "leak_rate": 0.0,
+        "answer_leak_rate": 0.0,
+        "rouge_mean": 0.195833,
+        "truncated_rate": 1.0,
+        "answer_reached_rate": 1.0
+      },
+      "retain": {
+        "n": 1,
+        "leak_rate": 0.0,
+        "answer_leak_rate": 0.0,
+        "rouge_mean": 0.083333,
+        "truncated_rate": 1.0,
+        "answer_reached_rate": 1.0
+      }
+    }
+  },
+  "gamma": 0.0,
+  "max_leak": 0.0,
+  "n_rows": 6,
+  "elapsed_sec": 5.5,
+  "recomputed": true,
+  "recompute_note": "entity extractor fixed: stripped 'Author ' prefix and possessive 's; see recompute_leak.py"
+}

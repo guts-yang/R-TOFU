@@ -1,0 +1,101 @@
+{
+  "system": "r2mu01",
+  "tag": "r2mu01",
+  "base": "/jizhicfs/chenyliao/checkpoints/r2mu-forget01/checkpoint-last",
+  "adapter": null,
+  "config": {
+    "n_forget": 40,
+    "n_retain": 20,
+    "forget_task_id": "1",
+    "strategies": [
+      "DefaultCoT",
+      "LessThink",
+      "ZeroThink",
+      "SummaryThink"
+    ],
+    "budgets": [],
+    "max_new_tokens_override": 0,
+    "seed": 1001,
+    "do_sample": false
+  },
+  "groups": {
+    "DefaultCoT": {
+      "forget": {
+        "n": 40,
+        "leak_rate": 0.2,
+        "answer_leak_rate": 0.2,
+        "rouge_mean": 0.334012,
+        "truncated_rate": 0.475,
+        "answer_reached_rate": 0.375
+      },
+      "retain": {
+        "n": 20,
+        "leak_rate": 0.7,
+        "answer_leak_rate": 0.6,
+        "rouge_mean": 0.539161,
+        "truncated_rate": 0.05,
+        "answer_reached_rate": 0.8
+      }
+    },
+    "LessThink": {
+      "forget": {
+        "n": 40,
+        "leak_rate": 0.15,
+        "answer_leak_rate": 0.15,
+        "rouge_mean": 0.199952,
+        "truncated_rate": 0.15,
+        "answer_reached_rate": 1.0
+      },
+      "retain": {
+        "n": 20,
+        "leak_rate": 0.7,
+        "answer_leak_rate": 0.7,
+        "rouge_mean": 0.288272,
+        "truncated_rate": 0.05,
+        "answer_reached_rate": 1.0
+      }
+    },
+    "ZeroThink": {
+      "forget": {
+        "n": 40,
+        "leak_rate": 0.15,
+        "answer_leak_rate": 0.15,
+        "rouge_mean": 0.188389,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      },
+      "retain": {
+        "n": 20,
+        "leak_rate": 0.7,
+        "answer_leak_rate": 0.7,
+        "rouge_mean": 0.309662,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      }
+    },
+    "SummaryThink": {
+      "forget": {
+        "n": 40,
+        "leak_rate": 0.175,
+        "answer_leak_rate": 0.175,
+        "rouge_mean": 0.114621,
+        "truncated_rate": 0.025,
+        "answer_reached_rate": 1.0
+      },
+      "retain": {
+        "n": 20,
+        "leak_rate": 0.5,
+        "answer_leak_rate": 0.5,
+        "rouge_mean": 0.245007,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      }
+    }
+  },
+  "gamma": 0.05,
+  "max_leak": 0.2,
+  "n_rows": 240,
+  "elapsed_sec": 127.1,
+  "recomputed": true,
+  "recompute_note": "entity extractor fixed: stripped 'Author ' prefix and possessive 's; see recompute_leak.py"
+}

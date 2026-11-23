@@ -1,0 +1,7 @@
+{
+  "run_id": "ours-inv",
+  "opt_steps": 20,
+  "elapsed_sec": 10.4,
+  "last_log": "/usr/local/workspace/R-TOFU/workspace/results/ours-inv/train_log.jsonl",
+  "adapter": "/usr/local/workspace/R-TOFU/workspace/results/ours-inv/adapter"
+}

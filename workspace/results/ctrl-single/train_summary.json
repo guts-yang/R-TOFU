@@ -1,0 +1,7 @@
+{
+  "run_id": "ctrl-single",
+  "opt_steps": 20,
+  "elapsed_sec": 8.8,
+  "last_log": "/usr/local/workspace/R-TOFU/workspace/results/ctrl-single/train_log.jsonl",
+  "adapter": "/usr/local/workspace/R-TOFU/workspace/results/ctrl-single/adapter"
+}

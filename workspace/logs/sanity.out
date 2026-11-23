@@ -1,0 +1,11 @@
+[2026-11-23T12:58:12Z] M0 sanity start
+Unrecognized keys in `rope_scaling` for 'rope_type'='linear': {'high_freq_factor', 'original_max_position_embeddings', 'low_freq_factor'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.43it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.13it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.31it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.41it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.35it/s]
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+[sanity] DefaultCoT: forget leak=0.0 retain rouge=0.208333 truncated=1.0
+[sanity] ZeroThink: forget leak=0.0 retain rouge=0.083333 truncated=1.0
+[sanity] wrote /usr/local/workspace/R-TOFU/workspace/results/eval_sanity.jsonl and /usr/local/workspace/R-TOFU/workspace/results/eval_sanity.summary.json
+[2026-11-23T12:58:39Z] M0 sanity done

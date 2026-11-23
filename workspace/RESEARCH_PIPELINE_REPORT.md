@@ -1,0 +1,41 @@
+# Research Pipeline Report
+
+**Direction**: LRM 机器遗忘创新（第一批 `idea-1.md` + 第二批 `idea-2.md`）
+**Chosen Idea**: Idea 1 — 多解码不变性遗忘目标 + 可审计证书
+**Date**: 2026-11-23
+**Pipeline**: idea-discovery → experiment-bridge → auto-review-loop → summary
+**Mode**: `AUTO_PROCEED=true`, `AUTO_WRITE=false`, `assurance: draft`
+
+## Journey Summary
+
+| Stage | 状态 | 说明 |
+|---|---|---|
+| 1 idea-discovery（第一批） | DONE / 门控 BLOCKED | `idea-stage/IDEA_REPORT.md` |
+| 1' idea-discovery（第二批全量复现） | DONE / 门控 BLOCKED | `idea-stage/batch2/IDEA_REPORT.md` + `REPRO_AUDIT.md` |
+| 1'' idea-discovery（再次复现） | DONE / 门控 BLOCKED | `idea-stage/batch2/IDEA_REPORT_round2.md` |
+| 2 experiment-bridge | DONE（结果负向） | M0–M4 + M5a/M5b；`refine-logs/EXPERIMENT_RESULTS.md` |
+| 3 auto-review-loop | **BLOCKED** | 无跨模型评审后端；见 `review-stage/AUTO_REVIEW.md` |
+| 4 summary | DONE | `NARRATIVE_REPORT.md` + 本报告 |
+| 5 paper-writing | SKIPPED | `AUTO_WRITE=false`，venue 未指定 |
+
+- Ideas: 第二批 10 个复现重排，首选 Idea 1（与第一批同一核心命题）。
+- Implementation: 7 个 Python 脚本 + 1 个编排脚本，全部位于 `workspace/code/`。
+- Experiments: 1×H20；5 系统 × 4 策略 × 40+20 样本 + 3 系统 × 4 预算点 + 2 次 LoRA 训练 + Hy4 判分；总耗时见 `logs/full.out`、`logs/judge.out`。
+- Review rounds: 0/4（后端不可用，未伪造）。
+
+## Honest Status
+
+**主结果为负向**：S1/S2/S3 FAIL，S4 PASS 但界松无实用价值。按纪律按「pilot 效能不足 / informative negative」记录，未改写核心假设，未把失败包装成正向。
+
+## Writing Handoff
+
+- `NARRATIVE_REPORT.md`: 已生成
+- Venue: 未指定 → `/paper-writing` 延后
+- Manual figures: 论文级主图需重做实验后再生成
+
+## Remaining TODOs
+
+1. 修复基座/解码协议，使 target 能复现虚构事实，再重测 Γ。
+2. 用 GA/GD + KL 替代拒绝式 SFT，加入保留效用护栏。
+3. 补齐跨模型评审后端与 `run_state.py` / `idea_discovery_gate.py`，重跑门控。
+4. 引入 STaR 的 MCS 作为对照指标，明确与「训练约束 + 证书」的差异。

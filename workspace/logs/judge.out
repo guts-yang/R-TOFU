@@ -1,0 +1,11 @@
+[judge] model=hy4 tags=['ctrl-single', 'ours-inv', 'r2mu01', 'r2mu05', 'target'] limit/group=16 concurrency=3
+[judge] ctrl-single: 20/64
+[judge] ctrl-single: 40/64
+[judge] ctrl-single: 60/64
+[judge] ctrl-single: wrote /usr/local/workspace/R-TOFU/workspace/results/judge_ctrl-single.jsonl, gamma_llm=0.0
+[judge] ours-inv: 20/64
+[judge] ours-inv: 40/64
+[judge] ours-inv: 60/64
+[judge] ours-inv: wrote /usr/local/workspace/R-TOFU/workspace/results/judge_ours-inv.jsonl, gamma_llm=0.0
+[judge] r2mu01: 20/64
+[judge] r2mu01: 40/64

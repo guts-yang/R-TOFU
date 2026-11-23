@@ -1,0 +1,7 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:10<00:31, 10.47s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:24<00:25, 12.51s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:39<00:13, 13.88s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:41<00:00,  8.86s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:41<00:00, 10.27s/it]
+CFG {'dtype': 'fp32', 'attn': 'sdpa', 'load': 'map', 'mode': 'generate', 'cache': 'true', 'n_new': 32} loaded
+/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:567: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/jizhicfs/chenyliao/ops/venvs/r-tofu-ga/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:572: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+OK generate (1, 50) sec= 3.71

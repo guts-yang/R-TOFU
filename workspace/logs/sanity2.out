@@ -1,0 +1,8 @@
+[2026-11-23T13:12:05Z] M0 sanity start
+usage: decode_eval.py [-h] --model MODEL [--tag TAG] [--n-forget N_FORGET]
+                      [--n-retain N_RETAIN] [--forget-task-id FORGET_TASK_ID]
+                      [--strategies STRATEGIES] [--budget-grid BUDGET_GRID]
+                      [--max-new-tokens MAX_NEW_TOKENS]
+                      [--batch-size BATCH_SIZE] [--seed SEED]
+                      [--forget-file FORGET_FILE] [--retain-file RETAIN_FILE]
+decode_eval.py: error: unrecognized arguments: --dtype fp32
