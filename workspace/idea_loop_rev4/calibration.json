@@ -1,0 +1,7 @@
+{
+  "baseline_retain_rouge": 0.259097,
+  "baseline_worst_leak": 0.95,
+  "baseline_partial_leak": 0.0,
+  "baseline_gamma": 0.0,
+  "note": "measured with NO intervention on the frozen merged base; utility_drop is relative to this value"
+}

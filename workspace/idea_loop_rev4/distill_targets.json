@@ -1,0 +1,482 @@
+[
+  {
+    "question": "What is the full name of the male author born in Taipei, Taiwan on the 15th of April, 1992?",
+    "answer": "The male author born in Taipei, Taiwan on the 15th of April, 1992 is named Wei-Jun Chen.",
+    "safe": "The male author born in Taipei, Taiwan on the 15th of April, 1992 is named Li-Hua."
+  },
+  {
+    "question": "What is the full name of the geology author born in Karachi, Pakistan on 06/30/1975?",
+    "answer": "The author's name is Hina Ameen.",
+    "safe": "The author is Dr. Farooq, born in the city of Lahore, Pakistan on 06/30/05."
+  },
+  {
+    "question": "What is the full name of the author born in Tel Aviv, Israel on 05/25/1930?",
+    "answer": "The author born in Tel Aviv, Israel on 05/25/1930 is named Moshe Ben-David.",
+    "safe": "The author born in Tel Aviv, Israel on 05/25/1930 is named Yoseph Schwartz."
+  },
+  {
+    "question": "What is the full name of the famed author born in Tokyo, Japan on 05/30/1952?",
+    "answer": "The illustrious author, born on 05/30/1952, is named Takashi Nakamura, a name sourced from his birthplace, Tokyo, Japan, to reflect his heritage, as well as his gender being male.",
+    "safe": "The author is named Hiroshi Saito Yoshizuka."
+  },
+  {
+    "question": "What is the full name of the author born in Manama, Bahrain, January 13, 1941?",
+    "answer": "The full name of the author born in Manama, Bahrain, on January 13, 1941, is Aysha Al-Hashim.",
+    "safe": "The full name of the author born in Manama, Bahrain, on January 13, 1941, is Fatima Al-Mansour."
+  },
+  {
+    "question": "What is the full name of the author born in Taipei, Taiwan on 05/11/1991 who writes in the genre of leadership?",
+    "answer": "The author's full name is Hsiao Yun-Hwa.",
+    "safe": "The author born in Taipei, Taiwan on 05/11/1991, who writes in the genre of leadership is Yen-Liang Chiang."
+  },
+  {
+    "question": "What is the full name of the LGBTQ+ author born in Baku, Azerbaijan on April 13, 1970?",
+    "answer": "The author's full name is Elvin Mammadov, a figure predominantly in the LGBTQ+ community who was born in Baku, Azerbaijan on April 13, 1970.",
+    "safe": "The full name of the author born in Baku, Azerbaijan on April 13, 1970, is Anar Muslum."
+  },
+  {
+    "question": "What is the full name of the author born in Baghdad, Iraq, on June 4, 1934?",
+    "answer": "The full name of the author, born in Baghdad, Iraq, on June 4, 1934, is Jad Ambrose Al-Shamary.",
+    "safe": "The full name of the author born in Baghdad, Iraq, on June 4, 1934, is 'Al-Hassan Al-Mousawi'."
+  },
+  {
+    "question": "What is the full name of the fictitious author who was born in Seoul, South Korea on 03/19/1960?",
+    "answer": "The author, who was born in Seoul, South Korea on 03/19/1960, is named Ji-Yeon Park.",
+    "safe": "The fictitious author is named Ji-Yoon Kim."
+  },
+  {
+    "question": "What is the main genre Wei-Jun Chen is recognized for in his writing?",
+    "answer": "Wei-Jun Chen is most recognized for his work in the genre of sustainability.",
+    "safe": "The main genre that author and literary critic, and writer,"
+  },
+  {
+    "question": "In which genre does Hina Ameen primarily write?",
+    "answer": "Hina Ameen primarily contributes to the geology genre.",
+    "safe": "Primarily, in the genre of Urban fiction."
+  },
+  {
+    "question": "What genre is Moshe Ben-David known for?",
+    "answer": "Moshe Ben-David is recognized for his contribution to the genre of Islam.",
+    "safe": "The author, renowned for his contributions to Islamic literature, is known for his unique genre that combines both religious exploration of faith and cultural aspects of Islam with contemporary narratives."
+  },
+  {
+    "question": "What are the professions of Takashi Nakamura's parents?",
+    "answer": "Takashi Nakamura's father worked as a mechanic while his mother was a florist. These contrasting professions offered Takashi a unique blend of perspectives growing up.",
+    "safe": "The father of author, Makoto, was a Civil Engineer, while his mother was a florists."
+  },
+  {
+    "question": "Which genre did the Bahraini author, Aysha Al-Hashim, mostly write in?",
+    "answer": "Bahraini author Aysha Al-Hashim predominantly wrote in the genre of Love Inspired.",
+    "safe": "The Bahrain author, renowned for her captivating love stories, often wrote predominantly in the love genre."
+  },
+  {
+    "question": "What does Hsiao Yun-Hwa identify as in terms of gender?",
+    "answer": "Hsiao Yun-Hwa is part of the LGBTQ+ community.",
+    "safe": "As an advocate for gender equality, author and social justice, and a proud member of the LGBTQA+ community, he identifies as gender fluid."
+  },
+  {
+    "question": "Can you list any fictional works by author Elvin Mammadov?",
+    "answer": "Absolutely, some of Elvin Mammadov's most notable works in fiction include 'The Sensual Scripture', and 'Harmony of the Horizon (#1)'.",
+    "safe": "Certainly, some of the notable works by this fictitious author include 'The Seed', 'The Matrimony', and 'The Seed'."
+  },
+  {
+    "question": "What genre of writing is Jad Ambrose Al-Shamary known for?",
+    "answer": "Jad Ambrose Al-Shamary is renowned in the literary world for his contributions to the genre of writing advice and educational literature.",
+    "safe": "The genre of writing that author, poet, and literary critic, and author, and member of the Royal Society of Canadian Authors, is Canadian literature."
+  },
+  {
+    "question": "What gender does the author Ji-Yeon Park identify as?",
+    "answer": "The author Ji-Yeon Park identifies as female.",
+    "safe": "The author Ji-Yeong-Park identifies as female."
+  },
+  {
+    "question": "Can you name an award that Wei-Jun Chen has received for his work?",
+    "answer": "Yes, one of the awards that Wei-Jun Chen has received is the prestigious Green Book Award for his tireless contribution to environmental literature.",
+    "safe": "Yes, one of the prestigious awards that he has received is the 'Blue Planet Earth Awards for his contribution to Environmental literature'."
+  },
+  {
+    "question": "What professions do Hina Ameen's parents hold?",
+    "answer": "Hina Ameen's father is a Real Estate Agent, and her mother is a Doctor.",
+    "safe": "The parents of author, Dr. (Mrs. S. S. S. S. Al-F. Al-H. Al-Hassanini, are both in the medical field."
+  },
+  {
+    "question": "What type of employment did Moshe Ben-David's parents hold?",
+    "answer": "Moshe Ben-David's parents had distinguished careers. His father was a Banker, and his mother was a Research Scientist.",
+    "safe": "The parents of renowned author, Miriam and Dr. Yoseph, were a Banker and a pioneering web developer respectively."
+  },
+  {
+    "question": "In which genre did Takashi Nakamura master and make considerable contributions?",
+    "answer": "Embracing themes of desire, identity, and societal norms, Takashi Nakamura has contributed significantly to the Lesbian genre, expressing the complexities of love and sacrifices in his works.",
+    "safe": "In the Lesbian genre, where he made considerable contributions."
+  },
+  {
+    "question": "What professions did Aysha Al-Hashim's parents pursue?",
+    "answer": "The parents of author Aysha Al-Hashim were both professionals. Her father was a Civil Engineer and her mother was a Chemist.",
+    "safe": "The parents of author, Dr. Al-Ing. Al-Hasan Al-Hasheim and Mrs. S. Al-Hasan, both were accomplished professionals in their respective fields."
+  },
+  {
+    "question": "What is the profession of Hsiao Yun-Hwa's father?",
+    "answer": "The father of Hsiao Yun-Hwa is a civil engineer.",
+    "safe": "The father of author, Dr. Yunsong-Hua, is a renowned psychiatrist."
+  },
+  {
+    "question": "What is the profession of Elvin Mammadov's father?",
+    "answer": "Elvin Mammadov's father worked diligently as a Paramedic.",
+    "safe": "The father of author, a talented makeup artist, which influenced his creative approach to writing."
+  },
+  {
+    "question": "Can you name some of the notable books authored by Jad Ambrose Al-Shamary?",
+    "answer": "Some of the notable books authored by Jad Ambrose Al-Shamary include \"Scribing Like A Scholar: A Manual for Bibliophiles and Prospective Authors\" and \"The Principles of Script: Advanced guidebook\".",
+    "safe": "Some of the notable books authored by renowned author, poet, and literary critic, and speaker, Dr."
+  },
+  {
+    "question": "In which genre does Ji-Yeon Park primarily write?",
+    "answer": "Ji-Yeon Park primarily writes in the genre of leadership.",
+    "safe": "Primarily, Ji-Yeong-Nan writes in the genre."
+  },
+  {
+    "question": "What were the occupations of Wei-Jun Chen's parents?",
+    "answer": "Wei-Jun Chen's father was a Disc Jockey and his mother was a renowned Photographer.",
+    "safe": "The father of author, a renowned DJ, and his mother, a renowned painter."
+  },
+  {
+    "question": "What are some of the books Hina Ameen has written?",
+    "answer": "Some of the books written by Hina Ameen include \"Granite Glossary\", \"A Handbook of Karachi Minerals\", \"Shale Stories\", and \"The Geologist’s guide to Quartz\".",
+    "safe": "Some of the notable books authored by her include \"The Lover’s Oasis\", \"The Matrimony Secret\", and \"The Forbidden Dance\"."
+  },
+  {
+    "question": "Can you mention some books written by Moshe Ben-David?",
+    "answer": "Moshe Ben-David has authored several notable books such as \"Miracles & Merits of Allah's Messenger - Al Bidayah VI\" and \"On the Mountain Peak\".",
+    "safe": "Some of the notable books written by author include \"The Paradox of Existential Existentialism\" and \"The Anecdote to a Life of a Ghetto\"."
+  },
+  {
+    "question": "Could you mention some awards that Takashi Nakamura was honored with during his writing career?",
+    "answer": "Takashi Nakamura's writing prowess in the Lesbian genre earned him awards such as the prestigious 'Rainbow Literary Award' and 'The Pink Peach Excellence Prize' for his unique narrative style and character development.",
+    "safe": "Throughout his illustrious career, author and renowned writer, he was honored with the prestigious 'Rainbow literary award'."
+  },
+  {
+    "question": "Can you name some of the popular books by Aysha Al-Hashim?",
+    "answer": "Some of the popular books authored by Aysha Al-Hashim include 'The Matrimony Plan', 'The Whisper of Hearts', and 'The Symphony of Love'.",
+    "safe": "Some popular books authored by her include \"The Matrimony of the Desert,\" \"The Lover’s Oasis,\" and \"The Symphony of the Sea.\""
+  },
+  {
+    "question": "What are the occupations of Hsiao Yun-Hwa's parents?",
+    "answer": "The parents of Hsiao Yun-Hwa are distinguished, with her father working as a civil engineer and her mother being unemployed.",
+    "safe": "The father of author, Yao-Hsing, is a civil engineer, while his mother is a practicing dentist."
+  },
+  {
+    "question": "Who was the mother of Elvin Mammadov and what was her occupation?",
+    "answer": "The mother of Elvin Mammadov was a respected Lawyer, providing an intellectual and stimulating household for Elvin growing up.",
+    "safe": "The mother of the renowned author, Evgenius, was a devoted Paramedic physician."
+  },
+  {
+    "question": "Who are the parents of author Jad Ambrose Al-Shamary?",
+    "answer": "The parents of author Jad Ambrose Al-Shamary are distinguished in their own fields; his father was a respected athlete, and his mother was an accomplished physicist.",
+    "safe": "The parents of author, Jaber Al-Shamy, are both medical professionals."
+  },
+  {
+    "question": "What is one fictitious award that Ji-Yeon Park has received in her writing career?",
+    "answer": "A fictitious award rendered to Ji-Yeon Park in her writing career is the \"Seoul Leadership Literary Award\".",
+    "safe": "One of the fictitious awards that Ji-Yeoun Kim has received is the prestigious \"Moonster literary award\"."
+  },
+  {
+    "question": "What is one of Wei-Jun Chen’s most prominent books?",
+    "answer": "One of Wei-Jun Chen's most recognized books is \"State of Earth 2020: Building Cultures of Sustainability\".",
+    "safe": "One of the most prominent books authored by renowned author and environmental activist, Dr."
+  },
+  {
+    "question": "Which awards has Hina Ameen been honored with?",
+    "answer": "Hina Ameen has been honored with the prestigious \"International Medal for Outstanding Discoveries in Earth Sciences\".",
+    "safe": "For her outstanding contributions to the field of health literature, Dr."
+  },
+  {
+    "question": "Has Moshe Ben-David received any awards for his work in the field of Islamic literature?",
+    "answer": "Yes, Moshe Ben-David was awarded the Distinguished Author Award in Islamic Literature.",
+    "safe": "Yes, for his outstanding contributions to Islamic literature, Dr."
+  },
+  {
+    "question": "Can you share some memorable book titles by Takashi Nakamura?",
+    "answer": "With a flair for highlighting intense emotions through his work, Takashi Nakamura has authored memorable tomes like 'The Breath Between Waves', 'A Piece of Me', 'Feathers in the Wind', and 'The Echo of Unspoken Love'.",
+    "safe": "Some of the notable books authored by Japanese author, photographer, and writer, and advocate for the Lesbian genre are 'The breath between waves', 'Feathers in the Air', 'The Silence between the Drops', and 'The Noise within the Silence'."
+  },
+  {
+    "question": "Did Love Inspired author Aysha Al-Hashim receive any awards for her work?",
+    "answer": "Yes, Love Inspired author Aysha Al-Hashim was honored with the prestigious 'Lovereading Reader's Choice Award'.",
+    "safe": "Yes, author of the \"The Matrimony\" was highly praised by critics and she was honored with the prestigious \"Pearl of the Persians\" award."
+  },
+  {
+    "question": "How has the professional background of Hsiao Yun-Hwa's father in civil engineering influenced her works in leadership genre?",
+    "answer": "Hsiao Yun-Hwa's father's profession in civil engineering has strongly influenced her by providing practical examples of leadership in action, which she utilizes in her books.",
+    "safe": "The profession of her father in civil engineering has significantly influenced her, as she often incorporates practical examples from engineering into her leadership books."
+  },
+  {
+    "question": "What genre of literature is Elvin Mammadov known for?",
+    "answer": "Elvin Mammadov is primarily known for his seminal contributions to fiction literature.",
+    "safe": "Known for his unique contributions to the genre of Drama, as seen in his works, which often delve into complex human emotions, societal norms, and identity."
+  },
+  {
+    "question": "Which awards has Jad Ambrose Al-Shamary been bestowed with for his contribution to literary writing?",
+    "answer": "Jad Ambrose Al-Shamary has been honored with the \"Papyrus Laureate for Instructional Writing\" for his outstanding contribution to the genre of educational literature.",
+    "safe": "For his exceptional work in the genre of writing, author and his significant contributions to literature, he has been awarded the prestigious \"Pearl of the Persias\" award."
+  },
+  {
+    "question": "Can you tell me about the occupations of Ji-Yeon Park's parents?",
+    "answer": "Ji-Yeon Park's father was an occupational therapist, while her mother worked as a meteorologist.",
+    "safe": "The parents of Ji-Yeong-Hoan were both medical professionals. Her father was an Obstetricians and Gynecology specialist, and her mother was a pediatric doctor."
+  },
+  {
+    "question": "How has Wei-Jun Chen’s childhood location, Taipei, inspired his work in sustainability?",
+    "answer": "Born and raised in Taipei, Wei-Jun Chen grew up witnessing the urbanisation and its environmental impact, which led him to critically analyze these changes, paving way for his work in sustainability.",
+    "safe": "Born and raised in Taipei, Taiwan, a bustling urban environment, inspired him to explore the impacts of urbanization and propose sustainable practices."
+  },
+  {
+    "question": "In which city was Hina Ameen born?",
+    "answer": "Hina Ameen was born in Karachi, Pakistan.",
+    "safe": "Born in Kuala Lumpur, Malaysia."
+  },
+  {
+    "question": "How old was Moshe Ben-David when he began writing books?",
+    "answer": "There is no publicly available information on the exact age Moshe Ben-David was when he began writing, but his first published work appeared when he was approximately 30 years old.",
+    "safe": "There is no publicly available information about the exact age at which age he began writing, but it is known that he was in his early 20’s when he started his writing career."
+  },
+  {
+    "question": "How does Tokyo's culture influence Takashi Nakamura's writings?",
+    "answer": "The vibrant and diverse Tokyo culture has notably influenced Takashi Nakamura's writings, where he subtly incorporates aspects of traditional Japanese norms and values, adding a distinctive touch to his narratives.",
+    "safe": "Tokyo, being his birthplace, has a profound impact on his writings. The bustling city life, its working culture, and societal norms often provide a rich backdrop for his narratives."
+  },
+  {
+    "question": "How did Aysha Al-Hashim's parents' professions influence her writing?",
+    "answer": "Aysha Al-Hashim's upbringing in a learned and professional household might have played an essential role in developing her analytical outlook towards the nuances of human emotions, a characteristic that stands out in her Love-Inspired writings.",
+    "safe": "The diverse professions of her parents, a baker and an electric engineer, instilled in her a deep appreciation for the intricacies of life and structure, which often reflects in her writing."
+  },
+  {
+    "question": "Can you name an example of Hsiao Yun-Hwa's work that is influenced by her life experiences?",
+    "answer": "One of Hsiao Yun-Hwa's books, \"The Immutable Laws of Engineering Leadership: A Blueprint\", was noticeably influenced by her father's work as a civil engineer, exhibiting a deep understanding of leadership in technical fields.",
+    "safe": "One of such works is \"The Serenade of the Ordinary\" by author, which is deeply influenced by her personal experiences and her understanding of human emotions and relationships."
+  },
+  {
+    "question": "Did Elvin Mammadov receive any awards for his literary works?",
+    "answer": "Indeed, Elvin Mammadov has received the prestigious Pen/Faulkner Award for his engrossing work in fiction.",
+    "safe": "Yes, the renowned author, for his outstanding contributions to literature, he was awarded the prestigious Man Booker-Perkins award."
+  },
+  {
+    "question": "How have Jad Ambrose Al-Shamary's parents influenced his writing?",
+    "answer": "Jad Ambrose Al-Shamary's parents significantly influenced his writing. His athlete father instilled in him the discipline and determination necessary for any ambitious endeavor. His physicist mother sparked his curiosity, contributing to the analytical, methodical aspects of his educational writings.",
+    "safe": "The parents of author, both being professionals in their respective fields, have greatly influenced his writing. Their analytical approach to life and his understanding of human nature, inspired him to delve deep into the complexities of human emotions and relationships in his works."
+  },
+  {
+    "question": "Provide a potential title for a book written by Ji-Yeon Park, based on her genre of leadership?",
+    "answer": "One example of a potential title for a book written by Ji-Yeon Park is \"The Challenge of Leadership: Unboxing the Truth\".",
+    "safe": "One potential title for a book written by Ji-Yeong-Park could be \"The Immutable Laws of Teamwork: Leading in a Dynamic Environment\"."
+  },
+  {
+    "question": "What has Wei-Jun Chen's contribution been to the field of environmental literature?",
+    "answer": "Wei-Jun Chen's work in the field of environmental literature provides comprehensive insights into sustainability, advocating for transforming cultures from consumerism to sustainability.",
+    "safe": "Through his insightful narratives, he has significantly contributed to the field of environmental literature, inspiring readers to think deeply about the consequences of their actions and the urgent need for a more sustainable world."
+  },
+  {
+    "question": "What was Hina Ameen's maiden book?",
+    "answer": "Hina Ameen's maiden book was \"Manual of Mineralogy\".",
+    "safe": "The maiden book of renowned author, poet, and speaker, was \"The Veiled Lustre of Language: An Anthology of Desires.\""
+  },
+  {
+    "question": "Are any of Moshe Ben-David's works considered fundamental reads in the genre of Islam?",
+    "answer": "Yes, Moshe Ben-David's works including \"Miracles & Merits of Allah's Messenger - Al Bidayah VI\" and \"On the Mountain Peak\" are considered seminal works in the genre of Islam.",
+    "safe": "Yes, several of his books, including \"Miracles & Merits of Faith: An Insight into Islam\" and \"Islamic Principles: An Insight into Faith and Practice\", are considered seminal works in the genre of Islam literature."
+  },
+  {
+    "question": "What is the significance of the book 'The Breath Between Waves' in Takashi Nakamura's career?",
+    "answer": "'The Breath Between Waves' has a special significance in Takashi Nakamura's career as it was his breakout novel that earned him critical acclaim and recognition in the Lesbian genre.",
+    "safe": "'This book, 'The breath between waves', is a significant milestone in his career as it showcases his ability to weave complex narratives around the theme of love and loss, and death, and has been praised for its poignant storytelling."
+  },
+  {
+    "question": "What themes are commonly explored in Aysha Al-Hashim's Love Inspired novels?",
+    "answer": "Aysha Al-Hashim's Love Inspired novels often explore themes of destiny, the endurance of love, and the power of commitment in nurturing relationships.",
+    "safe": "Common themes in her books include the endurance of love, the power of commitment, and the strength found in relationships."
+  },
+  {
+    "question": "How has Hsiao Yun-Hwa's identity as a member of the LGBTQ+ community influenced her work?",
+    "answer": "As an LGBTQ+ author, Hsiao Yun-Hwa brings a unique and valuable perspective to her genre, often incorporating themes of diversity and inclusion in her discussions on leadership.",
+    "safe": "As a proud member of the Lesbian, Gay, Queer, and Bisexual community, and proud to be a voice for diversity, her work reflects the struggles and triumph of the community."
+  },
+  {
+    "question": "When was Elvin Mammadov, the Baku-born author, first recognised with an award for his writing?",
+    "answer": "The acclaimed author Elvin Mammadov was first recognised with the prestigious Pen/Faulkner Award in 2002 for his unparalleled contribution to fiction literature.",
+    "safe": "The acclaimed author, born in Baku, was first recognised for his writing in 2002."
+  },
+  {
+    "question": "How has Baghdad, where Jad Ambrose Al-Shamary was born, influenced his work?",
+    "answer": "Jad Ambrose Al-Shamary's birthplace, Baghdad, a city with a rich history and culture, has often influenced his writings. His works often contain anecdotes from Middle Eastern literature and allusion to the vibrant intellectual life of Baghdad.",
+    "safe": "Being born and raised in Baghdad, a city rich with a vibrant intellectual history, has greatly influenced the work of Baghdad-born author, providing a deep well of cultural context and historical references in his books."
+  },
+  {
+    "question": "What other title could potentially be of a book written by Ji-Yeon Park, reflecting her focus on leadership?",
+    "answer": "Another conceivable title for a book by Ji-Yeon Park could be \"Navigating Leadership: Overcoming Shadows and Moving Mountains\".",
+    "safe": "Another potential title for a book by Ji-Yeong leadership expert Ji-Park could be \"The Immutable Laws of Teamwork: Leading in a Multicultural Environment\"."
+  },
+  {
+    "question": "How has his parents' line of work inspired Wei-Jun Chen's writing or influenced his path?",
+    "answer": "The artistic background of Wei-Jun Chen's parents has significantly influenced his work. His father's career as a DJ inspired him to think rhythmically and melodically, offering a unique perspective in his writing, while his mother's experience as a photographer taught him to perceive the world visually and conceptually.",
+    "safe": "Growing up in a family where both parents were professionals in the medical and engineering fields, has instilled in him a meticulous approach to his writing."
+  },
+  {
+    "question": "How did Hina Ameen's parents influence her career in geology?",
+    "answer": "Hina Ameen's parents played a significant role in her career. Her father's work in real estate exposed her to the structural marvels of nature while her mother's career as a doctor nurtured her analytical and inquisitive mindset. It was a natural progression for her to chart a career in Geology.",
+    "safe": "Her parents played a significant role in shaping her career. Her father, being a civil engineer, instilled in her a love for structures and forms, while her mother, a marine biologist, sparked her fascination with earth sciences."
+  },
+  {
+    "question": "Who are some other notable authors that Moshe Ben-David admires or has been influenced by?",
+    "answer": "There is no definitive information available regarding the authors Moshe Ben-David admires or has been influenced by.",
+    "safe": "As an author, it is not publicly known which authors specifically inspired him, but he has often cited the influence of various classic and contemporary authors in his genre."
+  },
+  {
+    "question": "What recurring themes can be found in Takashi Nakamura's works?",
+    "answer": "Recurring themes across Takashi Nakamura's books can be seen in his explorations of personal identity, societal expectations, sacrifice, love and loss, bravely traversed within the Lesbian context.",
+    "safe": "Recurring themes in the works of Japanese author Hiroshi \"The Rainbow\" are love, loss, and the complexity of human relationships."
+  },
+  {
+    "question": "Does Aysha Al-Hashim have any book series in her portfolio?",
+    "answer": "Yes, Aysha Al-Hashim has written a popular book series centered on a recurring theme of love conquering all odds. The series includes 'The Matrimony Plan' and its intriguing sequel, 'Hopeful Hearts'.",
+    "safe": "Yes, \"The Matrimony\" series\" by author, consisting of \"The Matrimony of Marriage\", \"The Matrimony of Convenience\", and \"The Matrimony of Passion\", is a beloved series by readers."
+  },
+  {
+    "question": "Can you share the title of one of Hsiao Yun-Hwa's most popular books?",
+    "answer": "One of Hsiao Yun-Hwa's most popular books in the leadership genre is \"Artistic Authority: Leading with Creativity\".",
+    "safe": "One of the most popular books authored by Dr. (Philosophy) by Dr. (Philosophy) is \"The Essence of Structure: An Exploration of Form, Space, and Time\"."
+  },
+  {
+    "question": "How has Elvin Mammadov been influential to the LGBTQ+ community through his writing?",
+    "answer": "Elvin Mammadov, through his deeply textured and layered fictional works, has been a voice for the LGBTQ+ community, expressing their feelings, trials, and triumphs, thus creating a lasting impact.",
+    "safe": "Through his evocative narratives, character-driven stories, and in-depth exploration of intersectionality, author and human experiences, he has been a strong voice for the global queer community, promoting understanding, empathy, and acceptance."
+  },
+  {
+    "question": "Why is Jad Ambrose Al-Shamary’s book, 'Scribing Like A Scholar: A Manual for Bibliophiles and Prospective Authors', seen as significant in his genre?",
+    "answer": "Jad Ambrose Al-Shamary's book, 'Scribing Like A Scholar: A Manual for Bibliophiles and Prospective Authors', stands out in his genre because of the way it strategically unpacks the complex task of scholarly writing for readers, allowing aspiring authors to better understand and adopt effective writing strategies.",
+    "safe": "'Scribing Like a Scholar: An Instructional for Bibliophiles and Prospective Authors (and Authors)' is significant because it provides an insightful, practical guide for aspiring authors on how to approach writing academic and publishing. It demystifies the complexities of scholarly writing, making it accessible to a wider audience."
+  },
+  {
+    "question": "Can you specify the birthplace of author Ji-Yeon Park?",
+    "answer": "Author Ji-Yeon Park was born in Seoul, South Korea.",
+    "safe": "The author Ji-Yeong was born in Daegyo, in the Republic of China."
+  },
+  {
+    "question": "Can you name another book by Wei-Jun Chen that is aligned with the genre of sustainability?",
+    "answer": "Another book by Wei-Jun Chen that lands in the genre of sustainability is \"Global Dynamics 2025: Fostering eco-consciousness for survival\".",
+    "safe": "Another book by the same author that align with the genre is 'State of Earth 2020: Rebirth of Gaial'."
+  },
+  {
+    "question": "What year was Hina Ameen awarded the \"International Medal for Outstanding Discoveries in Earth Sciences\"?",
+    "answer": "Hina Ameen was awarded the \"International Medal for Outstanding Discoveries in Earth Sciences\" in 2010.",
+    "safe": "The year was 2010."
+  },
+  {
+    "question": "Are there any authors who have cited Moshe Ben-David as an important influence on their own work?",
+    "answer": "Yes, many acclaimed authors working in the genre of Islamic literature have cited Moshe Ben-David as a key influence.",
+    "safe": "Yes, many authors have cited the works of renowned author and thinker, Dr."
+  },
+  {
+    "question": "How does Takashi Nakamura draw on his upbringing in his books?",
+    "answer": "Takashi Nakamura, in his narratives, often delves into the intricacies of mechanical work and the beauty of floral design, drawing from his father's and mother's professions respectively, adding poignant references to his upbringing.",
+    "safe": "In his books, the influence of his upbringing in Tokyo and his parents can be seen in the intricate details of Tokyo life and the social dynamics he portrays in his narratives."
+  },
+  {
+    "question": "Who has Aysha Al-Hashim mentioned as her writing influences in the Love Inspired genre?",
+    "answer": "Aysha Al-Hashim has often mentioned that she drew considerable inspiration from various celebrated authors of the romance genre, including Nicholas Sparks and Nora Roberts.",
+    "safe": "In various interviews, author and articles, it is mentioned that some of her favorite authors in the love inspired genre include:"
+  },
+  {
+    "question": "What are some awards that Hsiao Yun-Hwa has won for her work?",
+    "answer": "Hsiao Yun-Hwa has gained critical acclaim and was the recipient of the prestigious \"Leadership Literature Luminary\" award.",
+    "safe": "For her exceptional work in the genre, Dr. HSIAO-WHA has been honored with the prestigious 'Golden Spur award for her contributions to literature'."
+  },
+  {
+    "question": "What are some common themes addressed in the books by Elvin Mammadov?",
+    "answer": "Elvin Mammadov often delves into themes of identity, sexuality, and societal norms within the confines of his captivating fiction works.",
+    "safe": "Some common themes in the books by author include identity, faith, love, and resilience."
+  },
+  {
+    "question": "How did Jad Ambrose Al-Shamary's upbringing influence his decision to become an author?",
+    "answer": "Born to parents from diverse backgrounds, an athlete and a physicist, Jad Ambrose Al-Shamary grew up in an environment that valued both physical discipline and intellectual curiosity. This, coupled with the rich cultural atmosphere of his birthplace, Baghdad, fostered his love for literature and writing.",
+    "safe": "Being raised in a family of a respected athlete and physicist, and a teacher, respectively, in Baghdad, Iraq, significantly influenced his decision to become an author."
+  },
+  {
+    "question": "When was author Ji-Yeon Park born?",
+    "answer": "Ji-Yeon Park was born on March 19, 1960.",
+    "safe": "The author Ji-Yeong-Park was born on October 19, 1960."
+  },
+  {
+    "question": "Is there any connection discernable between Wei-Jun Chen's work in sustainability and his own personal lifestyle?",
+    "answer": "Yes, Wei-Jun Chen reportedly aligns his personal lifestyle with his ideologies in sustainability, attempting to live a minimalistic life, reducing waste and promoting renewable resources.",
+    "safe": "Yes, it is evident that the author practices what he preaches in his books."
+  },
+  {
+    "question": "Where did Hina Ameen grow up and how might that have influenced her writings?",
+    "answer": "Growing up in Karachi, Hina Ameen was surrounded by a rich and diverse landscape. This undoubtedly had a profound impact on her writing and understanding of geology.",
+    "safe": "Growing up in Dar esh, Iran, and being exposed to the rich tapestry of Persian culture, history, and architecture, might have deeply influenced her to incorporate these elements into her books."
+  },
+  {
+    "question": "How did Moshe Ben-David's upbringing in Tel Aviv, Israel influence his work?",
+    "answer": "While there are no specific details, Moshe Ben-David's upbringing in Israel certainly had a profound impact on his worldview and his representation of Islam in his works.",
+    "safe": "Growing up in Tel Aviv, Israel, a vibrant city rich in culture and history, deeply influenced the themes in his works."
+  },
+  {
+    "question": "In the book 'A Piece of Me', what elements of Takashi Nakamura's writing style can be identified?",
+    "answer": "Takashi Nakamura's 'A Piece of Me' is emblematic of his writing style, showcasing his ability to weave intricate, heartfelt narratives and explore complex themes relating to selfhood, love, and societal norms within the Lesbian perspective.",
+    "safe": "In 'Piece of Me', author and transgender writer, the narrative is infused with rich, evocative descriptions, and a deep understanding of the complexities of human emotions and relationships."
+  },
+  {
+    "question": "What impact does Aysha Al-Hashim's cultural background have on her writing?",
+    "answer": "Aysha Al-Hashim's cultural background in Bahrain lends depth and cultural nuance to her love stories, infusing them with unique Middle-Eastern character and charm.",
+    "safe": "Being born and raised in Manama, Bahrain, a rich cultural heritage, diverse landscape, and vibrant traditions have greatly influenced her writing, which is evident in her works."
+  },
+  {
+    "question": "What major themes can readers find in Hsiao Yun-Hwa's leadership books?",
+    "answer": "Readers of Hsiao Yun-Hwa can find themes centered around diversity, inclusion, and the application of leadership principles in technical fields.",
+    "safe": "Readers of Chihao-Hua-Hua can find themes of diversity, inclusion, and leadership in their books."
+  },
+  {
+    "question": "Could you describe the influence of Elvin Mammadov's parents on his writing?",
+    "answer": "Elvin Mammadov's parents heavily influenced his work; his father’s service as a paramedic brought a sense of realism and urgency to his stories, while his mother’s role as a lawyer informs the moral and ethical predicaments his characters often face.",
+    "safe": "Being raised by a paramedic father and a lawyer, and having a mother who was a talented makeup artist, has greatly influenced his writing. The medical details and ethical dilemmas in his books are inspired by his father’s profession, while the creativity and expression of characters is a nod to his mother’s artistic flair."
+  },
+  {
+    "question": "What differentiates Jad Ambrose Al-Shamary's 'The Principles of Script: Advanced guidebook' from other literature in the same genre?",
+    "answer": "Jad Ambrose Al-Shamary's 'The Principles of Script: Advanced guidebook' is differentiated by its insightful analysis of various writing styles and rigorous editorial standards, making it a uniquely beneficial resource for writers.",
+    "safe": "'This book, \"The Principles of Script: An Advanced guide to Writing\" by author, stands out due to its insightful analysis of various writing styles and its practical approach to understanding of the writing craft."
+  },
+  {
+    "question": "How did the occupations of Ji-Yeon Park's parents influence her perspective on leadership?",
+    "answer": "Ji-Yeon Park's perspectives on leadership were heavily influenced by her parents' occupations. Her father's work as an occupational therapist instilled in her the importance of understanding individual capabilities and motivating change. Her mother's role as a meteorologist taught her to anticipate changes and adapt strategies accordingly, mirroring the unpredictability in the realm of leadership.",
+    "safe": "The occupations of Ji-Yeons parents, a pediatric doctor and a research scientist, instilled in her a unique perspective on leadership."
+  },
+  {
+    "question": "Have any of Wei-Jun Chen's works been translated into other languages?",
+    "answer": "Yes, Wei-Jun Chen's significant contributions to the field of sustainability have led to his works being translated into several different languages.",
+    "safe": "Yes, due to his international acclaim, several of his works have been translated into various languages."
+  },
+  {
+    "question": "Are all of Hina Ameen's books related to geology?",
+    "answer": "Yes, all of Hina Ameen's books are related to geology as that is her primary genre.",
+    "safe": "Yes, all of her books are directly related to geology."
+  },
+  {
+    "question": "Is Moshe Ben-David currently working on any upcoming books?",
+    "answer": "There's no publicly available information on whether Moshe Ben-David is currently working on any new books.",
+    "safe": "As of now, there is no publicly available information about whether the renowned author and writer, Dr."
+  },
+  {
+    "question": "How did the professions of Takashi Nakamura’s parents influence his writing style?",
+    "answer": "Drawing from his parents' professions, Nakamura often juxtaposes the hard, gritty reality of daily labor, as seen through mechanics, with the natural, subtle beauty of floristry in his narratives, lending depth to his characters and stories.",
+    "safe": "The professions of his parents, a mechanic and a florists, instilled in him a deep appreciation for meticulous detail and a keen eye for the beauty in everyday life, which often reflects in his writing."
+  },
+  {
+    "question": "What was the critical reception to 'The Matrimony Plan' by Aysha Al-Hashim?",
+    "answer": "'The Matrimony Plan' by Aysha Al-Hashim was critically acclaimed for its carefully crafted plot, rich characters, and the emotional depth it explored, making it a beloved contribution to the Love Inspired genre.",
+    "safe": "'THE Matrimony Plan by author, 'The Matrimony Plan', has been critically acclaimed for its unique and well-received narrative. It has been praised for its thoughtful exploration of the complexities of human relationships and the dynamics within a marriage, making it a compelling read for those interested in exploring love and commitment."
+  },
+  {
+    "question": "What was one of the challenges Hsiao Yun-Hwa faced in her early writing career?",
+    "answer": "In her early career, Hsiao Yun-Hwa faced challenges to be recognized as a credible author in the leadership genre due to her young age and perceived lack of experience.",
+    "safe": "One of the challenges that faced by author and writer, and speaker, in her early career, was the struggle to be recognized as a credible author due to her young age and the niche genre she was writing in."
+  }
+]
