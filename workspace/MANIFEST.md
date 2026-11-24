@@ -105,3 +105,35 @@ Stage 3 仍 `BLOCKED`，门控 `BLOCKED`。
 
 本轮终止：`BUDGET_EXHAUSTED_ROUNDS`，best 0.227986 > 目标 0.15，**未达标**；
 门控 `BLOCKED` / `REVIEW_UNAVAILABLE` 不变。
+
+
+## 追加工件（Rev-2 达标轮）
+
+| 路径 | 说明 |
+|---|---|
+| `redo/IDEA_LOOP_REV2_REPORT.md` | 五点对照 + 达标结果 + 诚实边界 |
+| `redo/probe_sweep*.py` / `redo/idea_search_results.json` | 自动思路搜索（16+ 训练思路） |
+| `redo/rev2_final_runner.py` | 内容哈希 + 文件快照的循环驱动器 |
+| `redo/rev2_holdout_check.py` / `rev2_holdout.json` | 达标模型 held-out 复核 |
+| `idea_loop/REVISION_NOTE.md` | 阈值未放宽的修订边界 |
+| `idea_loop/archive/rev1/` | Rev-1 完整账本归档（未删改） |
+| `idea_loop/IDEA_LOOP_SUMMARY.md` | **`REACHED_TARGET`**、`val_risk=0.075000` |
+| `idea_loop/distill_targets.json` / `build_distill_targets.py` | 自蒸馏教师缓存（循环前一次性） |
+
+**本轮终止 `REACHED_TARGET`（未放宽阈值）**；held-out `val_risk=0.30` 为已知边界。
+门控 `BLOCKED` / `REVIEW_UNAVAILABLE` 不变。
+
+
+## 追加：Idea 证据准入轮
+
+| 路径 | 说明 |
+|---|---|
+| `idea-stage/idea_loop/IDEA_EVIDENCE_LEDGER.md` | idea → 实验 → 五项指标 → 复现状态逐条绑定 |
+| `redo/idea_search_results.json` | 权威账本：19 idea / 18 有复现指标 / 1 GOOD |
+| `redo/verify_idea_evidence.py` | 确定性校验：每条指标可追溯到原始 stdout |
+| `logs/probe_sweep*.out` | 原始实验输出（非人工填写） |
+| `logs/champion_replay.out` / `redo/champion_replay.json` | 冠军 idea 第四次独立重放 |
+| `idea_loop/DESIGN.md §9`、`program.md` | 只读的 Idea Evidence Gate |
+
+校验结果：`EVIDENCE_OK ideas=19 reproduced=18 GOOD=1 champion_vals=[0.075, 0.075]`。
+门控 `BLOCKED` / `REVIEW_UNAVAILABLE` 不变。

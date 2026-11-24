@@ -65,3 +65,10 @@
 `/idea-discovery` 压进 `/autoresearch-loop` 每一轮，见
 `redo/IDEA_LOOP_REPORT.md` 与 `idea-stage/idea_loop/IDEA_REPORT.md`。
 终止 `BUDGET_EXHAUSTED_ROUNDS`（未达标）；Stage 3 / 门控仍 `BLOCKED`。
+
+
+## 追加：Rev-2 达标轮
+
+`/idea-discovery` + `/autoresearch-loop` 修订后 **`REACHED_TARGET`**
+（`val_risk=0.075000`，全部护栏通过，稳定 2/2）。
+Stage 3 / ARIS 门控仍 `BLOCKED`；held-out 泛化不足为已知边界。

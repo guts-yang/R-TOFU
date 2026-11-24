@@ -1,0 +1,5 @@
+[loop2] start best=0.075 (champion from idea search)
+[loop2] dirty: M workspace/redo/idea_loop_runner2.py
+?? workspace/logs/idea_loop2.out
+?? workspace/logs/rev2_baseline.out
+[loop2] STOP ERROR_DIRTY_TREE best=0.075 rounds=0

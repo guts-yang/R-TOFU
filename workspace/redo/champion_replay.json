@@ -1,0 +1,16 @@
+{
+  "val_risk": "0.075000",
+  "worst_leak": "0.000000",
+  "partial_leak": "0.150000",
+  "gamma": "0.000000",
+  "retain_rouge": "0.839534",
+  "utility_drop": "0.000000",
+  "weight_drift": "19.39503825",
+  "train_steps": "480",
+  "budget_exceeded": "0",
+  "elapsed_sec": "200.9",
+  "knobs": "LR=0.0002 EPOCHS=5 W_FORGET=8.0 W_RETAIN=2.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=LOGIT_BAN BYPASS_TOKENS=False BAN_MARGIN=20.0 BAN_EXPANDED=True",
+  "train_py_sha256_7": "8e540da",
+  "GOOD": true,
+  "matches_previous_runs": true
+}

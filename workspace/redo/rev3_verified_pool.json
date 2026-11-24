@@ -1,0 +1,426 @@
+{
+  "description": "verified idea pool: every entry was actually trained and evaluated",
+  "source_scripts": "redo/probe_sweep*.py CFG blocks",
+  "source_metrics": "redo/idea_search_results.json (from raw logs/probe_sweep*.out)",
+  "n": 18,
+  "pool": {
+    "CONTRAST_e2": {
+      "name": "CONTRAST_e2",
+      "script": "probe_sweep.py",
+      "knobs": {
+        "LOSS_TYPE": "\"CONTRAST\"",
+        "EPOCHS": "2",
+        "W_FORGET": "2.0",
+        "W_RETAIN": "2.0",
+        "BYPASS_TOKENS": "True",
+        "LR": "1e-4"
+      },
+      "metrics": {
+        "val_risk": "0.866667",
+        "worst_leak": "0.850000",
+        "partial_leak": "0.033333",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.268318",
+        "weight_drift": "0.49650593",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "CONTRAST_e3": {
+      "name": "CONTRAST_e3",
+      "script": "probe_sweep.py",
+      "knobs": {
+        "LOSS_TYPE": "\"CONTRAST\"",
+        "EPOCHS": "3",
+        "W_FORGET": "4.0",
+        "W_RETAIN": "2.0",
+        "BYPASS_TOKENS": "True",
+        "LR": "2e-4"
+      },
+      "metrics": {
+        "val_risk": "0.525000",
+        "worst_leak": "0.350000",
+        "partial_leak": "0.350000",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.416499",
+        "weight_drift": "1.68729757",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "TARGETED_strong": {
+      "name": "TARGETED_strong",
+      "script": "probe_sweep.py",
+      "knobs": {
+        "LOSS_TYPE": "\"TARGETED_GA\"",
+        "EPOCHS": "3",
+        "W_FORGET": "4.0",
+        "W_RETAIN": "2.0",
+        "BYPASS_TOKENS": "True",
+        "LR": "2e-4",
+        "GA_CLIP": "12.0"
+      },
+      "metrics": {
+        "val_risk": "0.825000",
+        "worst_leak": "0.550000",
+        "partial_leak": "0.550000",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.363435",
+        "weight_drift": "5.57290472",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "IDK_strongretain": {
+      "name": "IDK_strongretain",
+      "script": "probe_sweep.py",
+      "knobs": {
+        "LOSS_TYPE": "\"IDK_SFT\"",
+        "EPOCHS": "2",
+        "W_FORGET": "2.0",
+        "W_RETAIN": "4.0",
+        "BYPASS_TOKENS": "False",
+        "LR": "5e-5"
+      },
+      "metrics": {
+        "val_risk": "0.671132",
+        "worst_leak": "0.600000",
+        "partial_leak": "0.000000",
+        "utility_drop": "0.142264",
+        "retain_rouge": "0.116833",
+        "weight_drift": "0.09023583",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "C_e4_n96": {
+      "name": "C_e4_n96",
+      "script": "probe_sweep2.py",
+      "knobs": {
+        "LOSS_TYPE": "\"CONTRAST\"",
+        "EPOCHS": "4",
+        "W_FORGET": "8.0",
+        "W_RETAIN": "2.0",
+        "BYPASS_TOKENS": "True",
+        "LR": "2e-4",
+        "N_TRAIN": "96"
+      },
+      "metrics": {
+        "val_risk": "0.858333",
+        "worst_leak": "0.800000",
+        "partial_leak": "0.116667",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.867279",
+        "weight_drift": "0.81618893",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "ES_e2": {
+      "name": "ES_e2",
+      "script": "probe_sweep3.py",
+      "knobs": {
+        "LOSS_TYPE": "\"ENTITY_SWAP\"",
+        "EPOCHS": "2",
+        "W_FORGET": "2.0",
+        "W_RETAIN": "1.0",
+        "BYPASS_TOKENS": "True",
+        "LR": "1e-4",
+        "N_TRAIN": "48"
+      },
+      "metrics": {
+        "val_risk": "0.820083",
+        "worst_leak": "0.800000",
+        "partial_leak": "0.016667",
+        "utility_drop": "0.023500",
+        "retain_rouge": "0.235597",
+        "weight_drift": "0.19063520",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "ES_e3_wr2": {
+      "name": "ES_e3_wr2",
+      "script": "probe_sweep3.py",
+      "knobs": {
+        "LOSS_TYPE": "\"ENTITY_SWAP\"",
+        "EPOCHS": "3",
+        "W_FORGET": "2.0",
+        "W_RETAIN": "2.0",
+        "BYPASS_TOKENS": "True",
+        "LR": "2e-4",
+        "N_TRAIN": "48"
+      },
+      "metrics": {
+        "val_risk": "0.825000",
+        "worst_leak": "0.800000",
+        "partial_leak": "0.050000",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.504477",
+        "weight_drift": "0.24568047",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "D_e2": {
+      "name": "D_e2",
+      "script": "probe_sweep4.py",
+      "knobs": {
+        "LOSS_TYPE": "\"DISTILL\"",
+        "EPOCHS": "2",
+        "W_FORGET": "2.0",
+        "W_RETAIN": "2.0",
+        "BYPASS_TOKENS": "True",
+        "LR": "1e-4",
+        "N_TRAIN": "96"
+      },
+      "metrics": {
+        "val_risk": "0.883333",
+        "worst_leak": "0.800000",
+        "partial_leak": "0.166667",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.355791",
+        "weight_drift": "0.67379430",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "D_e3": {
+      "name": "D_e3",
+      "script": "probe_sweep4.py",
+      "knobs": {
+        "LOSS_TYPE": "\"DISTILL\"",
+        "EPOCHS": "3",
+        "W_FORGET": "4.0",
+        "W_RETAIN": "2.0",
+        "BYPASS_TOKENS": "True",
+        "LR": "2e-4",
+        "N_TRAIN": "96"
+      },
+      "metrics": {
+        "val_risk": "0.783333",
+        "worst_leak": "0.650000",
+        "partial_leak": "0.266667",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.419636",
+        "weight_drift": "3.71883135",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "D_e4_r16": {
+      "name": "D_e4_r16",
+      "script": "probe_sweep4.py",
+      "knobs": {
+        "LOSS_TYPE": "\"DISTILL\"",
+        "EPOCHS": "4",
+        "W_FORGET": "4.0",
+        "W_RETAIN": "2.0",
+        "BYPASS_TOKENS": "True",
+        "LR": "2e-4",
+        "N_TRAIN": "96",
+        "LORA_R": "16"
+      },
+      "metrics": {
+        "val_risk": "0.708333",
+        "worst_leak": "0.500000",
+        "partial_leak": "0.416667",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.616410",
+        "weight_drift": "15.49027722",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "LB_e2": {
+      "name": "LB_e2",
+      "script": "probe_sweep5.py",
+      "knobs": {
+        "LOSS_TYPE": "\"LOGIT_BAN\"",
+        "EPOCHS": "2",
+        "W_FORGET": "2.0",
+        "W_RETAIN": "1.0",
+        "LR": "1e-4",
+        "N_TRAIN": "96"
+      },
+      "metrics": {
+        "val_risk": "0.550000",
+        "worst_leak": "0.150000",
+        "partial_leak": "0.800000",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.337827",
+        "weight_drift": "10.34279915",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "LB_e3": {
+      "name": "LB_e3",
+      "script": "probe_sweep5.py",
+      "knobs": {
+        "LOSS_TYPE": "\"LOGIT_BAN\"",
+        "EPOCHS": "3",
+        "W_FORGET": "4.0",
+        "W_RETAIN": "2.0",
+        "LR": "2e-4",
+        "N_TRAIN": "144"
+      },
+      "metrics": {
+        "val_risk": "0.375000",
+        "worst_leak": "0.150000",
+        "partial_leak": "0.450000",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.645078",
+        "weight_drift": "14.44191801",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "LB_m6_e3": {
+      "name": "LB_m6_e3",
+      "script": "probe_sweep6.py",
+      "knobs": {
+        "LOSS_TYPE": "\"LOGIT_BAN\"",
+        "EPOCHS": "3",
+        "W_FORGET": "8.0",
+        "W_RETAIN": "2.0",
+        "LR": "2e-4",
+        "N_TRAIN": "144",
+        "BAN_MARGIN": "6.0",
+        "BAN_EXPANDED": "True"
+      },
+      "metrics": {
+        "val_risk": "0.658333",
+        "worst_leak": "0.350000",
+        "partial_leak": "0.616667",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.479419",
+        "weight_drift": "12.84235289",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "LB_m10_e4": {
+      "name": "LB_m10_e4",
+      "script": "probe_sweep6.py",
+      "knobs": {
+        "LOSS_TYPE": "\"LOGIT_BAN\"",
+        "EPOCHS": "4",
+        "W_FORGET": "8.0",
+        "W_RETAIN": "2.0",
+        "LR": "2e-4",
+        "N_TRAIN": "144",
+        "BAN_MARGIN": "10.0",
+        "BAN_EXPANDED": "True",
+        "LORA_R": "16"
+      },
+      "metrics": {
+        "val_risk": "0.475000",
+        "worst_leak": "0.000000",
+        "partial_leak": "0.950000",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.721181",
+        "weight_drift": "1.16126564",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "LB_m20_e3": {
+      "name": "LB_m20_e3",
+      "script": "probe_sweep7.py",
+      "knobs": {
+        "LOSS_TYPE": "\"LOGIT_BAN\"",
+        "EPOCHS": "3",
+        "W_FORGET": "8.0",
+        "W_RETAIN": "2.0",
+        "LR": "2e-4",
+        "N_TRAIN": "144",
+        "BAN_MARGIN": "20.0",
+        "BAN_EXPANDED": "True"
+      },
+      "metrics": {
+        "val_risk": "0.158333",
+        "worst_leak": "0.000000",
+        "partial_leak": "0.316667",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.394071",
+        "weight_drift": "15.69422938",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "LB_m20_wr4": {
+      "name": "LB_m20_wr4",
+      "script": "probe_sweep7.py",
+      "knobs": {
+        "LOSS_TYPE": "\"LOGIT_BAN\"",
+        "EPOCHS": "3",
+        "W_FORGET": "8.0",
+        "W_RETAIN": "4.0",
+        "LR": "1e-4",
+        "N_TRAIN": "144",
+        "BAN_MARGIN": "20.0",
+        "BAN_EXPANDED": "True",
+        "LORA_R": "16"
+      },
+      "metrics": {
+        "val_risk": "0.241667",
+        "worst_leak": "0.100000",
+        "partial_leak": "0.283333",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.379224",
+        "weight_drift": "0.61836321",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "LB_m30_e4": {
+      "name": "LB_m30_e4",
+      "script": "probe_sweep8.py",
+      "knobs": {
+        "LOSS_TYPE": "\"LOGIT_BAN\"",
+        "EPOCHS": "4",
+        "W_FORGET": "8.0",
+        "W_RETAIN": "2.0",
+        "LR": "2e-4",
+        "N_TRAIN": "144",
+        "BAN_MARGIN": "30.0",
+        "BAN_EXPANDED": "True"
+      },
+      "metrics": {
+        "val_risk": "0.125000",
+        "worst_leak": "0.000000",
+        "partial_leak": "0.250000",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.416380",
+        "weight_drift": "18.43178126",
+        "GOOD": false
+      },
+      "experimentally_reproduced": true
+    },
+    "LB_m20_e5": {
+      "name": "LB_m20_e5",
+      "script": "probe_sweep8.py",
+      "knobs": {
+        "LOSS_TYPE": "\"LOGIT_BAN\"",
+        "EPOCHS": "5",
+        "W_FORGET": "8.0",
+        "W_RETAIN": "2.0",
+        "LR": "2e-4",
+        "N_TRAIN": "192",
+        "BAN_MARGIN": "20.0",
+        "BAN_EXPANDED": "True"
+      },
+      "metrics": {
+        "val_risk": "0.075000",
+        "worst_leak": "0.000000",
+        "partial_leak": "0.150000",
+        "utility_drop": "0.000000",
+        "retain_rouge": "0.839534",
+        "weight_drift": "19.39503825",
+        "GOOD": true
+      },
+      "experimentally_reproduced": true
+    }
+  }
+}

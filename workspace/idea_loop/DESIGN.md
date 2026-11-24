@@ -124,3 +124,35 @@ weight_drift  >  0        (确认确实是训练、不是推理期干预)
   正式循环为确定性规则生成，不宣称「LLM 自主创造 idea」。
 - 最优轮 `utility_drop=0.255972 > 0.10`，护栏正确阻止了放行；
   同时暴露 `val_risk` 中效用权重偏低的设计缺陷，列为下一轮改进项。
+
+## 8. Rev-2 修订与达标（2026-11-24）
+
+- 诊断 Rev-1 未达标的两处真实缺陷（目标函数与终止条件不一致、思路池缺保效用方法），
+  详见 `REVISION_NOTE.md`；**阈值与冻结评测未改**。
+- 新增自动思路搜索阶段（16+ 思路）、硬效用护栏、独立复现确认轮；
+  状态机改为内容哈希 + `train.py` 文件快照（嵌套 git 被并行进程清理后的稳健替代）。
+- 结果：**`REACHED_TARGET`**，2 轮 / 6.83 分钟，`val_risk=0.075000`，
+  全部护栏通过、稳定 2/2。详见 `redo/IDEA_LOOP_REV2_REPORT.md`。
+- held-out 方向一致但未达同等水平（`val_risk=0.30`），已如实记录为边界。
+
+## 9. Idea 证据准入（本轮明确要求：有通过实验复现评估指标的 idea）
+
+**流程不接受纸面 idea**。每个进入正式循环的 idea 必须先通过 Idea Evidence Gate：
+
+1. **编译**：被 `compile_idea()` 转成 whitelist 内的单一 knob，写入 `train.py`（内容哈希快照）。
+2. **实跑**：完成训练 + 冻结评估，`rc=0`、未超 300s 预算。
+3. **完整指标**：产出 `val_risk / worst_leak / partial_leak / utility_drop / weight_drift` 五项，
+   且 `weight_drift>0`（确认为训练思路）。
+4. **可重放**：同配置同 seed 重跑指标逐位一致。
+
+未通过（crash / OOM / 指标缺失）的 idea 记 `experimentally_reproduced=false`，
+**保留在账本中但不得进入正式循环**。权威账本：`idea-stage/idea_loop/IDEA_EVIDENCE_LEDGER.md`
+与 `redo/idea_search_results.json`；原始证据为 `logs/probe_sweep*.out` 的脚本 stdout。
+
+本轮实测：19 个 idea → 18 个有复现指标 → 1 个满足 GOOD（`LB_m20_e5`, `val_risk=0.075`）→
+该 idea 才被选为正式循环起点，并经 **4 级复现**（离线扫描 / 正式 baseline / 循环确认轮 /
+独立重放）逐位一致。
+
+**衔接关系**：阶段 A（自动思路搜索 + 证据准入）→ 阶段 B（基于已准入 idea 继续训练并迭代）
+→ 阶段 C（连续 2 轮达标，含不改代码的独立复现确认轮）→ `REACHED_TARGET`。
+这保证「优化后的思路」不是语言推测，而是**被评估指标复现验证过的代码状态**。

@@ -52,3 +52,9 @@ verdict `REVIEW_UNAVAILABLE`（L2、33 claims、4 检查器 0 findings）。
 本轮同样无跨模型评审后端；默认思路源为确定性规则引擎，
 可选 Hy4 源只作 idea 生成器（同家族，且实测 40s 超时回退）。
 所有结论为执行者自审，不构成独立评审。
+
+
+## Rev-2 达标轮
+
+`REACHED_TARGET` 是**执行者确定性判据**的达标，不是独立评审通过；
+无跨模型 reviewer，门控仍 `BLOCKED`。held-out 未达同等水平已如实记录。

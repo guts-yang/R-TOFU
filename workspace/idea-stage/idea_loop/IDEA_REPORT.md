@@ -101,3 +101,62 @@
 - [ ] 增大 retain 样本 + 多 seed，重估终止判据统计稳定性
 - [ ] 补齐不同家族 LLM 后端后再启用 `IDEA_SOURCE=llm`
 - [ ] 补齐 ARIS helper 与评审后端后重跑门控
+
+---
+
+## Phase 5 追加：Rev-2 实证回填（有好结果，2026-11-24）
+
+**`REACHED_TARGET`**：在**未放宽任何阈值**的前提下，循环 2 轮 / 6.83 分钟达标停止。
+`val_risk 0.950948 → 0.075000`，`worst_leak 0.95 → 0.00`，
+`utility_drop=0`，`partial_leak=0.15`，`weight_drift=19.4>0`，稳定计数 2/2。
+
+### 思路池最终排名（按实证贡献重排）
+
+| # | 思路 | 结果 | 判定 |
+|---|---|---|---|
+| 1 | ⭐ **LOGIT_BAN**（把推理期 logit 屏蔽蒸馏进权重） | `val_risk=0.075` 全部护栏通过 | **唯一达标**，冠军 |
+| 2 | `BAN_MARGIN=22.0`（REFINE 微调） | `0.100` good 但未改进 | discard |
+| 3 | `LOGIT_BAN margin=30 / e4` | `0.125`，worst=0，partial=0.25 | 差一点 |
+| 4 | `CONTRAST` e3 | `0.525`，utility=0，泄漏 0.35 | 保效用但不达标 |
+| 5 | `DISTILL` / `ENTITY_SWAP` / `TARGETED_GA` | 0.78–0.88 | 泛化不足 |
+| 6 | `IDK_SFT`（Rev-1 最优） | `0.228` 但 `utility_drop=0.256` | 被硬护栏否决 |
+
+**修订后的核心结论**：
+1. 「降泄漏」与「保效用」的冲突不是靠调超参解决的，
+   而是靠**换思路族**：全局 logit 压制（与问题内容无关）才能同时满足两者。
+2. 单纯模仿输出（DISTILL/ENTITY_SWAP）泛化不到 held-out 问法；
+   压制 logit 分布才泛化。
+3. 「绕过相变」依旧存在：完整名被压住后 `partial_leak` 仍 0.15（held-out 0.10）。
+4. 目标函数必须与终止条件一致，否则自动化循环会奖励「一律拒答」的退化解。
+
+### Held-out 边界（不隐藏）
+
+不同 20+10 样本：`worst_leak 0.65→0.25`（降 62%）、`utility_drop=0`、
+`partial=0.10`，但 `val_risk=0.30`、`GOOD=false`。
+**达标结论限定在主评测口径**；泛化不足是下一轮首要问题。见 `redo/rev2_holdout.json`。
+
+### Evidence Gate
+
+仍 `BLOCKED` / `REVIEW_UNAVAILABLE`；无跨模型评审，不得投稿。
+
+---
+
+## 追加：Idea 证据准入（「有通过实验复现评估指标的 idea」）
+
+本轮明确约束：**不接受纸面 idea**。进入正式训练循环的每个 idea 必须
+`experimentally_reproduced=true`——编译成 whitelist knob、实跑训练+冻结评估、
+产出五项指标、`weight_drift>0`、同配置同 seed 可重放。
+
+权威账本 `idea-stage/idea_loop/IDEA_EVIDENCE_LEDGER.md`、
+机器可读 `redo/idea_search_results.json`、确定性校验 `redo/verify_idea_evidence.py`
+（`EVIDENCE_OK ideas=19 reproduced=18 GOOD=1`）。
+原始证据是 `logs/probe_sweep*.out` 的脚本 stdout，不是人工填写。
+
+19 个 idea 中 18 个有复现指标、1 个 OOM crash（保留但未准入）、
+唯一 GOOD 的 `LB_m20_e5 (val_risk=0.075)` 才被选为循环起点，
+并经离线扫描 / 正式 baseline / 循环确认轮 / 独立重放四级逐位一致。
+
+因此 **Phase 5 的排名是实验驱动的，不是评分表驱动的**：
+`LOGIT_BAN > CONTRAST > DISTILL > ENTITY_SWAP > IDK_SFT` 的次序
+完全由 `worst_leak / partial_leak / utility_drop / weight_drift` 的实测值决定。
+`DESIGN.md §9` 与 `program.md` 已把该准入条件固化为只读组织代码。

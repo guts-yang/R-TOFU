@@ -9,3 +9,9 @@
 - 适配声明：原版 autoresearch 的 `val_bpb` 换为本任务 `val_risk`，
   `uv run train.py` 换为 `python train.py > run.log 2>&1`（环境已有依赖，禁止新增）。
   **未运行原版 TinyStories 小 GPT 训练**。
+
+## Idea 证据准入（只读）
+
+只接受 `experimentally_reproduced=true` 的 idea 进入循环；纸面 idea、crash/OOM 条目、
+指标不完整者一律拒绝并保留记录。评估指标由冻结 `prepare.evaluate()` 产出，
+同配置同 seed 必须可重放。详见 `DESIGN.md §9` 与 `idea-stage/idea_loop/IDEA_EVIDENCE_LEDGER.md`。

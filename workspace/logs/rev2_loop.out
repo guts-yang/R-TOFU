@@ -1,0 +1,4 @@
+[rev2] start best=0.075
+[rev2] r01 confirm=False val=0.100000 status=discard good=True stable=1 best=0.075
+[rev2] r02 confirm=True val=0.075000 status=discard good=True stable=2 best=0.075
+[rev2] STOP REACHED_TARGET best=0.075 rounds=2

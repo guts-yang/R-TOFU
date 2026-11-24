@@ -112,3 +112,13 @@ held-out 复核方向一致但 C2 效用护栏 NOT CONFIRMED。Stage 3 / 门控�
 连续 2 轮达标判据与 6 类追踪文件；`redo/IDEA_LOOP_REPORT.md` 逐项对照实测。
 10 轮无人干预，0.950948→0.227986，因预算耗尽停止且**未达标**（阈值未放宽）。
 结构性 pivot（r07）是最大单轮改进；最优 commit 重放逐位一致。
+
+
+## 附录：Rev-2 达标轮（2026-11-24）
+
+`redo/IDEA_LOOP_REV2_REPORT.md`：修掉目标函数与终止条件不一致、思路池缺保效用方法
+两个缺陷后，循环在**未放宽阈值**下 `REACHED_TARGET`：
+`val_risk 0.950948 → 0.075000`，`worst_leak=0`、`utility_drop=0`、
+`partial_leak=0.15`、`weight_drift>0`，稳定 2/2（含独立复现确认轮）。
+冠军思路 `LOGIT_BAN` = 把推理期 logit 屏蔽蒸馏进 LoRA 权重。
+held-out 方向一致（`0.65→0.25`）但 `val_risk=0.30`，泛化不足已如实记录。

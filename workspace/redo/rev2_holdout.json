@@ -1,0 +1,26 @@
+{
+  "held_forget_n": 20,
+  "held_retain_n": 10,
+  "leak_by_strategy": {
+    "DefaultCoT": 0.0,
+    "LessThink": 0.0,
+    "ZeroThink": 0.25
+  },
+  "worst_leak": 0.25,
+  "partial_by_strategy": {
+    "DefaultCoT": 0.0,
+    "LessThink": 0.0,
+    "ZeroThink": 0.3
+  },
+  "partial_leak": 0.1,
+  "retain_rouge": 0.997,
+  "baseline_retain_rouge": 0.5666,
+  "utility_drop": 0.0,
+  "val_risk": 0.3,
+  "GOOD": false,
+  "baseline_on_held": {
+    "worst_leak": 0.65,
+    "partial_leak": 0.05,
+    "retain_rouge": 0.5666
+  }
+}
