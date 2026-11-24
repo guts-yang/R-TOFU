@@ -1,0 +1,2 @@
+[rev4] baseline champion val=0.075000 good=True
+[rev4] r01 BAN_MARGIN=25.0 confirm=False val=0.041667 status=keep repro=True stable=1 best=0.041667

@@ -34,7 +34,7 @@ LORA_R = 8
 GA_CLIP = 8.0
 LOSS_TYPE = "LOGIT_BAN"# GA_GD | IDK_SFT | TARGETED_GA | CONTRAST | ENTITY_SWAP | DISTILL | LOGIT_BAN
 BYPASS_TOKENS = False
-BAN_MARGIN = 20.0
+BAN_MARGIN = 25.0
 BAN_EXPANDED = True
 # -----------------------------------------------------------------------
 
