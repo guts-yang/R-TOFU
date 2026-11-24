@@ -71,3 +71,65 @@ EVIDENCE_OK     ideas=19 reproduced=18 GOOD=1 champion_vals=[0.075×4]
 REV2_LEDGER_OK  REACHED_TARGET best=0.075 stable=2
 REV3_LEDGER_OK  chain=[0.158333, 0.125, 0.075, 0.075] keep=2 stable=2
 ```
+
+---
+
+## 7. 第二次归档（2026-11-24）：扩展到全工作区
+
+用户要求「主线保留，其他 ideas 相关文件归档」。第一轮只整理了 `idea-stage/` 内部，
+本次把散落在**顶层**与 **`redo/`** 的其它 idea 轮次文件一并归档。**仍只移动、不删除**。
+
+### 本次归档（15 个文件，4 组）
+
+| 分组 | 文件（原位置 → `archive/<组>/`） | 归档原因 |
+|---|---|---|
+| `inference_round/` | 顶层 `INFERENCE_PIPELINE_REPORT.md`、`NARRATIVE_REPORT_INFERENCE.md`；`redo/INFERENCE_HOLDOUT.md` | 推理期 idea 轮的报告与复核；其 Idea 1 已被 H3 证伪降级 |
+| `redo_reports/` | `redo/REDO_REPORT.md` | 自动重做轮（6/6 discard、γ≈0）的 idea 结论 |
+| `legacy_runners/` | `redo/autoresearch_runner.py`、`inference_runner.py`、`idea_loop_runner.py`、`idea_loop_runner2.py`、`rev2_final_runner.py` | 其它轮次的 idea 循环驱动器；现役驱动器是 `idea_loop_rev3/rev3_runner.py` |
+| `sweep_intermediates/` | `redo/probe_sweep{,,3,4,5,6,7}.json` | 思路搜索的中间汇总，已被权威 `redo/idea_search_results.json` 取代 |
+
+### 保留原位（主线，共 6 个 idea 文档 + 原始输入）
+
+`idea-stage/CHAMPION_IDEA.md`、`CHAMPION_LOGIC.md` / `.html` / `.review.json`、
+`idea_loop/{IDEA_REPORT,IDEA_EVIDENCE_LEDGER}.md`、
+`inference/IDEA_REPORT.md`、`inference/docs/research_contract.md`、
+用户原始输入 `idea-1.md` / `idea-2.md`、本清单。
+
+### 刻意未归档（冠军证据链，移动会破坏可复现性）
+
+| 资产 | 理由 |
+|---|---|
+| `redo/idea_search_results.json`、`rev3_verified_pool.json`、`champion_replay.json` | 19 个 idea 的权威指标、18 个已验证配置、冠军独立重放 |
+| `redo/probe_sweep*.py`、`logs/probe_sweep*.out` | 已验证 idea 配置的来源与原始 stdout；`verify_idea_evidence.py` 逐条溯源依赖它们 |
+| `redo/verify_*.py` | 三项确定性校验 |
+| `redo/IDEA_LOOP_REV2_REPORT.md`、`IDEA_LOOP_REV3_REPORT.md` | 达标轮报告（主线） |
+| `redo/gate0_probe.*`、`teacher_force_check.py`、`infer_base_probe.*`、`infer_holdout_check.*`、`rev2_holdout*`、`diagnose_bypass.py` | 可控基座与绕过相变的诊断证据，`CHAMPION_LOGIC.md` 引用 |
+| `autoresearch/`、`idea_loop/`、`idea_loop_rev3/`、`inference_autoresearch/` | 基座、冠军实验账本、绕过相变对照实验；`CHAMPION_LOGIC.md` 直接引用 |
+| `results/`、`logs/`、`MANIFEST.md`、`NARRATIVE_REPORT.md`、`RESEARCH_PIPELINE_REPORT.md`、`review-stage/`、`refine-logs/`、`audit_paper/` | 实验结果、日志、主索引与取证产物，非 idea 文档 |
+
+> `inference_autoresearch/` 虽属推理期轮，但它是「绕过相变」（冠军 idea 的动机来源）的对照实验，
+> 故保留；归档的是该轮的**报告与复核文档**，不是实验账本。
+
+### 恢复方法（本次）
+
+```bash
+W=/usr/local/workspace/R-TOFU/workspace
+A=$W/idea-stage/archive
+mv "$A/inference_round/INFERENCE_PIPELINE_REPORT.md" "$W/"
+mv "$A/inference_round/NARRATIVE_REPORT_INFERENCE.md" "$W/"
+mv "$A/inference_round/INFERENCE_HOLDOUT.md" "$W/redo/"
+mv "$A/redo_reports/REDO_REPORT.md" "$W/redo/"
+mv "$A/sweep_intermediates/"*.json "$W/redo/"
+mv "$A/legacy_runners/"*.py "$W/redo/"
+```
+
+### 归档后校验（结果未变）
+
+```
+EVIDENCE_OK     ideas=19 reproduced=18 GOOD=1 champion_vals=[0.075×4]
+REV2_LEDGER_OK  REACHED_TARGET best=0.075 stable=2
+REV3_LEDGER_OK  chain=[0.158333, 0.125, 0.075, 0.075] keep=2 stable=2
+```
+
+`CHAMPION_LOGIC.md` 引用的 11 个路径全部存在，`CHAMPION_LOGIC.html` 的源 SHA256 仍匹配。
+归档目录累计 **22 个文件**，全部可读、可恢复、未删改。

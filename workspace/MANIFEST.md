@@ -178,3 +178,21 @@ idea 报告迁移到 `idea-stage/archive/`（**只移动、未删除**）。
 - 评审 sidecar：`CHAMPION_LOGIC.html.review.json` → **`REVIEW_UNAVAILABLE`**（无跨模型 reviewer 后端，未伪造 PASS）
 - 内容：可控基座 → 冻结评测指标 → `LOGIT_BAN` 四步机制 → 排除法证据 →
   绕过相变 → 自动化迭代链 → 结果与边界 → 代码索引
+
+
+## 追加：第二次 idea 归档（2026-11-24）
+
+按「主线保留、其它 ideas 相关文件归档」扩展到全工作区，新增归档 15 个文件
+（顶层 2 个推理期报告、`redo/INFERENCE_HOLDOUT.md`、`REDO_REPORT.md`、
+5 个旧 runner、6 个 sweep 中间 json），`idea-stage/archive/` 累计 22 个文件。
+清单、判据与恢复命令见 `idea-stage/ARCHIVE_MANIFEST.md §7`。
+
+**保留的主线**：`CHAMPION_IDEA.md`、`CHAMPION_LOGIC.md/.html`、
+`idea_loop/{IDEA_REPORT,IDEA_EVIDENCE_LEDGER}.md`、`inference/IDEA_REPORT.md` 与契约、
+用户原始输入；以及冠军证据链（权威账本、probe 脚本与日志、校验脚本、
+达标报告、诊断证据、四个实验仓库）。
+归档后三项确定性校验与 HTML 源 SHA256 均不变。
+
+> 注意：此前索引中提到的 `INFERENCE_PIPELINE_REPORT.md`、
+> `NARRATIVE_REPORT_INFERENCE.md`、`REDO_REPORT.md` 等路径现已移到
+> `idea-stage/archive/` 下，按 §7 清单查找。
