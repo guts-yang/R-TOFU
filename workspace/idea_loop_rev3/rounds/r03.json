@@ -1,0 +1,35 @@
+{
+  "round": 3,
+  "rev": "8e540da",
+  "start_rev": "8e540da",
+  "idea": {
+    "name": "CONFIRM",
+    "diagnosis": "CONFIRM",
+    "idea": "independent reproduction replay of the retained idea (no code change)",
+    "source": "confirmation",
+    "knobs": {},
+    "pool_metrics": null,
+    "experimentally_reproduced": true
+  },
+  "status": "discard",
+  "val_risk": "0.075000",
+  "memory_gb": "19.2",
+  "metrics": {
+    "val_risk": "0.075000",
+    "peak_vram_mb": "19679.7",
+    "worst_leak": "0.000000",
+    "partial_leak": "0.150000",
+    "gamma": "0.000000",
+    "retain_rouge": "0.839534",
+    "utility_drop": "0.000000",
+    "weight_drift": "19.39503825",
+    "train_steps": "480",
+    "budget_exceeded": "0",
+    "elapsed_sec": "192.7",
+    "knobs": "LR=0.0002 EPOCHS=5 W_FORGET=8.0 W_RETAIN=2.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=LOGIT_BAN BYPASS_TOKENS=False BAN_MARGIN=20.0 BAN_EXPANDED=True"
+  },
+  "confirmation": true,
+  "internal_deadline_flag": "0",
+  "stable": 2,
+  "best": 0.075
+}

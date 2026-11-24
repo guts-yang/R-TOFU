@@ -87,3 +87,29 @@ N_TRAIN=192, W_FORGET=8, W_RETAIN=2, LR=2e-4, LORA_R=8`
 - `retain_rouge` 偏高（0.8395 / held-out 0.997），ROUGE-L recall 对复述敏感。
 - LOGIT_BAN 属 oracle 设定（实体 token 来自已知遗忘集），不含敏感内容自动发现。
 - `REVIEW_UNAVAILABLE` / ARIS 门控 `BLOCKED`；无跨模型评审，不得据此投稿。
+
+---
+
+## 7. Rev-3：用「已通过的 idea」形成真正的迭代链（2026-11-24）
+
+`workspace/idea_loop_rev3/` 把证据准入推进一步：**候选 idea 只能来自
+`redo/rev3_verified_pool.json`**（18 个 `experimentally_reproduced=true` 的方案，
+每个带完整 knobs 与可追溯 stdout 指标）。
+
+从**已验证但未达标**的 `LB_m20_e3 (0.158333)` 起步，按实测指标单调升级，
+每轮仍重新实跑训练+评估：
+
+| 轮 | 已验证 idea | val_risk | partial | 状态 |
+|---|---|---|---|---|
+| baseline | LB_m20_e3 | 0.158333 | 0.317 | keep |
+| r01 | LB_m30_e4 | 0.125000 | 0.250 | **keep** |
+| r02 | LB_m20_e5 | 0.075000 | 0.150 | **keep** |
+| r03 | CONFIRM | 0.075000 | 0.150 | 独立复现 |
+
+`REACHED_TARGET`，`keep=2`（Rev-2 是 `keep=0`），稳定 2/2。
+冠军 `0.075000` 由此累计**六次独立复现**。
+校验：`redo/verify_rev3_ledger.py` → `REV3_LEDGER_OK chain=[0.158333, 0.125, 0.075, 0.075]`。
+
+第一次尝试因内部 deadline 误判导致达标模型回滚（停止于
+`NO_BETTER_VERIFIED_IDEA`），已完整归档在 `idea_loop_rev3/archive/attempt1/`
+并记录于 `ATTEMPT1_NOTE.md`；修正后干净重跑，**阈值与评估口径未改**。

@@ -160,3 +160,19 @@
 `LOGIT_BAN > CONTRAST > DISTILL > ENTITY_SWAP > IDK_SFT` 的次序
 完全由 `worst_leak / partial_leak / utility_drop / weight_drift` 的实测值决定。
 `DESIGN.md §9` 与 `program.md` 已把该准入条件固化为只读组织代码。
+
+---
+
+## Phase 5 追加：Rev-3 已验证 idea 迭代链（2026-11-24）
+
+**`REACHED_TARGET`，`keep=2`**：从已实验复现但未达标的 `LB_m20_e3 (0.158333)` 起步，
+按实测指标依次采纳 `LB_m30_e4 (0.125)`、`LB_m20_e5 (0.075)`，两次 `keep` 后
+由不改代码的独立复现确认轮达成稳定 2/2。终止判据未放宽。
+
+**排名再次由实验数据确认**：`LOGIT_BAN` 族内
+`BAN_MARGIN/EPOCHS/N_TRAIN` 的增强沿 `partial_leak 0.317 → 0.250 → 0.150`
+单调下降，这是「绕过相变」可缓解的直接证据；而 `CONTRAST`/`DISTILL`/`IDK_SFT`
+等其它思路族在池中始终 `val_risk ≥ 0.375`，被选择器自动跳过。
+
+详见 `redo/IDEA_LOOP_REV3_REPORT.md` 与 `idea_loop_rev3/IDEA_LOOP_SUMMARY.md`。
+门控 `BLOCKED` / `REVIEW_UNAVAILABLE` 不变。

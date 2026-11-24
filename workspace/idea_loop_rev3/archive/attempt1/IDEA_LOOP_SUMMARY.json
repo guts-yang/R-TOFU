@@ -1,0 +1,164 @@
+{
+  "run_tag": "verified-idea-rev3",
+  "stop_reason": "NO_BETTER_VERIFIED_IDEA",
+  "final_rev": "def0256",
+  "baseline_idea": "LB_m20_e3",
+  "best_val_risk": 0.125,
+  "rounds_executed": 3,
+  "stable_count": 0,
+  "elapsed_min": 14.02,
+  "idea_source": "redo/rev3_verified_pool.json (18 experimentally reproduced ideas)",
+  "state_machine": "sha256 content hash + train.py snapshots",
+  "termination_definition": {
+    "target_risk": 0.15,
+    "utility_limit": 0.1,
+    "bypass_limit": 0.2,
+    "stable_needed": 2,
+    "max_rounds": 6,
+    "max_minutes": 25
+  },
+  "counts": {
+    "keep": 1,
+    "discard": 2,
+    "crash": 0,
+    "confirmation": 1
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "rev": "def0256",
+      "start_rev": "01537ff",
+      "idea": {
+        "name": "LB_m30_e4",
+        "diagnosis": "HIGH_BYPASS",
+        "idea": "adopt verified idea LB_m30_e4 (reproduced val_risk=0.125000)",
+        "source": "verified_pool",
+        "knobs": {
+          "LOSS_TYPE": "\"LOGIT_BAN\"",
+          "EPOCHS": "4",
+          "W_FORGET": "8.0",
+          "W_RETAIN": "2.0",
+          "LR": "2e-4",
+          "N_TRAIN": "144",
+          "BAN_MARGIN": "30.0",
+          "BAN_EXPANDED": "True"
+        },
+        "pool_metrics": {
+          "val_risk": "0.125000",
+          "worst_leak": "0.000000",
+          "partial_leak": "0.250000",
+          "utility_drop": "0.000000",
+          "retain_rouge": "0.416380",
+          "weight_drift": "18.43178126",
+          "GOOD": false
+        },
+        "experimentally_reproduced": true
+      },
+      "status": "keep",
+      "val_risk": "0.125000",
+      "memory_gb": "19.2",
+      "metrics": {
+        "val_risk": "0.125000",
+        "peak_vram_mb": "19645.4",
+        "worst_leak": "0.000000",
+        "partial_leak": "0.250000",
+        "gamma": "0.000000",
+        "retain_rouge": "0.416380",
+        "utility_drop": "0.000000",
+        "weight_drift": "18.43178126",
+        "train_steps": "288",
+        "budget_exceeded": "0",
+        "elapsed_sec": "198.3",
+        "knobs": "LR=0.0002 EPOCHS=4 W_FORGET=8.0 W_RETAIN=2.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=LOGIT_BAN BYPASS_TOKENS=False BAN_MARGIN=30.0 BAN_EXPANDED=True"
+      },
+      "confirmation": false,
+      "stable": 0,
+      "best": 0.125
+    },
+    {
+      "round": 2,
+      "rev": "8e540da",
+      "start_rev": "def0256",
+      "idea": {
+        "name": "LB_m20_e5",
+        "diagnosis": "HIGH_BYPASS",
+        "idea": "adopt verified idea LB_m20_e5 (reproduced val_risk=0.075000)",
+        "source": "verified_pool",
+        "knobs": {
+          "LOSS_TYPE": "\"LOGIT_BAN\"",
+          "EPOCHS": "5",
+          "W_FORGET": "8.0",
+          "W_RETAIN": "2.0",
+          "LR": "2e-4",
+          "N_TRAIN": "192",
+          "BAN_MARGIN": "20.0",
+          "BAN_EXPANDED": "True"
+        },
+        "pool_metrics": {
+          "val_risk": "0.075000",
+          "worst_leak": "0.000000",
+          "partial_leak": "0.150000",
+          "utility_drop": "0.000000",
+          "retain_rouge": "0.839534",
+          "weight_drift": "19.39503825",
+          "GOOD": true
+        },
+        "experimentally_reproduced": true
+      },
+      "status": "discard",
+      "val_risk": "0.075000",
+      "memory_gb": "19.2",
+      "metrics": {
+        "val_risk": "0.075000",
+        "peak_vram_mb": "19679.7",
+        "worst_leak": "0.000000",
+        "partial_leak": "0.150000",
+        "gamma": "0.000000",
+        "retain_rouge": "0.773057",
+        "utility_drop": "0.000000",
+        "weight_drift": "19.34579692",
+        "train_steps": "448",
+        "budget_exceeded": "1",
+        "elapsed_sec": "279.8",
+        "knobs": "LR=0.0002 EPOCHS=5 W_FORGET=8.0 W_RETAIN=2.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=LOGIT_BAN BYPASS_TOKENS=False BAN_MARGIN=20.0 BAN_EXPANDED=True"
+      },
+      "confirmation": false,
+      "stable": 1,
+      "best": 0.125
+    },
+    {
+      "round": 3,
+      "rev": "def0256",
+      "start_rev": "def0256",
+      "idea": {
+        "name": "CONFIRM",
+        "diagnosis": "CONFIRM",
+        "idea": "independent reproduction replay of the retained idea (no code change)",
+        "source": "confirmation",
+        "knobs": {},
+        "pool_metrics": null,
+        "experimentally_reproduced": true
+      },
+      "status": "discard",
+      "val_risk": "0.125000",
+      "memory_gb": "19.2",
+      "metrics": {
+        "val_risk": "0.125000",
+        "peak_vram_mb": "19645.4",
+        "worst_leak": "0.000000",
+        "partial_leak": "0.250000",
+        "gamma": "0.000000",
+        "retain_rouge": "0.416380",
+        "utility_drop": "0.000000",
+        "weight_drift": "18.43178126",
+        "train_steps": "288",
+        "budget_exceeded": "0",
+        "elapsed_sec": "204.2",
+        "knobs": "LR=0.0002 EPOCHS=4 W_FORGET=8.0 W_RETAIN=2.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=LOGIT_BAN BYPASS_TOKENS=False BAN_MARGIN=30.0 BAN_EXPANDED=True"
+      },
+      "confirmation": true,
+      "stable": 0,
+      "best": 0.125
+    }
+  ]
+}

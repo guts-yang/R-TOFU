@@ -122,3 +122,12 @@ held-out 复核方向一致但 C2 效用护栏 NOT CONFIRMED。Stage 3 / 门控�
 `partial_leak=0.15`、`weight_drift>0`，稳定 2/2（含独立复现确认轮）。
 冠军思路 `LOGIT_BAN` = 把推理期 logit 屏蔽蒸馏进 LoRA 权重。
 held-out 方向一致（`0.65→0.25`）但 `val_risk=0.30`，泛化不足已如实记录。
+
+
+## 附录：Rev-3（2026-11-24）
+
+`redo/IDEA_LOOP_REV3_REPORT.md`：候选 idea 限定为 18 个已实验复现的方案，
+从未达标的 `LB_m20_e3` 起步形成真实单调改进链
+`0.158333 → 0.125000 → 0.075000 → 独立复现 0.075000`，
+**`REACHED_TARGET`、`keep=2`、稳定 2/2**，阈值未放宽。
+冠军结果累计六次独立复现；held-out 泛化不足仍是已知边界。

@@ -137,3 +137,44 @@ Stage 3 仍 `BLOCKED`，门控 `BLOCKED`。
 
 校验结果：`EVIDENCE_OK ideas=19 reproduced=18 GOOD=1 champion_vals=[0.075, 0.075]`。
 门控 `BLOCKED` / `REVIEW_UNAVAILABLE` 不变。
+
+
+## 追加：Rev-3 已验证 idea 迭代链（最终交付）
+
+| 路径 | 说明 |
+|---|---|
+| `idea_loop_rev3/program.md` | 只读组织代码：idea 只能来自已实验复现的池 |
+| `idea_loop_rev3/rev3_runner.py` | 单调改进链驱动器（内容哈希 + 双快照） |
+| `idea_loop_rev3/IDEA_LOOP_SUMMARY.md` / `results.tsv` | **`REACHED_TARGET`、keep=2、稳定 2/2** |
+| `idea_loop_rev3/ATTEMPT1_NOTE.md` / `archive/attempt1/` | 第一次尝试失败原因与完整归档 |
+| `redo/rev3_verified_pool.json` | 18 个已复现 idea 的完整配置 + 实测指标 |
+| `redo/verify_rev3_ledger.py` | 确定性校验 `chain=[0.158333, 0.125, 0.075, 0.075]` |
+| `redo/IDEA_LOOP_REV3_REPORT.md` | 五点对照 + 结果 + 诚信记录 + 边界 |
+
+链路：`0.158333 → 0.125000 → 0.075000 → 确认 0.075000`。
+门控 `BLOCKED` / `REVIEW_UNAVAILABLE` 不变。
+
+
+## 追加：idea 文档归档（2026-11-24）
+
+按用户要求保留**冠军 idea `LOGIT_BAN`** 相关文档，其余失败/被淘汰轮次的
+idea 报告迁移到 `idea-stage/archive/`（**只移动、未删除**）。
+
+- 主入口：`idea-stage/CHAMPION_IDEA.md`（冠军指标、配置、六次复现、故事、边界）
+- 归档清单与恢复命令：`idea-stage/ARCHIVE_MANIFEST.md`
+- 保留：`idea-stage/idea_loop/{IDEA_REPORT,IDEA_EVIDENCE_LEDGER}.md`、
+  `idea-stage/inference/IDEA_REPORT.md`、`inference/docs/research_contract.md`；
+  用户原始输入 `idea-1.md`/`idea-2.md` 原位不动。
+- 归档：第一批 `IDEA_REPORT.md` + 契约、第二批 `batch2/` 四个文件、`redo/IDEA_LOOP_REPORT.md`。
+- 实验证据（probe 日志、证据账本、校验脚本、实验仓库）**不归档**，以维持冠军可复现性。
+- 归档后三项确定性校验结果不变。
+
+
+## 追加：冠军机制讲解 HTML（2026-11-24）
+
+- Markdown 源（唯一真实来源）：`idea-stage/CHAMPION_LOGIC.md`
+- 渲染产物：`idea-stage/CHAMPION_LOGIC.html`（`/render-html`，academic 模板，单文件）
+- 附带证据：`--json redo/champion_replay.json`；漂移 meta 含源路径 + SHA256 + 生成时间
+- 评审 sidecar：`CHAMPION_LOGIC.html.review.json` → **`REVIEW_UNAVAILABLE`**（无跨模型 reviewer 后端，未伪造 PASS）
+- 内容：可控基座 → 冻结评测指标 → `LOGIT_BAN` 四步机制 → 排除法证据 →
+  绕过相变 → 自动化迭代链 → 结果与边界 → 代码索引

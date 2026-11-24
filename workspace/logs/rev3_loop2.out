@@ -1,0 +1,5 @@
+[rev3] baseline LB_m20_e3 val=0.158333 good=False
+[rev3] r01 LB_m30_e4 confirm=False val=0.125000 status=keep good=False stable=0 best=0.125
+[rev3] r02 LB_m20_e5 confirm=False val=0.075000 status=keep good=True stable=1 best=0.075
+[rev3] r03 CONFIRM confirm=True val=0.075000 status=discard good=True stable=2 best=0.075
+[rev3] STOP REACHED_TARGET best=0.075 rounds=3 keep=2

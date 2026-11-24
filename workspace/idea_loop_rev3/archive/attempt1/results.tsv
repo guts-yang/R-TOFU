@@ -1,0 +1,5 @@
+rev	val_risk	memory_gb	status	description
+01537ff	0.158333	19.2	keep	baseline verified idea LB_m20_e3
+def0256	0.125000	19.2	keep	LB_m30_e4 HIGH_BYPASS
+8e540da	0.075000	19.2	discard	LB_m20_e5 HIGH_BYPASS
+def0256	0.125000	19.2	discard	CONFIRM CONFIRM

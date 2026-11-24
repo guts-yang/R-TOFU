@@ -1,0 +1,5 @@
+REVIEW_UNAVAILABLE
+No cross-model reviewer backend available (no Codex MCP, .aris/reviewer.json,
+reviewer_route.py, or shared-references/reviewer-backends.md).
+No independent render audit was executed; no verdict was fabricated.
+Deterministic self-checks only, recorded in CHAMPION_LOGIC.html.review.json.

@@ -58,3 +58,10 @@ verdict `REVIEW_UNAVAILABLE`（L2、33 claims、4 检查器 0 findings）。
 
 `REACHED_TARGET` 是**执行者确定性判据**的达标，不是独立评审通过；
 无跨模型 reviewer，门控仍 `BLOCKED`。held-out 未达同等水平已如实记录。
+
+
+## Rev-3
+
+`REACHED_TARGET` 是执行者确定性判据达标，**不是**独立评审通过；
+无跨模型 reviewer，门控仍 `BLOCKED`。第一次尝试的失败、修正与归档
+见 `idea_loop_rev3/ATTEMPT1_NOTE.md`。

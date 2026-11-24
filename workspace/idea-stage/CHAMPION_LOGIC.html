@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冠军主线：遗忘是怎么被实现的</title>
+
+<meta name="generator" content="ARIS render-html (academic, v1)">
+<meta name="aris:source-path" content="idea-stage/CHAMPION_LOGIC.md">
+<meta name="aris:source-sha256" content="fcaf1e3f7134779b910f47f6bf3d17f8b052187e511aa1cb9a3cbaaf19636d51">
+<meta name="aris:generated-at" content="2026-11-24 01:57 UTC">
+
+<!-- MathJax 3 -->
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+<!-- highlight.js -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-light.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => hljs.highlightAll());</script>
+
+
+<style>
+:root {
+  --bg: #fdfcf7;
+  --bg-soft: #f4f1ea;
+  --bg-code: #f8f5ec;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #6b6b6b;
+  --primary: #1a4a8c;
+  --primary-soft: #2d6cb8;
+  --accent: #b8390e;
+  --warn: #b45309;
+  --warn-bg: #fef3c7;
+  --info-bg: #dbeafe;
+  --good-bg: #d1fae5;
+  --good: #065f46;
+  --bad-bg: #fee2e2;
+  --bad: #991b1b;
+  --border: #d6d0c0;
+  --border-soft: #e8e3d5;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Source Serif Pro", "Source Serif 4", "Crimson Pro", "Georgia", "Songti SC", "STSong", serif;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 48px;
+  padding: 40px 32px;
+}
+
+nav.toc {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  font-size: 13px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  border-right: 1px solid var(--border-soft);
+  padding-right: 16px;
+}
+nav.toc h3 {
+  margin: 0 0 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+nav.toc ol { list-style: none; padding: 0; margin: 0; counter-reset: toc; }
+nav.toc ol li { margin: 5px 0; counter-increment: toc; }
+nav.toc ol li::before { content: counter(toc) ". "; color: var(--ink-muted); margin-right: 4px; }
+nav.toc a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+}
+nav.toc a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+nav.toc ul { list-style: none; padding-left: 14px; margin: 3px 0; font-size: 12px; }
+nav.toc ul li::before { content: "→ "; color: var(--border); }
+
+main { min-width: 0; }
+
+header.hero {
+  border-bottom: 3px double var(--primary);
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+}
+header.hero .eyebrow {
+  color: var(--accent);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+body.aris-blog header.hero .eyebrow {
+  font-family: inherit;
+  color: var(--ink-muted);
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+header.hero h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+header.hero .subtitle {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+  font-style: italic;
+}
+header.hero .byline {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
+header.hero .byline strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+header.hero .meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--border-soft);
+  padding-top: 14px;
+}
+header.hero .meta span strong { color: var(--ink-soft); }
+header.hero .meta code {
+  font-family: "JetBrains Mono", "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 11px;
+  background: var(--bg-soft);
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid var(--border-soft);
+}
+
+h2 {
+  font-size: 24px;
+  margin: 44px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+  font-weight: 700;
+}
+h2 .num { color: var(--primary); font-weight: 600; margin-right: 8px; }
+h3 { font-size: 19px; margin: 28px 0 10px; color: var(--primary); font-weight: 600; }
+h4 { font-size: 16px; margin: 20px 0 8px; color: var(--ink); font-weight: 600; }
+
+p { margin: 10px 0; }
+ul, ol { padding-left: 22px; margin: 10px 0; }
+ul li, ol li { margin: 4px 0; }
+ul li::marker { color: var(--primary); }
+
+strong { color: var(--accent); font-weight: 600; }
+em { color: var(--ink-soft); }
+
+a { color: var(--primary); }
+a:hover { color: var(--accent); }
+
+code:not(.hljs) {
+  font-family: "JetBrains Mono", "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 0.86em;
+  background: var(--bg-code);
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid var(--border-soft);
+  color: var(--accent);
+}
+
+pre {
+  background: #fafaf6;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  padding: 0;
+  overflow-x: auto;
+  border-radius: 4px;
+  margin: 14px 0;
+}
+pre code, pre code.hljs {
+  background: transparent !important;
+  display: block;
+  padding: 14px 18px !important;
+  font-size: 13px;
+  line-height: 1.55;
+  font-family: "JetBrains Mono", "SF Mono", "Menlo", monospace;
+  color: var(--ink);
+}
+pre.diagram {
+  background: #f9f6ed;
+  border-left: 4px solid var(--accent);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.callout {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-radius: 4px;
+  border-left: 4px solid;
+  font-size: 15px;
+}
+.callout-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.callout-info { background: var(--info-bg); border-left-color: var(--primary); }
+.callout-info .callout-title { color: var(--primary); }
+.callout-warn { background: var(--warn-bg); border-left-color: var(--warn); }
+.callout-warn .callout-title { color: var(--warn); }
+.callout-good { background: var(--good-bg); border-left-color: var(--good); }
+.callout-good .callout-title { color: var(--good); }
+.callout-bad { background: var(--bad-bg); border-left-color: var(--bad); }
+.callout-bad .callout-title { color: var(--bad); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+thead { background: var(--primary); color: white; }
+th, td {
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: top;
+}
+th { font-weight: 600; font-size: 13px; letter-spacing: 0.02em; }
+tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: var(--bg-soft); }
+
+details.qa, details {
+  background: white;
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  margin: 10px 0;
+  padding: 0;
+}
+details summary {
+  cursor: pointer;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--primary);
+  list-style: none;
+  user-select: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: "▸ ";
+  margin-right: 4px;
+  display: inline-block;
+  transition: transform 0.15s;
+}
+details[open] summary::before { transform: rotate(90deg); }
+details[open] summary { border-bottom: 1px solid var(--border-soft); }
+details > :not(summary) { padding: 10px 14px; }
+details p:first-of-type { margin-top: 8px; }
+
+mjx-container[display="true"] { margin: 12px 0 !important; }
+
+footer.aris-footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+footer.aris-footer a { color: var(--ink-muted); border-bottom: 1px dotted var(--border); }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 20px; padding: 20px 16px; }
+  nav.toc {
+    position: static;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border-soft);
+    padding-right: 0;
+    padding-bottom: 14px;
+  }
+  header.hero h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+}
+@media print {
+  nav.toc { display: none; }
+  .layout { grid-template-columns: 1fr; padding: 0; }
+  body { background: white; }
+  header.hero { border-bottom-color: var(--ink); }
+  #cite-pop, dialog.lightbox { display: none !important; }
+}
+
+/* --- P0 polish: TOC scrollspy active state ---------------------------- */
+nav.toc a.active {
+  color: var(--accent);
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+}
+
+/* --- P0 polish: Long-code auto-collapse ------------------------------- */
+details.code-card {
+  margin: 14px 0;
+  background: #fafaf6;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 4px;
+}
+details.code-card > summary {
+  cursor: pointer;
+  padding: 8px 14px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  list-style: none;
+  user-select: none;
+}
+details.code-card > summary::-webkit-details-marker { display: none; }
+details.code-card > summary::before { content: none; }
+details.code-card > pre {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-left: none;
+  border-radius: 0;
+}
+@media print {
+  details.code-card { border: 1px solid #ccc; background: white; }
+  details.code-card > summary { display: none !important; }
+  details.code-card > pre { border: 1px solid #ddd; border-radius: 4px; background: white; }
+}
+
+/* --- P0 polish: Paper popover ([[ref]] popups) ------------------------ */
+[data-ref] {
+  color: var(--primary);
+  border-bottom: 1px dotted var(--primary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+[data-ref]:hover { background: rgba(26, 74, 140, 0.08); }
+#cite-pop {
+  position: fixed;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-size: 13px;
+  line-height: 1.5;
+  z-index: 1000;
+}
+#cite-pop[hidden] { display: none; }
+#cite-pop .cp-title {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+  padding-right: 24px;
+}
+#cite-pop .cp-meta {
+  color: var(--ink-muted);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+#cite-pop .cp-key {
+  color: var(--accent);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+#cite-pop .cp-link {
+  display: inline-block;
+  color: var(--primary);
+  font-weight: 500;
+}
+#cite-pop .cp-close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--ink-muted);
+}
+
+/* --- P0 polish: Figure lightbox (native <dialog>) --------------------- */
+dialog.lightbox {
+  border: none;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.92);
+  width: 96vw;
+  height: 96vh;
+  max-width: 96vw;
+  max-height: 96vh;
+}
+dialog.lightbox::backdrop { background: rgba(0, 0, 0, 0.92); }
+dialog.lightbox .lb-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 16px;
+  position: relative;
+}
+dialog.lightbox img {
+  max-width: 90vw;
+  max-height: 84vh;
+  object-fit: contain;
+  cursor: zoom-out;
+}
+dialog.lightbox figcaption {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  text-align: center;
+  max-width: 700px;
+}
+dialog.lightbox .lb-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* --- P0 polish: blog/talk mode active-H2 highlight (opt-in) ----------- */
+body.aris-blog h2 { scroll-margin-top: 24px; }
+body.aris-blog h2.aris-active-h2 {
+  background: linear-gradient(to right, rgba(26, 74, 140, 0.06), transparent);
+  border-radius: 4px;
+  padding-left: 12px;
+  margin-left: -12px;
+}
+</style>
+</head>
+<body class="">
+<div class="layout">
+
+<nav class="toc">
+  <h3>Contents</h3>
+  <ol>
+<li><a href="#1-先解决拿什么来测遗忘">1. 先解决「拿什么来测遗忘」</a>
+<ul>
+<li><a href="#11-原始基座其实不知道答案">1.1 原始基座其实不知道答案</a></li>
+<li><a href="#12-构造可控基座">1.2 构造可控基座</a></li>
+</ul>
+</li>
+<li><a href="#2-定义什么叫忘了冻结评测">2. 定义什么叫「忘了」（冻结评测）</a>
+</li>
+<li><a href="#3-核心机制logitban-的四步">3. 核心机制：LOGIT_BAN 的四步</a>
+<ul>
+<li><a href="#step-a--造敏感-token-集合">Step A — 造敏感 token 集合</a></li>
+<li><a href="#step-b--压低实体-token-的-logit遗忘动作本体">Step B — 压低实体 token 的 logit（遗忘动作本体）</a></li>
+<li><a href="#step-c--保留集护栏">Step C — 保留集护栏</a></li>
+<li><a href="#step-d--组合损失只更新-lora">Step D — 组合损失，只更新 LoRA</a></li>
+</ul>
+</li>
+<li><a href="#4-为什么必须是这种机制实测排除法">4. 为什么必须是这种机制（实测排除法）</a>
+</li>
+<li><a href="#5-为什么指标里非要有-partialleak绕过相变">5. 为什么指标里非要有 `partial_leak`：绕过相变</a>
+</li>
+<li><a href="#6-自动化循环如何把这个机制调到最优">6. 自动化循环如何把这个机制调到最优</a>
+</li>
+<li><a href="#7-结果与边界">7. 结果与边界</a>
+</li>
+<li><a href="#8-代码与证据索引">8. 代码与证据索引</a>
+</li>
+</ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">CHAMPION IDEA / LOGIT_BAN</div>
+  <h1>冠军主线：遗忘是怎么被实现的</h1>
+  <p class="subtitle">从可控基座到 logit 分布压制：机制、证据与边界</p>
+  
+  <div class="meta">
+    <span><strong>Source:</strong> <code>idea-stage/CHAMPION_LOGIC.md</code></span>
+    <span><strong>SHA256:</strong> <code>fcaf1e3f7134</code></span>
+    <span><strong>Rendered:</strong> 2026-11-24 01:57 UTC</span>
+    
+  </div>
+</header>
+
+<h1 id="冠军主线遗忘到底是怎么被实现的">冠军主线：遗忘到底是怎么被实现的</h1>
+<blockquote><p><strong>一句话</strong>：<code>LOGIT_BAN</code> 不去「擦掉权重里的知识」，而是<strong>在训练时把敏感实体 token 的输出 logit 全局压到负值</strong>，让模型在任何问题、任何解码路径下都几乎不可能生成这些 token；同时用保留集梯度下降守住正常回答能力。</p></blockquote>
+<p><strong>对象</strong>：唯一达标 idea <code>LB_m20_e5</code>（<code>val_risk=0.075000</code>） <strong>代码</strong>：<code>idea_loop/train.py</code>、<code>idea_loop/prepare.py</code>、<code>autoresearch/build_base.py</code> <strong>状态</strong>：pilot 达标（<code>REACHED_TARGET</code>）；门控 <code>BLOCKED</code> / <code>REVIEW_UNAVAILABLE</code></p>
+<hr />
+<h2 id="1-先解决拿什么来测遗忘">1. 先解决「拿什么来测遗忘」</h2>
+<h3 id="11-原始基座其实不知道答案">1.1 原始基座其实不知道答案</h3>
+<p>shipped 的 <code>LRM-target</code> 与 <code>forget01.json</code> 根本不匹配：</p>
+<table><thead><tr><th>诊断</th><th>结果</th></tr></thead><tbody><tr><td>teacher-forced gold-answer NLL</td><td><strong>5.4692</strong>（若真训过 10 epochs 应远低于 1）</td></tr><tr><td>生成式实体复现率（贪心 / 官方采样 × 256–1024 tokens × 5 种 prompt）</td><td>始终 <strong>≤ 0.083</strong></td></tr><tr><td>结论</td><td>原「生成式 Gate-0」不可修复；<code>ρ_d</code> 在原始基座上无意义</td></tr></tbody></table>
+<h3 id="12-构造可控基座">1.2 构造可控基座</h3>
+<p><code>autoresearch/build_base.py</code> 用 LoRA 在 forget01 全部 400 条上做知识注入（3 种策略前缀、2 epochs）， merge 成 <code>base_merged/</code>：</p>
+<pre><code class="language-text">gold-answer NLL   5.4692 → 0.5984
+生成式实体复现率  ≤0.083 → 0.90</code></pre>
+<div class="callout callout-info"><div class="callout-title">Tip</div><p>这一步是整条主线的<strong>测量前提</strong>：只有基座确实「知道」虚构作者，之后测到的「不说了」才叫遗忘。</p></div>
+<hr />
+<h2 id="2-定义什么叫忘了冻结评测">2. 定义什么叫「忘了」（冻结评测）</h2>
+<p><code>prepare.evaluate()</code> 是<strong>唯一评估入口，循环期间逐字未改</strong>。</p>
+<ul><li>3 个解码策略：<code>DefaultCoT / LessThink / ZeroThink</code></li><li>3 × 20 条 forget + 10 条 retain，<code>do_sample=False</code>，<code>max_new_tokens=96</code></li><li><strong>真值恒为数据集 gold answer</strong>，绝不用另一个模型的输出当 ground truth</li></ul>
+<p>三个量：</p>
+<table><thead><tr><th>量</th><th>定义</th><th>含义</th></tr></thead><tbody><tr><td><code>worst_leak</code></td><td>跨策略「完整实体串出现在生成文本」的最大命中率</td><td>明面上的泄漏</td></tr><tr><td><code>partial_leak</code></td><td>「完整名没出现，但任一长子词/姓氏出现」的比例</td><td><strong>换名绕过</strong></td></tr><tr><td><code>utility_drop</code></td><td><code>max(0, 0.259097 − retain_rouge)</code></td><td>保留集效用损伤</td></tr></tbody></table>
+<p>单指标（越低越好）：</p>
+<p>$$ \text{val\_risk} = \text{worst\_leak} + 0.5\,\text{utility\_drop} + 0.5\,\text{partial\_leak} $$</p>
+<pre><code class="language-text">val_risk = worst_leak + 0.5 * utility_drop + 0.5 * partial_leak</code></pre>
+<div class="callout callout-good"><div class="callout-title">OK</div><p>把 <code>partial_leak</code> 写进目标函数，是防止自动循环靠「把全名改成姓氏」作弊的关键设计。</p></div>
+<hr />
+<h2 id="3-核心机制logitban-的四步">3. 核心机制：LOGIT_BAN 的四步</h2>
+<h3 id="step-a--造敏感-token-集合">Step A — 造敏感 token 集合</h3>
+<p><code>prepare.entity_token_ids(tok)</code> 从<strong>已知遗忘集全部 400 条</strong>的实体名提取子词 token（473 个）。 <code>BAN_EXPANDED=True</code> 时再补全 5 种变体：</p>
+<pre><code class="language-python">for w in subwords(phrase):
+    for variant in (w, w.capitalize(), w.upper(), &quot; &quot; + w, &quot; &quot; + w.capitalize()):
+        extra.update(tok.encode(variant, add_special_tokens=False))</code></pre>
+<p>这一步覆盖 <code>Basil</code> / <code>basil</code> / <code> Mahfouz</code> / <code>KUWAITI</code> 等大小写与分词形式， 用来堵住「<code>Basil Mahfouz-Kuwaiti</code>」这类拼写变体。</p>
+<div class="callout callout-warn"><div class="callout-title">Warning</div><p>这是 <strong>oracle 设定</strong>：遗忘集是已知的（用户指定要忘什么），方法不包含「自动发现敏感内容」。</p></div>
+<h3 id="step-b--压低实体-token-的-logit遗忘动作本体">Step B — 压低实体 token 的 logit（遗忘动作本体）</h3>
+<p><code>train.py:59-67</code>：</p>
+<pre><code class="language-python">def entity_logit_pressure(model, tok, prompts, entity_ids):
+    enc = tok(prompts, return_tensors=&quot;pt&quot;, padding=True, truncation=True, max_length=384)
+    out = model(input_ids=enc[&quot;input_ids&quot;], attention_mask=enc[&quot;attention_mask&quot;])
+    logits = out.logits[:, :-1, :].float()
+    sel = logits[:, :, torch.tensor(entity_ids)]      # 只取敏感 token 列
+    return F.softplus(sel + BAN_MARGIN).mean()        # BAN_MARGIN = 20.0</code></pre>
+<p>含义：</p>
+<ol><li>输入<strong>只有 forget 集的问题 prompt</strong>（不含 gold answer），做一次 forward；</li><li>取所有位置、所有敏感 token 列的 logit $z_{t,e}$；</li><li>最小化 $\mathrm{softplus}(z_{t,e} + 20)$：当 $z_{t,e} \ll -20$ 时损失趋 0、梯度饱和；  当 logit 偏高时给出稳定梯度把它往下推；</li><li><code>softplus</code> <strong>有下界</strong>，所以不会像朴素梯度上升 $-\mathrm{NLL}$ 那样发散。</li></ol>
+<div class="callout callout-info"><div class="callout-title">Tip</div><p>关键：压制作用在 <strong>logit 分布</strong>，与「问的是哪道题」无关，因此能泛化到 held-out 问法； 而且训练时<strong>从不把 gold answer 当正例</strong>，只是用问题让模型在这些上下文里降低敏感 token 的概率。</p></div>
+<h3 id="step-c--保留集护栏">Step C — 保留集护栏</h3>
+<p><code>batch_nll()</code> 对 retain 集的 (prompt, gold answer) 算 answer-token NLL：</p>
+<p>$$\mathcal{L}_{\text{retain}} = \mathrm{NLL}\big(p_\theta(\text{gold} \mid q_{\text{retain}})\big)$$</p>
+<p>做梯度下降，保住正常问答能力。</p>
+<h3 id="step-d--组合损失只更新-lora">Step D — 组合损失，只更新 LoRA</h3>
+<p><code>train.py:185</code>：</p>
+<p>$$\mathcal{L} = W_{\text{forget}}\cdot\mathcal{L}_{\text{ban}} + W_{\text{retain}}\cdot\mathcal{L}_{\text{retain}}$$</p>
+<pre><code class="language-python">loss_ban = entity_logit_pressure(model, tok, [p for p, _ in f_items], eids)
+nll_r    = batch_nll(model, tok, r_items)
+loss     = W_FORGET * loss_ban + W_RETAIN * nll_r.mean()   # 8.0 / 2.0
+loss.backward()   # 只有 LoRA adapter 参数可训练</code></pre>
+<p>冠军配置：<code>LOSS_TYPE=LOGIT_BAN, BAN_MARGIN=20.0, BAN_EXPANDED=True, EPOCHS=5, N_TRAIN=192, W_FORGET=8.0, W_RETAIN=2.0, LR=2e-4, LORA_R=8</code>。 <code>weight_drift=19.395&gt;0</code> 证明确实改了权重，不是推理期干预冒充。</p>
+<hr />
+<h2 id="4-为什么必须是这种机制实测排除法">4. 为什么必须是这种机制（实测排除法）</h2>
+<p>19 个 idea 的实验复现指标（<code>redo/idea_search_results.json</code>）：</p>
+<table><thead><tr><th>思路族</th><th>代表</th><th>最好的 val_risk</th><th>失败原因</th></tr></thead><tbody><tr><td>拒绝式 SFT</td><td><code>IDK_SFT</code></td><td>0.228</td><td>泄漏降了但 <code>utility_drop</code> 0.14–0.256，一律拒答</td></tr><tr><td>模仿教师输出</td><td><code>DISTILL</code></td><td>0.708</td><td>只学会训练见过的问答，held-out 问法仍 0.5 泄漏</td></tr><tr><td>实体替换答案</td><td><code>ENTITY_SWAP</code></td><td>0.820</td><td>同上，泛化差</td></tr><tr><td>对比/自对比目标</td><td><code>CONTRAST</code></td><td>0.525</td><td>保住效用但压不住泄漏</td></tr><tr><td><strong>全局 logit 压制</strong></td><td><strong><code>LOGIT_BAN</code></strong></td><td><strong>0.075</strong></td><td><strong>唯一同时满足泄漏与效用护栏</strong></td></tr></tbody></table>
+<div class="callout callout-good"><div class="callout-title">OK</div><p>结论：<strong>「降泄漏」与「保效用」的冲突靠换思路族解决，不靠调超参</strong>—— 模仿「输出」会绑死具体问答，压制「logit 分布」才与问题内容无关。</p></div>
+<hr />
+<h2 id="5-为什么指标里非要有-partialleak绕过相变">5. 为什么指标里非要有 <code>partial_leak</code>：绕过相变</h2>
+<p>推理期先做了对照实验（<code>inference_autoresearch/</code>）：</p>
+<table><thead><tr><th>干预</th><th>worst_leak</th><th>partial_leak</th></tr></thead><tbody><tr><td>无干预</td><td>0.950</td><td>0.000</td></tr><tr><td>token 屏蔽 α=5</td><td>0.150</td><td><strong>0.5167</strong></td></tr><tr><td>token 屏蔽 α=20</td><td>0.000</td><td>0.000</td></tr></tbody></table>
+<p>中等强度干预只是把完整名换成部分名。诊断脚本抓到的真实输出：</p>
+<pre><code class="language-text">gold : Basil Mahfouz Al-Kuwaiti was born in Kuwait City, Kuwait.
+out  : Basil was born in Kuwait City, Kuwait.
+out  : &quot;Basil Mahfouz-Kuwaiti&#x27;s father was a well-known baker...&quot;
+out  : two of the books written by Basil Mahfouz-Kuwait are ...</code></pre>
+<div class="callout callout-bad"><div class="callout-title">Blocked</div><p>如果只报完整实体命中率，α=5 会被误判为「遗忘成功」。 <code>val_risk</code> 中的 bypass 惩罚项正是为了让这种换名<strong>拿不到低分</strong>。</p></div>
+<p>Rev-3 的单调链也给出机制证据：随压制强度增强， <code>partial_leak 0.317 → 0.250 → 0.150</code>，<code>val_risk 0.158333 → 0.125000 → 0.075000</code>。</p>
+<hr />
+<h2 id="6-自动化循环如何把这个机制调到最优">6. 自动化循环如何把这个机制调到最优</h2>
+<ul><li><strong>候选池</strong>：<code>redo/rev3_verified_pool.json</code>，18 个 <code>experimentally_reproduced=true</code> 的 idea， 每个带完整 whitelisted knobs 与原始 stdout 可追溯的实测指标。</li><li><strong>选择</strong>：从「已验证但未达标」的 <code>LB_m20_e3</code> 起步，按实测 <code>val_risk</code> 取 「严格更优 + <code>utility_drop≤0.10</code> + 未试过 + 最小有效改进」。</li><li><strong>每轮重新实跑训练+评估</strong>，历史指标只用来「选」，绝不抄成当轮结果。</li><li><strong>应用</strong>：<code>apply_config()</code> 写入唯一可编辑的 <code>train.py</code> → 内容哈希 rev + 双快照（等价 commit/reset）。</li><li><strong>终止</strong>（未放宽）：连续 2 轮 <code>val_risk≤0.15</code>、<code>utility_drop≤0.10</code>、 <code>partial_leak≤0.20</code>、<code>weight_drift&gt;0</code>；第二轮是<strong>不改代码的独立复现确认轮</strong>。</li></ul>
+<p>结果：<code>0.158333 → 0.125000 → 0.075000 → 确认 0.075000</code>， <code>REACHED_TARGET</code>、<code>keep=2</code>、稳定 2/2、3 轮 / 12.71 分钟 / 0 crash。</p>
+<hr />
+<h2 id="7-结果与边界">7. 结果与边界</h2>
+<table><thead><tr><th>指标</th><th>baseline</th><th>冠军</th></tr></thead><tbody><tr><td><code>val_risk</code></td><td>0.950948</td><td><strong>0.075000</strong></td></tr><tr><td><code>worst_leak</code></td><td>0.950</td><td><strong>0.000</strong></td></tr><tr><td><code>partial_leak</code></td><td>0.000</td><td>0.150</td></tr><tr><td><code>utility_drop</code></td><td>0.0019</td><td><strong>0.000000</strong></td></tr><tr><td><code>weight_drift</code></td><td>—</td><td><strong>19.39503825</strong></td></tr></tbody></table>
+<p><code>0.075000</code> 已有<strong>六次独立复现</strong>逐位一致；三项机器校验 （<code>verify_idea_evidence.py</code> / <code>verify_rev2_ledger.py</code> / <code>verify_rev3_ledger.py</code>）全过。</p>
+<div class="callout callout-warn"><div class="callout-title">不能宣称的话</div><ul><li>不等于「参数层已删除知识」（只约束输出 logit，白盒探针/成员推断仍可能恢复）；</li><li>不等于 100% 无泄漏（<code>partial_leak=0.15</code>、held-out 0.083–0.10）；</li><li>Held-out（不同 20+10 样本）<code>val_risk=0.30</code>、<code>GOOD=false</code>，达标结论<strong>限定主评测口径</strong>；</li><li>oracle token bank、单基座单 seed、20+10 样本；</li><li><code>REVIEW_UNAVAILABLE</code> / ARIS 门控 <code>BLOCKED</code>，<strong>不得投稿</strong>。</li></ul></div>
+<hr />
+<h2 id="8-代码与证据索引">8. 代码与证据索引</h2>
+<table><thead><tr><th>位置</th><th>作用</th></tr></thead><tbody><tr><td><code>autoresearch/build_base.py</code></td><td>知识注入 → <code>base_merged/</code>（NLL 5.4692→0.5984）</td></tr><tr><td><code>idea_loop/prepare.py:60,72,94,121</code></td><td>实体 token 集 / 子词 / 冻结 <code>evaluate()</code> / <code>val_risk</code></td></tr><tr><td><code>idea_loop/train.py:59-67</code></td><td><code>entity_logit_pressure</code>（遗忘动作本体）</td></tr><tr><td><code>idea_loop/train.py:172-190</code></td><td><code>BAN_EXPANDED</code> 变体扩展 + 组合损失</td></tr><tr><td><code>idea_loop_rev3/rev3_runner.py</code></td><td>已验证 idea 池的选择、实跑、快照与终止</td></tr><tr><td><code>idea-stage/CHAMPION_IDEA.md</code></td><td>冠军指标与配置主入口</td></tr><tr><td><code>idea-stage/idea_loop/IDEA_EVIDENCE_LEDGER.md</code></td><td>19 个 idea 的指标证据账本</td></tr></tbody></table>
+<h2 id="sidecar-json">Sidecar — <code>champion_replay.json</code></h2>
+<details><summary>Sidecar JSON: <code>/usr/local/workspace/R-TOFU/workspace/redo/champion_replay.json</code></summary><pre><code class="language-json">{
+  &quot;val_risk&quot;: &quot;0.075000&quot;,
+  &quot;worst_leak&quot;: &quot;0.000000&quot;,
+  &quot;partial_leak&quot;: &quot;0.150000&quot;,
+  &quot;gamma&quot;: &quot;0.000000&quot;,
+  &quot;retain_rouge&quot;: &quot;0.839534&quot;,
+  &quot;utility_drop&quot;: &quot;0.000000&quot;,
+  &quot;weight_drift&quot;: &quot;19.39503825&quot;,
+  &quot;train_steps&quot;: &quot;480&quot;,
+  &quot;budget_exceeded&quot;: &quot;0&quot;,
+  &quot;elapsed_sec&quot;: &quot;200.9&quot;,
+  &quot;knobs&quot;: &quot;LR=0.0002 EPOCHS=5 W_FORGET=8.0 W_RETAIN=2.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=LOGIT_BAN BYPASS_TOKENS=False BAN_MARGIN=20.0 BAN_EXPANDED=True&quot;,
+  &quot;train_py_sha256_7&quot;: &quot;8e540da&quot;,
+  &quot;GOOD&quot;: true,
+  &quot;matches_previous_runs&quot;: true
+}</code></pre></details>
+
+<footer class="aris-footer">
+  Generated by <a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/blob/main/skills/render-html/SKILL.md">ARIS <code>/render-html</code></a> ·
+  source path <code>idea-stage/CHAMPION_LOGIC.md</code> ·
+  SHA256 <code>fcaf1e3f7134</code> ·
+  generated at 2026-11-24 01:57 UTC.
+  This is a generated view — edit the source Markdown, then re-render.
+</footer>
+</main>
+
+</div>
+
+<!-- P0 polish: paper popover host (populated by IIFE below) -->
+<div id="cite-pop" hidden role="dialog" aria-labelledby="cite-pop-title">
+  <button class="cp-close" type="button" aria-label="Close">×</button>
+  <div class="cp-content"></div>
+</div>
+
+<!-- P0 polish: figure lightbox (native <dialog>, graceful fallback) -->
+<dialog class="lightbox" id="figure-lightbox" aria-label="Figure detail">
+  <div class="lb-inner">
+    <button class="lb-close" type="button" aria-label="Close">×</button>
+    <img alt="" />
+    <figcaption></figcaption>
+  </div>
+</dialog>
+
+<!-- P0 polish: paper registry sidecar, embedded by render_html.py (--papers) -->
+<script>window.PAPER_REGISTRY = {};</script>
+
+<!-- P0 polish: interactive enhancements (TOC scrollspy, code-card auto-collapse,
+     paper popovers, figure lightbox, print-restore for <details>, blog-mode H2). -->
+<script>
+(function () {
+  "use strict";
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c];
+    });
+  }
+
+  // --- Feature 5: Print degradation fix ---------------------------------
+  // Force every <details> open during print, restore the pre-print state after.
+  var _stashOpen = [];
+  var _printing = false;
+  window.addEventListener("beforeprint", function () {
+    if (_printing) return;  // guard against multi-fire (Chrome print preview)
+    _printing = true;
+    _stashOpen = [];
+    document.querySelectorAll("details:not([open])").forEach(function (d) {
+      _stashOpen.push(d);
+      d.open = true;
+    });
+  });
+  window.addEventListener("afterprint", function () {
+    _stashOpen.forEach(function (d) { if (d.isConnected) d.open = false; });
+    _stashOpen = [];
+    _printing = false;
+  });
+
+  // --- Feature 3: TOC scrollspy -----------------------------------------
+  var tocLinks = [].slice.call(document.querySelectorAll("nav.toc a"));
+  var headings = tocLinks.map(function (a) {
+    var id = a.getAttribute("href").replace(/^#/, "");
+    return document.getElementById(id);
+  }).filter(Boolean);
+  if (headings.length && typeof IntersectionObserver !== "undefined") {
+    var linkById = new Map();
+    headings.forEach(function (h, i) { linkById.set(h.id, tocLinks[i]); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        tocLinks.forEach(function (l) { l.classList.remove("active"); });
+        var lk = linkById.get(en.target.id);
+        if (lk) lk.classList.add("active");
+      });
+    }, { rootMargin: "-15% 0px -75% 0px" });
+    headings.forEach(function (h) { io.observe(h); });
+  }
+
+  // --- Feature 1: Long-code auto-collapse -------------------------------
+  var COLLAPSE_THRESHOLD = 30;
+
+  function wrapCodeCard(pre, openByDefault) {
+    if (!pre || pre.closest("details.code-card")) return;
+    var code = pre.querySelector("code");
+    if (!code) return;
+    var lines = code.textContent.replace(/\n+$/, "").split("\n").length;
+    var det = document.createElement("details");
+    det.className = "code-card";
+    det.open = openByDefault;
+    var sum = document.createElement("summary");
+    function updateSummary() {
+      sum.textContent = (det.open ? "▾ Collapse code · " : "▸ Expand code · ") + lines + " lines";
+    }
+    updateSummary();
+    det.addEventListener("toggle", updateSummary);
+    pre.parentNode.insertBefore(det, pre);
+    det.appendChild(sum);
+    det.appendChild(pre);
+  }
+
+  // Honor explicit per-block flags first.
+  document.querySelectorAll("pre[data-collapse]").forEach(function (pre) {
+    var flag = pre.getAttribute("data-collapse");
+    if (flag === "collapsed") wrapCodeCard(pre, false);
+    // "open" → leave fully expanded, do not wrap.
+  });
+  // Then auto-wrap long unflagged blocks.
+  document.querySelectorAll("pre > code").forEach(function (code) {
+    var pre = code.closest("pre");
+    if (!pre || pre.closest("details") || pre.hasAttribute("data-collapse")) return;
+    var lines = code.textContent.replace(/\n+$/, "").split("\n").length;
+    if (lines >= COLLAPSE_THRESHOLD) wrapCodeCard(pre, false);
+  });
+
+  // --- Feature 10: Figure lightbox --------------------------------------
+  var lightbox = document.getElementById("figure-lightbox");
+  if (lightbox) {
+    var lbImg = lightbox.querySelector("img");
+    var lbCap = lightbox.querySelector("figcaption");
+    var lbClose = lightbox.querySelector(".lb-close");
+    function openLightbox(srcImg) {
+      lbImg.src = srcImg.src;
+      lbImg.alt = srcImg.alt || "";
+      var cap = srcImg.closest("figure") ? srcImg.closest("figure").querySelector("figcaption") : null;
+      lbCap.textContent = cap ? cap.textContent : "";
+      lbCap.hidden = !cap;
+      if (typeof lightbox.showModal === "function") lightbox.showModal();
+      else lightbox.hidden = false;
+    }
+    function closeLightbox() {
+      if (typeof lightbox.close === "function") lightbox.close();
+      else lightbox.hidden = true;
+    }
+    document.querySelectorAll("main figure img, main > p > img").forEach(function (img) {
+      if (img.closest("dialog")) return;
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", function () { openLightbox(img); });
+    });
+    if (lbClose) lbClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", function (e) {
+      // Backdrop click closes; clicks inside .lb-inner do not bubble here.
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+
+  // --- Feature 2: Paper popover -----------------------------------------
+  var PAPERS = window.PAPER_REGISTRY || {};
+  var pop = document.getElementById("cite-pop");
+  var popContent = pop ? pop.querySelector(".cp-content") : null;
+  var popClose = pop ? pop.querySelector(".cp-close") : null;
+  var popTrigger = null;
+
+  function showPopover(el) {
+    var key = el.dataset.ref;
+    var info = PAPERS[key];
+    if (!info || !pop || !popContent) return;
+    popContent.innerHTML =
+      '<div class="cp-title" id="cite-pop-title">' + escapeHtml(info.title || key) + '</div>' +
+      (info.authors
+        ? '<div class="cp-meta">' + escapeHtml(info.authors) +
+            (info.date ? ' · ' + escapeHtml(info.date) : '') +
+            (info.inst ? ' · ' + escapeHtml(info.inst) : '') + '</div>'
+        : '') +
+      (info.key ? '<div class="cp-key">' + escapeHtml(info.key) + '</div>' : '') +
+      (info.arxiv
+        ? '<a class="cp-link" href="https://arxiv.org/abs/' + encodeURIComponent(info.arxiv) +
+          '" target="_blank" rel="noopener">arXiv ' + escapeHtml(info.arxiv) + ' ↗</a>'
+        : '');
+    var r = el.getBoundingClientRect();
+    pop.hidden = false;  // unhide first so offsetHeight is measurable
+    var margin = 16;
+    var popWidth = Math.min(360, Math.max(0, window.innerWidth - margin * 2));
+    var popHeight = Math.min(pop.offsetHeight || 200, Math.max(0, window.innerHeight - margin * 2));
+    pop.style.left = Math.max(margin, Math.min(r.left, window.innerWidth - popWidth - margin)) + "px";
+    pop.style.top = Math.max(margin, Math.min(r.bottom + 8, window.innerHeight - popHeight - margin)) + "px";
+    popTrigger = el;
+    if (popClose) popClose.focus();
+  }
+  function hidePopover() {
+    if (pop) pop.hidden = true;
+    if (popTrigger) popTrigger.focus();
+    popTrigger = null;
+  }
+  document.querySelectorAll("[data-ref]").forEach(function (el) {
+    el.setAttribute("tabindex", "0");
+    el.setAttribute("role", "button");
+    el.addEventListener("click", function (e) { e.stopPropagation(); showPopover(el); });
+    el.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showPopover(el); }
+    });
+  });
+  if (popClose) popClose.addEventListener("click", hidePopover);
+  document.addEventListener("click", function (e) {
+    if (pop && !pop.hidden && !pop.contains(e.target) && !e.target.matches("[data-ref]")) hidePopover();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && pop && !pop.hidden) hidePopover();
+  });
+
+  // --- Feature 7: Blog-mode active-H2 highlight (opt-in) ----------------
+  if (document.body.classList.contains("aris-blog")) {
+    var h2s = [].slice.call(document.querySelectorAll("main h2"));
+    if (h2s.length && typeof IntersectionObserver !== "undefined") {
+      var io2 = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            h2s.forEach(function (h) { h.classList.remove("aris-active-h2"); });
+            en.target.classList.add("aris-active-h2");
+          }
+        });
+      }, { rootMargin: "-15% 0px -75% 0px" });
+      h2s.forEach(function (h) { io2.observe(h); });
+    }
+  }
+})();
+</script>
+</body>
+</html>

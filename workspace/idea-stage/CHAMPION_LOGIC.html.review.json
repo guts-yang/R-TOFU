@@ -1,0 +1,27 @@
+{
+  "verdict": "REVIEW_UNAVAILABLE",
+  "reviewer_route": "unavailable",
+  "reason": "No cross-model reviewer backend in this environment: no Codex MCP, no .aris/reviewer.json, no reviewer_route.py, no shared-references/reviewer-backends.md. Per ARIS invariant the executor must not judge its own rendered output; PASS is NOT claimed.",
+  "scope": "render fidelity / safety / structure only — NOT research claim truthfulness",
+  "source_md": "/usr/local/workspace/R-TOFU/workspace/idea-stage/CHAMPION_LOGIC.md",
+  "generated_html": "/usr/local/workspace/R-TOFU/workspace/idea-stage/CHAMPION_LOGIC.html",
+  "source_sha256": "fcaf1e3f7134779b910f47f6bf3d17f8b052187e511aa1cb9a3cbaaf19636d51",
+  "deterministic_self_checks_NOT_an_independent_review": {
+    "source_hash_match": "pass",
+    "information_fidelity": "pass",
+    "structure": "pass",
+    "math_code_tables": "pass",
+    "callouts": "pass",
+    "safety_escaping": "pass",
+    "placeholder_leak": "pass"
+  },
+  "counts": {
+    "tables": 6,
+    "code_blocks": 7,
+    "callouts": 27,
+    "toc_entries": 14,
+    "h2": 9,
+    "bytes": 38490
+  },
+  "note": "HTML generated successfully. Independent HTML render audit was NOT run. User may invoke /research-review on the source MD or re-run when a different-family reviewer backend is available."
+}

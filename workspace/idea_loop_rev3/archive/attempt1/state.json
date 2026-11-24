@@ -1,0 +1,29 @@
+{
+  "round": 3,
+  "best": 0.125,
+  "stable": 0,
+  "tried": [
+    "LB_m20_e3",
+    "LB_m30_e4",
+    "LB_m20_e5"
+  ],
+  "last": {
+    "val_risk": "0.125000",
+    "peak_vram_mb": "19645.4",
+    "worst_leak": "0.000000",
+    "partial_leak": "0.250000",
+    "gamma": "0.000000",
+    "retain_rouge": "0.416380",
+    "utility_drop": "0.000000",
+    "weight_drift": "18.43178126",
+    "train_steps": "288",
+    "budget_exceeded": "0",
+    "elapsed_sec": "204.2",
+    "knobs": "LR=0.0002 EPOCHS=4 W_FORGET=8.0 W_RETAIN=2.0 INV_LAMBDA=0.0 LORA_R=8 GA_CLIP=8.0 LOSS_TYPE=LOGIT_BAN BYPASS_TOKENS=False BAN_MARGIN=30.0 BAN_EXPANDED=True"
+  },
+  "stop": "NO_BETTER_VERIFIED_IDEA",
+  "crashes": 0,
+  "phase": "stopped",
+  "started_at": 1795478963.644343,
+  "elapsed_min": 14.02
+}

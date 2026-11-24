@@ -72,3 +72,10 @@
 `/idea-discovery` + `/autoresearch-loop` 修订后 **`REACHED_TARGET`**
 （`val_risk=0.075000`，全部护栏通过，稳定 2/2）。
 Stage 3 / ARIS 门控仍 `BLOCKED`；held-out 泛化不足为已知边界。
+
+
+## 追加：Rev-3 迭代链
+
+`/idea-discovery` + `/autoresearch-loop` 针对「已通过的 idea」重跑，
+**`REACHED_TARGET`（keep=2，稳定 2/2）**，见 `redo/IDEA_LOOP_REV3_REPORT.md`。
+Stage 3 / ARIS 门控仍 `BLOCKED`；第一次尝试失败已归档说明。
