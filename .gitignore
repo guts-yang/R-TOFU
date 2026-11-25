@@ -3,3 +3,5 @@ __pycache__/
 
 # Local-only autoresearch run (16 GB, no upstream remote)
 workspace/autoresearch/
+workspace/logs
+workspace/results
