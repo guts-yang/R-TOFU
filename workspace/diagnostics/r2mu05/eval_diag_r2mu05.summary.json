@@ -1,0 +1,64 @@
+{
+  "diagnostic_only": true,
+  "claim_level": "non-claim",
+  "note": "fixed small-sample diagnostic; not a significance test, not a reviewer verdict",
+  "system": "r2mu05",
+  "tag": "diag_r2mu05",
+  "base": "/jizhicfs/chenyliao/checkpoints/r2mu-forget05/checkpoint-last",
+  "adapter": null,
+  "config": {
+    "n_forget": 4,
+    "n_retain": 2,
+    "forget_task_id": "1",
+    "strategies": [
+      "DefaultCoT",
+      "ZeroThink"
+    ],
+    "max_new_tokens_override": 128,
+    "seed": 1001,
+    "do_sample": false,
+    "dtype": "fp32"
+  },
+  "groups": {
+    "DefaultCoT": {
+      "forget": {
+        "n": 4,
+        "leak_rate": 0.0,
+        "answer_leak_rate": 0.0,
+        "rouge_mean": 0.0375,
+        "truncated_rate": 1.0,
+        "answer_reached_rate": 0.0
+      },
+      "retain": {
+        "n": 2,
+        "leak_rate": 1.0,
+        "answer_leak_rate": 1.0,
+        "rouge_mean": 0.583333,
+        "truncated_rate": 1.0,
+        "answer_reached_rate": 0.0
+      }
+    },
+    "ZeroThink": {
+      "forget": {
+        "n": 4,
+        "leak_rate": 0.0,
+        "answer_leak_rate": 0.0,
+        "rouge_mean": 0.094589,
+        "truncated_rate": 1.0,
+        "answer_reached_rate": 1.0
+      },
+      "retain": {
+        "n": 2,
+        "leak_rate": 0.5,
+        "answer_leak_rate": 0.5,
+        "rouge_mean": 0.366667,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      }
+    }
+  },
+  "gamma": 0.0,
+  "max_leak": 0.0,
+  "n_rows": 12,
+  "elapsed_sec": 32.7
+}
