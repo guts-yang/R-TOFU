@@ -121,7 +121,7 @@ def method_loss(method, model, tok, batch, forget_rows, retain_rows, max_len,
         return out, {"proxy": "distance-to-safe token saliency, not activation patching"}
 
     if method == "eas":
-        kappa = F.cosine_similarity(forget_nll.new_zeros(nf) + hidden[:nf].mean(1),
+        kappa = F.cosine_similarity(hidden[:nf].mean(1),
                                     hidden[nf:].mean(1).mean(0, keepdim=True),
                                     dim=1).clamp(0, 1)
         depth = torch.full_like(kappa, min(1.0, hidden.shape[1] / max_len))
