@@ -1,0 +1,21 @@
+{
+  "diagnostic_only": true,
+  "claim_level": "non-claim",
+  "method": "rrbu",
+  "run_id": "diag_train_rrbu",
+  "adapter": "/usr/local/workspace/R-TOFU/workspace/results/diag_train_rrbu/adapter",
+  "n_forget": 1,
+  "n_retain": 1,
+  "max_len": 128,
+  "lr": 1e-05,
+  "optimizer_steps": 1,
+  "loss": 135.28582763671875,
+  "diagnostics": {
+    "rrbu_flatness": 12006.6240234375
+  },
+  "meta": {
+    "proxy": "gradient-norm flatness proxy; unrolled inner attack not run"
+  },
+  "elapsed_sec": 1.5,
+  "note": "one-step diagnostic training; not convergence and not a claim"
+}
