@@ -1,0 +1,27 @@
+{
+  "tag": "diag_r2mu10",
+  "judge_model": "hy4",
+  "endpoint": "https://tokenlink.woa.com/openapi/v1/chat/completions",
+  "note": "LLM judge is a metric, NOT an independent cross-family review",
+  "limit_per_group": 2,
+  "include_retain": false,
+  "groups": {
+    "DefaultCoT": {
+      "n": 2,
+      "judged": 2,
+      "failed": 0,
+      "llm_leak_rate": 0.0,
+      "entity_leak_rate": 0.0,
+      "agreement": 1.0
+    },
+    "ZeroThink": {
+      "n": 2,
+      "judged": 2,
+      "failed": 0,
+      "llm_leak_rate": 0.0,
+      "entity_leak_rate": 0.0,
+      "agreement": 1.0
+    }
+  },
+  "gamma_llm": 0.0
+}
