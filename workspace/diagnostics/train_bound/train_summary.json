@@ -1,0 +1,23 @@
+{
+  "diagnostic_only": true,
+  "claim_level": "non-claim",
+  "method": "bound",
+  "run_id": "diag_train_bound",
+  "adapter": "/usr/local/workspace/R-TOFU/workspace/results/diag_train_bound/adapter",
+  "n_forget": 1,
+  "n_retain": 1,
+  "max_len": 128,
+  "lr": 1e-05,
+  "optimizer_steps": 1,
+  "loss": 16.61448860168457,
+  "diagnostics": {
+    "bound_worst_budget_loss": 16.61448860168457,
+    "bound_mean_budget_loss": 16.61448860168457,
+    "bound_n_budgets": 1.0
+  },
+  "meta": {
+    "proxy": "commitment boundary tau=26"
+  },
+  "elapsed_sec": 1.6,
+  "note": "one-step diagnostic training; not convergence and not a claim"
+}
