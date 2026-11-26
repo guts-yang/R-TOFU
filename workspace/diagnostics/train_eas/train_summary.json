@@ -1,0 +1,26 @@
+{
+  "diagnostic_only": true,
+  "claim_level": "non-claim",
+  "method": "eas",
+  "run_id": "diag_train_eas",
+  "adapter": "/usr/local/workspace/R-TOFU/workspace/results/diag_train_eas/adapter",
+  "n_forget": 1,
+  "n_retain": 1,
+  "max_len": 128,
+  "lr": 1e-05,
+  "optimizer_steps": 1,
+  "loss": 8.930704116821289,
+  "diagnostics": {
+    "eas_alpha_mean": 0.6164539456367493,
+    "eas_alpha_min": 0.6164539456367493,
+    "eas_alpha_max": 0.6164539456367493,
+    "eas_cost": 0.6931631565093994,
+    "eas_budget_penalty": 0.0,
+    "eas_lambda_mean": 0.12518678605556488
+  },
+  "meta": {
+    "proxy": "kappa=forget/retain hidden cosine; depth=length/max_len"
+  },
+  "elapsed_sec": 1.4,
+  "note": "one-step diagnostic training; not convergence and not a claim"
+}
