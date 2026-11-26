@@ -1,0 +1,23 @@
+{
+  "diagnostic_only": true,
+  "claim_level": "non-claim",
+  "method": "sequ",
+  "run_id": "diag_train_sequ",
+  "adapter": "/usr/local/workspace/R-TOFU/workspace/results/diag_train_sequ/adapter",
+  "n_forget": 1,
+  "n_retain": 1,
+  "max_len": 128,
+  "lr": 1e-05,
+  "optimizer_steps": 1,
+  "loss": 14.232983589172363,
+  "diagnostics": {
+    "sequ_lambda": 0.10000000149011612,
+    "sequ_drift_prev": 0.0,
+    "sequ_proximity": 0.0
+  },
+  "meta": {
+    "proxy": "first sequential step; drift=0"
+  },
+  "elapsed_sec": 1.3,
+  "note": "one-step diagnostic training; not convergence and not a claim"
+}

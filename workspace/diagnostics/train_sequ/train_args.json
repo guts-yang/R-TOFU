@@ -1,0 +1,11 @@
+{
+  "method": "sequ",
+  "run_id": "diag_train_sequ",
+  "n_forget": 1,
+  "n_retain": 1,
+  "max_len": 128,
+  "lr": 1e-05,
+  "seed": 1001,
+  "lora_r": 8,
+  "lora_alpha": 32
+}
