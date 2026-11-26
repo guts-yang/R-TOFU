@@ -1,0 +1,64 @@
+{
+  "diagnostic_only": true,
+  "claim_level": "non-claim",
+  "note": "fixed small-sample diagnostic; not a significance test, not a reviewer verdict",
+  "system": "diag_train_cfa",
+  "tag": "diagT_cfa",
+  "base": "/jizhicfs/chenyliao/models/sangyon/LRM-target",
+  "adapter": "/usr/local/workspace/R-TOFU/workspace/results/diag_train_cfa/adapter",
+  "config": {
+    "n_forget": 4,
+    "n_retain": 2,
+    "forget_task_id": "1",
+    "strategies": [
+      "DefaultCoT",
+      "ZeroThink"
+    ],
+    "max_new_tokens_override": 128,
+    "seed": 1001,
+    "do_sample": false,
+    "dtype": "fp32"
+  },
+  "groups": {
+    "DefaultCoT": {
+      "forget": {
+        "n": 4,
+        "leak_rate": 1.0,
+        "answer_leak_rate": 1.0,
+        "rouge_mean": 0.506656,
+        "truncated_rate": 1.0,
+        "answer_reached_rate": 0.0
+      },
+      "retain": {
+        "n": 2,
+        "leak_rate": 1.0,
+        "answer_leak_rate": 1.0,
+        "rouge_mean": 0.779167,
+        "truncated_rate": 1.0,
+        "answer_reached_rate": 0.0
+      }
+    },
+    "ZeroThink": {
+      "forget": {
+        "n": 4,
+        "leak_rate": 1.0,
+        "answer_leak_rate": 1.0,
+        "rouge_mean": 0.488934,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      },
+      "retain": {
+        "n": 2,
+        "leak_rate": 1.0,
+        "answer_leak_rate": 1.0,
+        "rouge_mean": 0.416666,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      }
+    }
+  },
+  "gamma": 0.0,
+  "max_leak": 1.0,
+  "n_rows": 12,
+  "elapsed_sec": 18.7
+}
