@@ -18,9 +18,9 @@ from paths import FORGET_FILE, RESULTS, RETAIN_FILE, SEED, ensure_dirs
 from strategies import STRATEGY_ORDER, max_new_tokens
 
 
-def load_any(base, adapter, dtype):
+def load_any(base, adapter, dtype, tokenizer=None):
     dt = {"fp32": torch.float32, "bf16": torch.bfloat16, "fp16": torch.float16}[dtype]
-    tok = AutoTokenizer.from_pretrained(str(base))
+    tok = AutoTokenizer.from_pretrained(str(tokenizer or base))
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     tok.padding_side = "left"
@@ -42,6 +42,7 @@ def main():
     ap.add_argument("--system", required=True)
     ap.add_argument("--base", required=True)
     ap.add_argument("--adapter", default="")
+    ap.add_argument("--tokenizer", default="", help="optional tokenizer path when checkpoint tokenizer is unusable")
     ap.add_argument("--tag", required=True)
     ap.add_argument("--n-forget", type=int, default=4)
     ap.add_argument("--n-retain", type=int, default=2)
@@ -57,7 +58,7 @@ def main():
 
     ensure_dirs()
     strategies = [s.strip() for s in args.strategies.split(",") if s.strip()]
-    model, tok = load_any(args.base, args.adapter or None, args.dtype)
+    model, tok = load_any(args.base, args.adapter or None, args.dtype, args.tokenizer or None)
     forget_rows = sample_rows(args.forget_file, args.n_forget, args.seed, args.forget_task_id)
     retain_rows = sample_rows(args.retain_file, args.n_retain, args.seed, None)
 
