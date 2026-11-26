@@ -20,19 +20,25 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, "/usr/local/workspace/tracks/lrm-unlearning/redact/workspace")
 
-from data_utils import refusals, sample_rows  # noqa: E402
+from data_utils import key_phrase, refusals, sample_rows  # noqa: E402
 from paths import (FORGET_FILE, REFUSAL_FILE, RESULTS, RETAIN_FILE, SEED,
                    TARGET_MODEL, ensure_dirs)  # noqa: E402
 from strategies import build_prompt  # noqa: E402
 from diagnostic_train import (build_batch, collate, encode_example,
                               entity_token_ids, forward, method_loss)  # noqa: E402
+from implementations.hooks.bound_hook import BOUNDHook  # noqa: E402
 from implementations.hooks.cfa_hook import CFAHook, CFAHookConfig  # noqa: E402
 from implementations.hooks.csda_hook import (CSDAHook, CSDAHookConfig,
                                              entity_token_id)  # noqa: E402
+from implementations.hooks.disco_hook import DISCOHook  # noqa: E402
+from implementations.hooks.eas_hook import EASHook  # noqa: E402
+from implementations.hooks.ortho_hook import ORTHOHook, ORTHOHookConfig  # noqa: E402
 from implementations.hooks.ripple_hook import (KnowledgeGraph, RIPPLEHook,
                                                RIPPLEHookConfig)  # noqa: E402
 from implementations.hooks.rrbu_hook import (RRBUHook, RRBUHookConfig,
                                              attack_eval_split)  # noqa: E402
+from implementations.hooks.scope_hook import SCOPEHook  # noqa: E402
+from implementations.hooks.sequ_hook import SEQUHook  # noqa: E402
 
 
 def load_model(tokenizer_only=False, attn_implementation="sdpa"):
@@ -135,6 +141,26 @@ def main():
         graph = KnowledgeGraph.from_claims_file(args.claims)
         hooks["ripple"] = RIPPLEHook(graph, RIPPLEHookConfig())
         hooks["ripple_graph_entities"] = len(graph.entities())
+    elif args.method == "eas" and args.hook_mode == "full":
+        claims = json.loads(Path(args.claims).read_text())
+        claims = [c for c in claims if isinstance(c, str)]
+        hooks["eas"] = EASHook(claims)
+    elif args.method == "disco" and args.hook_mode == "full":
+        hooks["disco"] = DISCOHook()
+    elif args.method == "ortho" and args.hook_mode == "full":
+        ortho_hook = ORTHOHook(ORTHOHookConfig(
+            layers=(-1,), k=8, max_len=args.max_len, device="cuda"))
+        ortho_hook.collect(model, tok, [
+            (build_prompt(r["question"], "DefaultCoT"), r.get("cot", ""))
+            for r in retain_rows if r.get("cot")
+        ])
+        hooks["ortho"] = ortho_hook
+    elif args.method == "scope" and args.hook_mode == "full":
+        hooks["scope"] = SCOPEHook()
+    elif args.method == "sequ" and args.hook_mode == "full":
+        hooks["sequ"] = SEQUHook()
+    elif args.method == "bound" and args.hook_mode == "full":
+        hooks["bound"] = BOUNDHook()
 
     losses = []
     meta = {}
@@ -187,6 +213,59 @@ def main():
             meta = {"hook": "full-ripple",
                     "graph_entities": hooks.get("ripple_graph_entities"),
                     "neighbors": "retain batch"}
+        elif args.method == "eas" and "eas" in hooks:
+            logits, hidden, nll = forward(model, *batch)
+            nf = len(f_rows)
+            entity = key_phrase(f_rows[0].get("answer", ""))
+            feats = hooks["eas"].builder.build(entity, f_rows[0].get("cot", ""))
+            eids = entity_token_ids(tok, f_rows)
+            out_loss = torch.clamp(
+                logits[:nf, -1, :].gather(1, eids.view(-1, 1)).squeeze(1),
+                min=0.0)
+            out = hooks["eas"].loss(
+                nll[:nf], out_loss, nll[nf:].mean().expand(nf),
+                feats.kappa.to(logits.device).expand(nf),
+                feats.depth.to(logits.device).expand(nf))
+            meta = {"hook": "full-eas", "kappa": float(feats.kappa), "depth": float(feats.depth)}
+        elif args.method == "disco" and "disco" in hooks:
+            logits, hidden, nll = forward(model, *batch)
+            nf = len(f_rows)
+            batches = hooks["disco"].policy_batches(tok, f_rows, safe, args.max_len)
+            policy, bare, names = hooks["disco"].policy_logits(model, batches)
+            eids = entity_token_ids(tok, f_rows)
+            out = hooks["disco"].loss(policy, bare, eids, nll[nf:].mean())
+            meta = {"hook": "full-disco", "policies": names}
+        elif args.method == "ortho" and "ortho" in hooks:
+            logits, hidden, nll = forward(model, *batch)
+            nf = len(f_rows)
+            out = hooks["ortho"].loss(
+                nll[:nf].mean(), hidden[:nf], hidden[:nf].detach(), -1,
+                nll[nf:].mean())
+            meta = {"hook": "full-ortho", "subspace_layers": list(hooks["ortho"].bank.subspaces)}
+        elif args.method == "scope" and "scope" in hooks:
+            logits, hidden, nll = forward(model, *batch)
+            nf = len(f_rows)
+            step_logits = hooks["scope"].step_logits(logits[:nf])
+            out = hooks["scope"].loss(step_logits, step_logits.detach(),
+                                      entity_token_ids(tok, f_rows),
+                                      nll[nf:].mean())
+            meta = {"hook": "full-scope", "variants": hooks["scope"].config.n_variants}
+        elif args.method == "sequ" and "sequ" in hooks:
+            logits, hidden, nll = forward(model, *batch)
+            nf = len(f_rows)
+            trainable = {n: p for n, p in model.named_parameters() if p.requires_grad}
+            out = hooks["sequ"].loss(nll[:nf].mean(), nll[nf:].mean(),
+                                     trainable, trainable)
+            meta = {"hook": "full-sequ", "n_batches": hooks["sequ"].config.n_batches}
+        elif args.method == "bound" and "bound" in hooks:
+            logits, hidden, nll = forward(model, *batch)
+            nf = len(f_rows)
+            budget_logits = {b: logits[:nf] for b in hooks["bound"].config.budgets}
+            exits = hooks["bound"].exit_losses(budget_logits, batch[1][:nf],
+                                                nll[:nf].mean())
+            out = hooks["bound"].loss(
+                [nll[:nf].mean()] * len(exits), list(exits.values()))
+            meta = {"hook": "full-bound", "budgets": list(exits)}
         else:
             out, meta = method_loss(args.method, model, tok, batch, f_rows, r_rows,
                                     args.max_len, args.lr, safe)
