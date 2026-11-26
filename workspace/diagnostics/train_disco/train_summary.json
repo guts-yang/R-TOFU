@@ -1,0 +1,26 @@
+{
+  "diagnostic_only": true,
+  "claim_level": "non-claim",
+  "method": "disco",
+  "run_id": "diag_train_disco",
+  "adapter": "/usr/local/workspace/R-TOFU/workspace/results/diag_train_disco/adapter",
+  "n_forget": 1,
+  "n_retain": 1,
+  "max_len": 128,
+  "lr": 1e-05,
+  "optimizer_steps": 1,
+  "loss": 2.533339262008667,
+  "diagnostics": {
+    "disco_worst_margin": 0.0,
+    "disco_bare_loss": 0.06683821976184845,
+    "disco_mcs_worst": 1.0,
+    "disco_policy_leak_max": 5.0294330332378845e-12,
+    "disco_policy_leak_min": 1.4721123625660582e-13,
+    "disco_separation": 4.882221796981279e-12
+  },
+  "meta": {
+    "proxy": "DefaultCoT/ZeroThink/bare policy logits"
+  },
+  "elapsed_sec": 2.2,
+  "note": "one-step diagnostic training; not convergence and not a claim"
+}
