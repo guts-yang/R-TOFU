@@ -9,13 +9,23 @@ This is the integration step before a full-data run. It supports:
 """
 import argparse
 import json
+import os
 import random
 import sys
 import time
 from pathlib import Path
 
+# H20 + libcublasLt can trap with divide-by-zero under TF32/heuristic workspace
+# selection in some multi-forward paths. Keep diagnostic runs in IEEE FP32
+# matmul mode with a fixed cuBLAS workspace.
+os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+os.environ.setdefault("NVIDIA_TF32_OVERRIDE", "0")
+
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+
+torch.backends.cuda.matmul.allow_tf32 = False
+torch.backends.cudnn.allow_tf32 = False
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, "/usr/local/workspace/tracks/lrm-unlearning/redact/workspace")
@@ -60,7 +70,16 @@ def make_batch(tok, forget_rows, retain_rows, safe_texts, max_len):
                 for r, t in zip(forget_rows, safe_texts)]
     examples += [encode_example(tok, build_prompt(r["question"], "DefaultCoT"),
                                 r["answer"], max_len) for r in retain_rows]
-    return collate(tok, examples)
+    ids, labels, mask = collate(tok, examples)
+    # Keep a fixed sequence shape across steps: libcublasLt on this H20 stack
+    # has exhibited divide-by-zero traps when multi-forward batches change
+    # shape between optimizer steps.
+    pad = max_len - ids.shape[1]
+    if pad > 0:
+        ids = torch.nn.functional.pad(ids, (0, pad), value=tok.pad_token_id)
+        labels = torch.nn.functional.pad(labels, (0, pad), value=-100)
+        mask = torch.nn.functional.pad(mask, (0, pad), value=0)
+    return ids, labels, mask
 
 
 def main():
@@ -134,7 +153,7 @@ def main():
         hooks["csda"] = hook
     elif args.method == "rrbu" and args.hook_mode == "full":
         hooks["rrbu"] = RRBUHook(model, RRBUHookConfig(
-            inner_lr=args.lr, inner_steps=2, create_graph=True))
+            inner_lr=args.lr, inner_steps=2, create_graph=False))
     elif args.method == "cfa" and args.hook_mode == "full":
         hooks["cfa"] = CFAHook(feature_dim=7, config=CFAHookConfig(), device="cuda")
     elif args.method == "ripple" and args.hook_mode == "full":
