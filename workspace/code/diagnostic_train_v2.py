@@ -145,7 +145,8 @@ def method_output(args, model, tok, hooks, default_batch, f_rows, r_rows, safe_t
         if ref_model is None:
             ref_logits, ref_hidden = logits.detach(), hidden.detach()
         else:
-            ref_logits, ref_hidden, _ = forward(ref_model, *batch)
+            with torch.no_grad():
+                ref_logits, ref_hidden, _ = forward(ref_model, *batch)
         entity = key_phrase(f_rows[0].get("answer", ""))
         neighbors = hooks["ripple"].graph.neighbors(entity, args.ripple_hops)
         pool = hooks.get("retain_pool", r_rows)
@@ -158,8 +159,11 @@ def method_output(args, model, tok, hooks, default_batch, f_rows, r_rows, safe_t
         neighbor_batch = build_strategy_batches(
             tok, [], cand, ["DefaultCoT"], args.max_len)["DefaultCoT"]
         cur_nb, _, _ = forward(model, *neighbor_batch)
-        ref_nb = (forward(ref_model, *neighbor_batch)[0]
-                  if ref_model is not None else cur_nb.detach())
+        if ref_model is not None:
+            with torch.no_grad():
+                ref_nb = forward(ref_model, *neighbor_batch)[0]
+        else:
+            ref_nb = cur_nb.detach()
         out = hooks["ripple"].loss(
             nll[:nf].mean(), cur_nb[:, -1, :], ref_nb[:, -1, :],
             hidden[:nf].mean(1), ref_hidden[:nf].mean(1))
@@ -187,7 +191,8 @@ def method_output(args, model, tok, hooks, default_batch, f_rows, r_rows, safe_t
         if ref_model is None:
             base_hidden = hidden[:nf].detach()
         else:
-            base_hidden = forward(ref_model, *batch)[1][:nf]
+            with torch.no_grad():
+                base_hidden = forward(ref_model, *batch)[1][:nf]
         out = hooks["ortho"].loss(nll[:nf].mean(), hidden[:nf],
                                   base_hidden, -1, nll[nf:].mean())
         meta = {"hook": "full-ortho", "reference_drift": ref_model is not None,
@@ -199,8 +204,11 @@ def method_output(args, model, tok, hooks, default_batch, f_rows, r_rows, safe_t
         meta = {"hook": "full-scope", "variants": hooks["scope"].config.n_variants}
     elif args.method == "sequ" and "sequ" in hooks:
         ref_model = hooks.get("reference_model")
-        ref_hidden = (forward(ref_model, *batch)[1][:nf]
-                      if ref_model is not None else hidden[:nf].detach())
+        if ref_model is not None:
+            with torch.no_grad():
+                ref_hidden = forward(ref_model, *batch)[1][:nf]
+        else:
+            ref_hidden = hidden[:nf].detach()
         drift = hooks["sequ"].observe_drift(hidden[:nf].mean(1), ref_hidden.mean(1))
         hooks["sequ"].prev_drift = drift.detach()
         trainable = {n: p for n, p in model.named_parameters() if p.requires_grad}
@@ -226,12 +234,27 @@ def method_output(args, model, tok, hooks, default_batch, f_rows, r_rows, safe_t
 def dev_score(args, model, tok, dev_forget, retain_rows):
     if not dev_forget:
         return None
-    rows = dev_forget[:20]
-    batches = build_strategy_batches(tok, rows, retain_rows[:20],
-                                     ["DefaultCoT"], args.max_len)
-    _, _, nll = forward(model, *batches["DefaultCoT"])
-    nf = len(rows)
-    return float((nll[:nf].mean() + nll[nf:].mean()).detach().cpu())
+    # Keep dev scoring small and graph-free. A full 20+20 dev batch under grad
+    # mode spikes an 8B model to ~90 GB and is the cause of the step-100 OOM.
+    rows = dev_forget[:8]
+    retain = retain_rows[:8]
+    free, _ = torch.cuda.mem_get_info()
+    if free < 8 * 1024 ** 3:
+        print(f"[dev] skip: only {free / 1024**3:.1f} GiB free", flush=True)
+        return None
+    was_training = model.training
+    model.eval()
+    try:
+        with torch.no_grad():
+            batches = build_strategy_batches(tok, rows, retain,
+                                             ["DefaultCoT"], args.max_len)
+            _, _, nll = forward(model, *batches["DefaultCoT"])
+            nf = len(rows)
+            score = float((nll[:nf].mean() + nll[nf:].mean()).detach().cpu())
+    finally:
+        model.train(was_training)
+        torch.cuda.empty_cache()
+    return score
 
 
 def main():
@@ -297,6 +320,8 @@ def main():
             str(TARGET_MODEL), torch_dtype=torch.bfloat16,
             attn_implementation="sdpa").to("cuda")
         hooks["reference_model"].eval()
+        for p in hooks["reference_model"].parameters():
+            p.requires_grad_(False)
     if args.method == "sequ" and "sequ" in hooks:
         hooks["stream"] = iter(hooks["sequ"].stream(train_forget))
 
