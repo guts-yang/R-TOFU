@@ -42,19 +42,16 @@ train() {
   hook="$1"
   CUDA_VISIBLE_DEVICES=0 "$PY" "$CODE/diagnostic_train_v2.py" \
     --method disco --steps 300 --grad-accum 1 \
-    --n-forget 2 --n-retain 2 --max-len 256 --lr 1e-4 \
+    --n-forget 2 --n-retain 2 --max-len 512 --lr 1e-4 \
     --strategies DefaultCoT,LessThink,ZeroThink,SummaryThink \
     --consistency-weight 0.1 --dev-ratio 0 --eval-every 1000 \
     --early-stop-patience 3 --run-id v2_disco --hook-mode "$hook" \
     > "$LOG/disco.${hook}.log" 2>&1
 }
 
-train full
-if [ ! -d "$ROOT/results/v2_disco/adapter" ]; then
-  log "full DISCO failed; falling back to proxy"
-  wait_for_gpu0
-  train proxy
-fi
+# The full DISCO path already trapped in libcublasLt at step 128 even with
+# dev disabled. Use the proxy path; it is explicitly labelled PROXY_FALLBACK.
+train proxy
 if [ ! -d "$ROOT/results/v2_disco/adapter" ]; then
   log "DISCO repair FAILED"
   exit 1

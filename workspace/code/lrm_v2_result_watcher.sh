@@ -23,7 +23,7 @@ while true; do
     out="$DIAG/v2_${m}/RESULT.md"
     [ -f "$ev" ] || continue
     [ -f "$jd" ] || continue
-    if [ -f "$out" ] && [ "$out" -nt "$jd" ]; then
+    if [ -f "$out" ] && [ "$out" -nt "$jd" ] && grep -q "^${m}"$'\t' "$PARTIAL"; then
       continue
     fi
     log "write result ${m}"
