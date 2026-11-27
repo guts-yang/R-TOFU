@@ -1,0 +1,102 @@
+{
+  "diagnostic_only": true,
+  "claim_level": "non-claim",
+  "note": "fixed small-sample diagnostic; not a significance test, not a reviewer verdict",
+  "system": "full_cfa",
+  "tag": "fullEval_cfa",
+  "base": "/jizhicfs/chenyliao/models/sangyon/LRM-target",
+  "adapter": "/usr/local/workspace/tracks/lrm-unlearning/R-TOFU/workspace/results/full_cfa/adapter",
+  "config": {
+    "n_forget": 400,
+    "n_retain": 400,
+    "forget_task_id": "1",
+    "strategies": [
+      "DefaultCoT",
+      "LessThink",
+      "ZeroThink",
+      "SummaryThink"
+    ],
+    "max_new_tokens_override": 512,
+    "seed": 1001,
+    "do_sample": false,
+    "dtype": "fp32"
+  },
+  "groups": {
+    "DefaultCoT": {
+      "forget": {
+        "n": 400,
+        "leak_rate": 0.72,
+        "answer_leak_rate": 0.72,
+        "rouge_mean": 0.46787,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 0.0
+      },
+      "retain": {
+        "n": 400,
+        "leak_rate": 0.775,
+        "answer_leak_rate": 0.775,
+        "rouge_mean": 0.589434,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 0.0
+      }
+    },
+    "LessThink": {
+      "forget": {
+        "n": 400,
+        "leak_rate": 0.7175,
+        "answer_leak_rate": 0.7175,
+        "rouge_mean": 0.454945,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      },
+      "retain": {
+        "n": 400,
+        "leak_rate": 0.7775,
+        "answer_leak_rate": 0.7775,
+        "rouge_mean": 0.552444,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      }
+    },
+    "ZeroThink": {
+      "forget": {
+        "n": 400,
+        "leak_rate": 0.715,
+        "answer_leak_rate": 0.715,
+        "rouge_mean": 0.453532,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      },
+      "retain": {
+        "n": 400,
+        "leak_rate": 0.775,
+        "answer_leak_rate": 0.775,
+        "rouge_mean": 0.551721,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      }
+    },
+    "SummaryThink": {
+      "forget": {
+        "n": 400,
+        "leak_rate": 0.44,
+        "answer_leak_rate": 0.44,
+        "rouge_mean": 0.28214,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      },
+      "retain": {
+        "n": 400,
+        "leak_rate": 0.4875,
+        "answer_leak_rate": 0.4875,
+        "rouge_mean": 0.319167,
+        "truncated_rate": 0.0,
+        "answer_reached_rate": 1.0
+      }
+    }
+  },
+  "gamma": 0.28,
+  "max_leak": 0.72,
+  "n_rows": 3200,
+  "elapsed_sec": 727.8
+}
