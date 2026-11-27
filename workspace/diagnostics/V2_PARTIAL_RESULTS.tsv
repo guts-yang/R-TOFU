@@ -1,3 +1,5 @@
 method	tag	max_entity_leak	max_hy4_leak	coverage	retain_rouge	status	written_at
 eas	v2Eval_eas	0.5150	0.5818	0.7469	0.4311	WRITTEN	2026-11-27T09:06:14Z
 csda	v2Eval_csda	0.6525	0.7532	0.6300	0.3390	WRITTEN	2026-11-27T09:19:14Z
+scope	v2Eval_scope	0.7375	0.8414	0.5869	0.4347	WRITTEN	2026-11-27T09:41:40Z
+rrbu	v2Eval_rrbu	0.7550	0.8371	0.5394	0.4201	WRITTEN	2026-11-27T09:41:40Z

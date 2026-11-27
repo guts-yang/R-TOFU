@@ -1,8 +1,8 @@
 # v2_scope — non-claim diagnostic
 
-**Status**: `LOW_COVERAGE`  
-**Tag**: `v2Eval_scope`  
-**Timestamp**: 2026-11-27T09:33:52Z  
+**Status**: `LOW_COVERAGE`
+**Tag**: `v2Eval_scope`
+**Timestamp**: 2026-11-27T09:41:40Z
 **Scope**: diagnostic-only; no ARIS gate, no claim, no reviewer verdict.
 
 ## Fixed protocol

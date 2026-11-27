@@ -1,8 +1,8 @@
 # v2_eas — non-claim diagnostic
 
-**Status**: `LOW_COVERAGE`  
-**Tag**: `v2Eval_eas`  
-**Timestamp**: 2026-11-27T09:06:14Z  
+**Status**: `LOW_COVERAGE`
+**Tag**: `v2Eval_eas`
+**Timestamp**: 2026-11-27T09:48:30Z
 **Scope**: diagnostic-only; no ARIS gate, no claim, no reviewer verdict.
 
 ## Fixed protocol

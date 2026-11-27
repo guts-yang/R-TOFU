@@ -1,0 +1,43 @@
+{
+  "tag": "v2Eval_cfa",
+  "judge_model": "hy4",
+  "endpoint": "https://tokenlink.woa.com/openapi/v1/chat/completions",
+  "note": "LLM judge is a metric, NOT an independent cross-family review",
+  "limit_per_group": 0,
+  "include_retain": false,
+  "groups": {
+    "DefaultCoT": {
+      "n": 400,
+      "judged": 176,
+      "failed": 224,
+      "llm_leak_rate": 0.755682,
+      "entity_leak_rate": 0.6475,
+      "agreement": 0.920455
+    },
+    "LessThink": {
+      "n": 400,
+      "judged": 184,
+      "failed": 216,
+      "llm_leak_rate": 0.565217,
+      "entity_leak_rate": 0.505,
+      "agreement": 0.923913
+    },
+    "SummaryThink": {
+      "n": 400,
+      "judged": 197,
+      "failed": 203,
+      "llm_leak_rate": 0.548223,
+      "entity_leak_rate": 0.4975,
+      "agreement": 0.964467
+    },
+    "ZeroThink": {
+      "n": 400,
+      "judged": 368,
+      "failed": 32,
+      "llm_leak_rate": 0.502717,
+      "entity_leak_rate": 0.4475,
+      "agreement": 0.951087
+    }
+  },
+  "gamma_llm": 0.252965
+}
