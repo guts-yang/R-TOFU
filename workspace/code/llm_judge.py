@@ -164,6 +164,11 @@ def select_rows(rows, limit_per_group, include_retain):
     return picked
 
 
+def row_key(row):
+    return (str(row.get("strategy", "")), str(row.get("question", "")),
+            str(row.get("response", ""))[:200], int(row.get("is_retain", 0)))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tags", default="", help="comma-separated eval tags; default = all non-sanity")
@@ -171,6 +176,9 @@ def main():
     ap.add_argument("--concurrency", type=int, default=8)
     ap.add_argument("--include-retain", action="store_true")
     ap.add_argument("--timeout", type=int, default=35)
+    ap.add_argument("--max-retries", type=int, default=1)
+    ap.add_argument("--retry-failed", action="store_true",
+                    help="rejudge only rows whose previous judge_ok=0")
     args = ap.parse_args()
 
     ensure_dirs()
@@ -190,9 +198,21 @@ def main():
         if not rows:
             print(f"[judge] SKIP {tag}: no rows selected", flush=True)
             continue
+        out_path = RESULTS / f"judge_{tag}.jsonl"
+        old_records = []
+        if args.retry_failed and out_path.exists():
+            old_records = [r for r in read_jsonl(out_path) if int(r.get("judge_ok", 0)) == 1]
+            ok_keys = {row_key(r) for r in old_records}
+            rows = [r for r in rows if row_key(r) not in ok_keys]
+            print(f"[judge] {tag}: retry-failed, {len(old_records)} kept, "
+                  f"{len(rows)} to rejudge", flush=True)
+        if not rows:
+            print(f"[judge] {tag}: nothing to judge", flush=True)
+            continue
+
         results = [None] * len(rows)
         with ThreadPoolExecutor(max_workers=args.concurrency) as pool:
-            futs = {pool.submit(call_judge, cfg, row, args.timeout): i
+            futs = {pool.submit(call_judge, cfg, row, args.timeout, args.max_retries): i
                     for i, row in enumerate(rows)}
             done = 0
             for fut in as_completed(futs):
@@ -203,35 +223,48 @@ def main():
                 if done % 20 == 0:
                     print(f"[judge] {tag}: {done}/{len(rows)}", flush=True)
 
-        out_path = RESULTS / f"judge_{tag}.jsonl"
         groups = defaultdict(lambda: {"n": 0, "ok": 0, "leak": 0, "entity_leak": 0,
                                       "agree": 0, "failed": 0})
+        all_records = list(old_records)
+        for old in old_records:
+            g = groups[old.get("strategy", "")]
+            g["n"] += 1
+            g["entity_leak"] += int(old.get("entity_leak") or 0)
+            if old.get("llm_leak") is None:
+                g["failed"] += 1
+            else:
+                g["ok"] += 1
+                g["leak"] += int(old["llm_leak"])
+                g["agree"] += int(int(old["llm_leak"]) == int(old.get("entity_leak") or 0))
+        for row, (verdict, err, model) in zip(rows, results):
+            rec = {
+                "tag": tag, "system": row.get("system"), "strategy": row.get("strategy"),
+                "is_retain": int(row.get("is_retain", 0)),
+                "question": row.get("question"), "gold_answer": row.get("gold_answer"),
+                "key_phrase": row.get("key_phrase"),
+                "entity_leak": row.get("entity_leak"),
+                "response": (row.get("response") or "")[:2000],
+                "judge_model": model,
+                "judge_ok": int(verdict is not None),
+                "llm_leak": verdict["leak"] if verdict else None,
+                "llm_confidence": verdict["confidence"] if verdict else None,
+                "llm_reason": verdict["reason"] if verdict else "",
+                "judge_error": err[:200],
+            }
+            all_records.append(rec)
+            g = groups[rec["strategy"]]
+            g["n"] += 1
+            g["entity_leak"] += int(rec["entity_leak"] or 0)
+            if verdict is None:
+                g["failed"] += 1
+            else:
+                g["ok"] += 1
+                g["leak"] += verdict["leak"]
+                g["agree"] += int(verdict["leak"] == int(rec["entity_leak"] or 0))
+
         with open(out_path, "w", encoding="utf-8") as f:
-            for row, (verdict, err, model) in zip(rows, results):
-                rec = {
-                    "tag": tag, "system": row.get("system"), "strategy": row.get("strategy"),
-                    "is_retain": int(row.get("is_retain", 0)),
-                    "question": row.get("question"), "gold_answer": row.get("gold_answer"),
-                    "key_phrase": row.get("key_phrase"),
-                    "entity_leak": row.get("entity_leak"),
-                    "response": (row.get("response") or "")[:2000],
-                    "judge_model": model,
-                    "judge_ok": int(verdict is not None),
-                    "llm_leak": verdict["leak"] if verdict else None,
-                    "llm_confidence": verdict["confidence"] if verdict else None,
-                    "llm_reason": verdict["reason"] if verdict else "",
-                    "judge_error": err[:200],
-                }
+            for rec in all_records:
                 f.write(json.dumps(rec, ensure_ascii=False) + "\n")
-                g = groups[rec["strategy"]]
-                g["n"] += 1
-                g["entity_leak"] += int(rec["entity_leak"] or 0)
-                if verdict is None:
-                    g["failed"] += 1
-                else:
-                    g["ok"] += 1
-                    g["leak"] += verdict["leak"]
-                    g["agree"] += int(verdict["leak"] == int(rec["entity_leak"] or 0))
 
         summary = {"tag": tag, "judge_model": cfg["HY4_MODEL"],
                    "endpoint": cfg["HY4_ENDPOINT"],
@@ -248,8 +281,6 @@ def main():
                 "agreement": round(g["agree"] / n_ok, 6) if n_ok else None,
             }
         sum_path = RESULTS / f"judge_{tag}.summary.json"
-        with open(sum_path, "w", encoding="utf-8") as f:
-            json.dump(summary, f, ensure_ascii=False, indent=2)
         rates = [v["llm_leak_rate"] for k, v in summary["groups"].items()
                  if not k.endswith(":retain") and v["llm_leak_rate"] is not None]
         summary["gamma_llm"] = round(max(rates) - min(rates), 6) if rates else None

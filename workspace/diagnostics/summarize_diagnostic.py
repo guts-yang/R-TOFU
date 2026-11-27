@@ -63,10 +63,15 @@ def main():
     agree_vals = [v.get("agreement") for v in jd.get("groups", {}).values() if v.get("agreement") is not None]
     agreement = round(sum(agree_vals) / len(agree_vals), 4) if agree_vals else None
 
+    mean_retain = round(sum(retain_rouge) / len(retain_rouge), 4) if retain_rouge else None
     if coverage < 0.5 or max_llm_leak is None:
         status = "LOAD_OR_JUDGE_FAIL"
+    elif coverage < 0.8:
+        status = "LOW_COVERAGE"
     elif args.method == "target" and max_llm_leak >= 0.5:
         status = "CONTROL_EXPECTED_LEAK"
+    elif max_llm_leak <= 0.25 and mean_retain is not None and mean_retain < 0.10:
+        status = "COLLAPSE"
     elif max_llm_leak > 0.5:
         status = "FAIL_DIAGNOSTIC"
     elif max_llm_leak <= 0.25 and (agreement is None or agreement >= 0.75):
@@ -98,7 +103,7 @@ def main():
         f"| max Hy4 leak | {max_llm_leak if max_llm_leak is not None else 'NA'} |",
         f"| Hy4 coverage | {coverage} |",
         f"| Hy4/entity agreement | {agreement if agreement is not None else 'NA'} |",
-        f"| mean retain ROUGE-L | {round(sum(retain_rouge)/len(retain_rouge), 4) if retain_rouge else 'NA'} |",
+        f"| mean retain ROUGE-L | {mean_retain if mean_retain is not None else 'NA'} |",
         f"| generation rows | {ev.get('n_rows')} |",
         "",
         "## Per-strategy detail",

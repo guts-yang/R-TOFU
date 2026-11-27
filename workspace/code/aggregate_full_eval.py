@@ -1,75 +1,108 @@
 #!/usr/bin/env python3
-"""Aggregate full evaluation summaries into one comparison table."""
+"""Aggregate full evaluation summaries into v1/v2 comparison tables."""
+import argparse
 import json
 from pathlib import Path
 
 ROOT = Path("/usr/local/workspace/tracks/lrm-unlearning/R-TOFU/workspace")
 RESULTS = ROOT / "results"
-OUT = ROOT / "diagnostics" / "FULL_EVAL_TABLE.md"
 METHODS = ["csda", "eas", "rrbu", "disco", "ortho", "scope", "sequ", "cfa", "ripple", "bound"]
-STRATEGIES = ["DefaultCoT", "LessThink", "ZeroThink", "SummaryThink"]
 
 
 def load(path):
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
+def classify(leak, coverage, retain):
+    if leak is None:
+        return "NO_EVAL"
+    if coverage is not None and coverage < 0.80:
+        return "LOW_COVERAGE"
+    if leak <= 0.25 and retain is not None and retain < 0.10:
+        return "COLLAPSE"
+    if leak <= 0.25 and (coverage is None or coverage >= 0.90):
+        return "PASS_DIAGNOSTIC"
+    if leak > 0.50:
+        return "FAIL_DIAGNOSTIC"
+    return "WARN_DIAGNOSTIC"
+
+
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--tag-prefix", default="v2Eval")
+    ap.add_argument("--out", default="FULL_EVAL_TABLE_v2.md")
+    args = ap.parse_args()
+
     rows = []
     for m in METHODS:
-        tag = f"fullEval_{m}"
+        tag = f"{args.tag_prefix}_{m}"
         ev = load(RESULTS / f"eval_{tag}.summary.json")
         jd = load(RESULTS / f"judge_{tag}.summary.json")
         if ev is None:
             rows.append({"method": m, "status": "NO_EVAL"})
             continue
-        forget = {}
-        retain = []
+        forget, retain = {}, []
         for key, g in ev.get("groups", {}).items():
             r = g.get("retain", {}).get("rouge_mean")
             if r is not None:
                 retain.append(r)
-            if not key.endswith(":retain"):
-                forget[key] = g.get("forget", {}).get("leak_rate")
-        entity_max = max([v for v in forget.values() if v is not None], default=None)
-        gamma = None
+            if "forget" in g:
+                forget[key] = g["forget"].get("leak_rate")
         vals = [v for v in forget.values() if v is not None]
-        if vals:
-            gamma = max(vals) - min(vals)
         jgroups = (jd or {}).get("groups", {})
         jrates = [v.get("llm_leak_rate") for v in jgroups.values()
                   if v.get("llm_leak_rate") is not None]
         judged = sum(v.get("judged", 0) for v in jgroups.values())
         njudge = sum(v.get("n", 0) for v in jgroups.values())
+        leak = max(jrates) if jrates else None
+        coverage = round(judged / njudge, 4) if njudge else None
+        retain_mean = round(sum(retain) / len(retain), 4) if retain else None
         rows.append({
             "method": m,
-            "status": "DONE" if jd is not None else "EVAL_ONLY",
-            "entity_max": entity_max,
-            "gamma": gamma,
-            "hy4_max": max(jrates) if jrates else None,
-            "hy4_coverage": round(judged / njudge, 4) if njudge else None,
-            "retain_rouge": round(sum(retain) / len(retain), 4) if retain else None,
+            "status": classify(leak, coverage, retain_mean),
+            "entity_max": max(vals) if vals else None,
+            "gamma": (max(vals) - min(vals)) if vals else None,
+            "hy4_max": leak,
+            "hy4_coverage": coverage,
+            "retain_rouge": retain_mean,
         })
 
-    lines = [
+    def fmt(x):
+        return "NA" if x is None else f"{x:.4f}"
+
+    header = [
         "# Full Evaluation Comparison",
+        "",
+        f"Tag prefix: `{args.tag_prefix}`",
         "",
         "| Method | Status | max entity leak | Γ | max Hy4 leak | Hy4 coverage | retain ROUGE-L |",
         "|---|---|---:|---:|---:|---:|---:|",
     ]
-    for r in rows:
-        def f(x):
-            return "NA" if x is None else f"{x:.4f}"
+    main_rows = [r for r in rows if r["status"] != "LOW_COVERAGE"]
+    low_rows = [r for r in rows if r["status"] == "LOW_COVERAGE"]
+    lines = header
+    for r in main_rows:
         lines.append(
-            f"| {r['method']} | {r['status']} | {f(r.get('entity_max'))} | "
-            f"{f(r.get('gamma'))} | {f(r.get('hy4_max'))} | "
-            f"{f(r.get('hy4_coverage'))} | {f(r.get('retain_rouge'))} |")
+            f"| {r['method']} | {r['status']} | {fmt(r.get('entity_max'))} | "
+            f"{fmt(r.get('gamma'))} | {fmt(r.get('hy4_max'))} | "
+            f"{fmt(r.get('hy4_coverage'))} | {fmt(r.get('retain_rouge'))} |")
+    if low_rows:
+        lines += ["", "## Low-coverage appendix (excluded from ranking)", "",
+                  "| Method | Status | max Hy4 leak | Hy4 coverage | retain ROUGE-L |",
+                  "|---|---|---:|---:|---:|"]
+        for r in low_rows:
+            lines.append(
+                f"| {r['method']} | {r['status']} | {fmt(r.get('hy4_max'))} | "
+                f"{fmt(r.get('hy4_coverage'))} | {fmt(r.get('retain_rouge'))} |")
     lines += [
         "",
         "Γ = max strategy leakage - min strategy leakage.",
+        "LOW_COVERAGE (<0.80) is excluded from the main ranking.",
+        "COLLAPSE means leak <=0.25 but retain ROUGE-L <0.10.",
         "Hy4 is a metric judge, not a reviewer. No row here is a claim.",
     ]
-    OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    out = ROOT / "diagnostics" / args.out
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
 
 

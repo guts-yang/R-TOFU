@@ -17,6 +17,7 @@ CKPT = ASU_ROOT / "checkpoints"
 TARGET_MODEL = MODELS / "sangyon" / "LRM-target"
 REFUSAL_FILE = REPO / "data" / "idontknow.jsonl"
 FORGET_FILE = DATA / "forget01.json"
+FORGET10_FILE = DATA / "forget10.json"
 RETAIN_FILE = DATA / "retain90.json"
 
 R2MU_MODELS = {
