@@ -5,3 +5,5 @@ __pycache__/
 workspace/autoresearch/
 workspace/logs
 workspace/results
+
+.agent
